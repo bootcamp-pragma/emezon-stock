@@ -3,14 +3,17 @@ package com.emezon.stock.app.mappers;
 import com.emezon.stock.app.dtos.CreateCategoryDTO;
 import com.emezon.stock.domain.models.Category;
 
+import java.util.HashSet;
+
 public class CreateCategoryDTOMapper {
 
     public static Category toModel(CreateCategoryDTO createCategoryDTO) {
-        return new Category(
-                null,
-                createCategoryDTO.getName(),
-                createCategoryDTO.getDescription(),
-                createCategoryDTO.getCode());
+        Category category = new Category();
+        category.setName(createCategoryDTO.getName());
+        category.setDescription(createCategoryDTO.getDescription());
+        category.setCode(createCategoryDTO.getCode());
+        category.setArticles(new HashSet<>());
+        return category;
     }
 
     public static CreateCategoryDTO toDTO(Category category) {

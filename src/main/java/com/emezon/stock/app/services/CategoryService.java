@@ -18,14 +18,6 @@ public class CategoryService implements ICreateCategoryInPort, IRetrieveCategory
 
     @Override
     public Category createCategory(Category category) {
-        Optional<Category> categoryByName = retrieveCategoryUseCase.getCategoryByName(category.getName());
-        if (categoryByName.isPresent()) {
-            throw new IllegalArgumentException("Category already exists");
-        }
-        Optional<Category> categoryByCode = retrieveCategoryUseCase.getCategoryByCode(category.getCode());
-        if (categoryByCode.isPresent()) {
-            throw new IllegalArgumentException("Category code already exists");
-        }
         return createCategoryUseCase.createCategory(category);
     }
 

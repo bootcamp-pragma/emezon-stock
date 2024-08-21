@@ -1,7 +1,5 @@
 package com.emezon.stock.domain.models;
 
-import com.emezon.stock.domain.common.BaseModel;
-
 import java.util.HashSet;
 import java.util.Set;
 
@@ -23,6 +21,10 @@ public class Category {
 
     public Category(String id, String name, String description, String code) {
         new Category(id, name, description, code, new HashSet<>());
+    }
+
+    public Category() {
+        new Category(null, null, null, null, new HashSet<>());
     }
 
     public String getId() {
