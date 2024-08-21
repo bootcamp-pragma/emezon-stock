@@ -1,12 +1,11 @@
 package com.emezon.stock.domain.models;
 
-import com.emezon.stock.domain.common.BaseModel;
-
 import java.util.HashSet;
 import java.util.Set;
 
-public class Article extends BaseModel {
+public class Article {
 
+    private String id;
     private String name;
     private String description;
     private String code;
@@ -15,7 +14,8 @@ public class Article extends BaseModel {
     private Brand brand;
     private Set<Category> categories;
 
-    public Article(String name, String description, String code, double price, int stock, Brand brand, Set<Category> categories) {
+    public Article(String id, String name, String description, String code, double price, int stock, Brand brand, Set<Category> categories) {
+        this.id = id;
         this.name = name;
         this.description = description;
         this.code = code;
@@ -25,16 +25,24 @@ public class Article extends BaseModel {
         this.categories = categories;
     }
 
-    public Article(String name, String description, String code, double price, int stock, Brand brand) {
-        new Article(name, description, code, price, stock, brand, new HashSet<>());
+    public Article(String id, String name, String description, String code, double price, int stock, Brand brand) {
+        new Article(id, name, description, code, price, stock, brand, new HashSet<>());
     }
 
-    public Article(String name, String description, String code, double price, int stock) {
-        new Article(name, description, code, price, stock, null, new HashSet<>());
+    public Article(String id, String name, String description, String code, double price, int stock) {
+        new Article(id, name, description, code, price, stock, null, new HashSet<>());
     }
 
-    public Article(String name, String description, String code, double price, int stock, Set<Category> categories) {
-        new Article(name, description, code, price, stock, null, categories);
+    public Article(String id, String name, String description, String code, double price, int stock, Set<Category> categories) {
+        new Article(id, name, description, code, price, stock, null, categories);
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {

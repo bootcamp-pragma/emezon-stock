@@ -1,12 +1,9 @@
 package com.emezon.stock.app.dtos;
 
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 
 @Data
-@NoArgsConstructor
-public class CategoryDTO {
+public class CreateCategoryDTO {
 
     private String name;
     private String description;
