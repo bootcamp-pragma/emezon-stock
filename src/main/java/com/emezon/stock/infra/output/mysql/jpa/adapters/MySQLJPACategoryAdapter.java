@@ -12,8 +12,8 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
-@RequiredArgsConstructor
 @Component
+@RequiredArgsConstructor
 public class MySQLJPACategoryAdapter implements ICategoryRepositoryOutPort {
 
     private final IMySQLJPACategoryRepository repository;
