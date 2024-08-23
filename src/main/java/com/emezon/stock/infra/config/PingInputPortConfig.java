@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import com.emezon.stock.domain.ports.input.IPingInputPort;
 
 @Configuration
-public class BeanPingInputPort {
+public class PingInputPortConfig {
 
     @Bean
     public IPingInputPort pingInputPort() {
