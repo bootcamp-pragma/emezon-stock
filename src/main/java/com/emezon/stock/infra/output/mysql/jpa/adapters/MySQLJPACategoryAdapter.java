@@ -36,12 +36,20 @@ public class MySQLJPACategoryAdapter implements ICategoryRepositoryOutPort {
 
     @Override
     public Optional<Category> findByName(String name) {
-        return Optional.empty();
+        CategoryEntity categoryEntity = repository.findByName(name);
+        if (categoryEntity == null) {
+            return Optional.empty();
+        }
+        return Optional.of(CategoryEntityMapper.toModel(categoryEntity));
     }
 
     @Override
     public Optional<Category> findByCode(String code) {
-        return Optional.empty();
+        CategoryEntity categoryEntity = repository.findByCode(code);
+        if (categoryEntity == null) {
+            return Optional.empty();
+        }
+        return Optional.of(CategoryEntityMapper.toModel(categoryEntity));
     }
 
     @Override

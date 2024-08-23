@@ -33,6 +33,7 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 	runtimeOnly 'com.mysql:mysql-connector-j'
+	runtimeOnly 'com.h2database:h2'
 }
 
 jacoco {
@@ -52,5 +53,13 @@ jacocoTestReport {
 		csv.required = false
 		html.required = true
 //		html.outputLocation = layout.buildDirectory.dir('jacocoHtml')
+	}
+	afterEvaluate {
+		classDirectories.setFrom(files(classDirectories.files.collect {
+			fileTree(dir: it, exclude: [
+					'**/app/errorhandling/advices/**',
+					'**/app/errorhandling/messages/**',
+			])
+		}))
 	}
 }
