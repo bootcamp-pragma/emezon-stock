@@ -3,6 +3,7 @@ plugins {
 	id 'org.springframework.boot' version '3.3.2'
 	id 'io.spring.dependency-management' version '1.1.6'
 	id 'jacoco'
+	id "org.sonarqube" version "4.4.1.3373"
 }
 
 group = 'com.emezon'
@@ -38,7 +39,6 @@ dependencies {
 
 jacoco {
 	toolVersion = "0.8.12"
-//	reportsDirectory = layout.buildDirectory.dir('customJacocoReportDir') // default is 'build/reports'
 }
 
 tasks.named('test', Test) {
@@ -52,7 +52,15 @@ jacocoTestReport {
 		xml.required = true
 		csv.required = false
 		html.required = true
-//		html.outputLocation = layout.buildDirectory.dir('jacocoHtml')
+	}
+}
+
+sonar {
+	properties {
+		property "sonar.projectKey", "bootcamp-pragma_emezon-stock"
+		property "sonar.organization", "bootcamp-pragma"
+		property "sonar.host.url", "https://sonarcloud.io"
+		property "sonar.coverage.jacoco.xmlReportPaths", "build/reports/jacoco/test/jacocoTestReport.xml"
 	}
 	afterEvaluate {
 		classDirectories.setFrom(files(classDirectories.files.collect {
