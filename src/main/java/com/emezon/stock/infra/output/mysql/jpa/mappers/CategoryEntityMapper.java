@@ -8,6 +8,10 @@ import java.util.stream.Collectors;
 
 public class CategoryEntityMapper {
 
+    private CategoryEntityMapper() {
+        throw new IllegalStateException("Utility class");
+    }
+
     public static CategoryEntity toEntity(Category category) {
         CategoryEntity categoryEntity = new CategoryEntity();
         categoryEntity.setId(category.getId());

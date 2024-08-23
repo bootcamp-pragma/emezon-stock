@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class PingController {
 
-    private final IPingInputPort PingInputPort;
+    private final IPingInputPort pingInputPort;
 
     @GetMapping
     public String ping() {
-        return PingInputPort.ping();
+        return pingInputPort.ping();
     }
 
 }

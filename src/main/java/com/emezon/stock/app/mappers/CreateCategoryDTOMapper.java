@@ -7,6 +7,10 @@ import java.util.HashSet;
 
 public class CreateCategoryDTOMapper {
 
+    private CreateCategoryDTOMapper() {
+        throw new IllegalStateException("Utility class");
+    }
+
     public static Category toModel(CreateCategoryDTO createCategoryDTO) {
         Category category = new Category();
         category.setName(createCategoryDTO.getName());
