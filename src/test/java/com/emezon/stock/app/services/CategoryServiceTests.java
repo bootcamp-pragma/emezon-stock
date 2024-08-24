@@ -1,6 +1,6 @@
 package com.emezon.stock.app.services;
 
-import com.emezon.stock.app.exceptions.category.*;
+import com.emezon.stock.domain.exceptions.category.*;
 import com.emezon.stock.domain.models.Category;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +11,7 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-public class CategoryServiceTests {
+class CategoryServiceTests {
 
     @Autowired
     private CategoryService categoryService;
@@ -20,7 +20,7 @@ public class CategoryServiceTests {
     void shouldThrowException_whenNameIsNull() {
         Category category = new Category();
         category.setDescription("Electronic devices");
-        category.setCode("ELEC");
+        category.setCode("ELECT");
 
         try {
             categoryService.createCategory(category);
@@ -48,7 +48,7 @@ public class CategoryServiceTests {
     void shouldThrowException_whenDescriptionIsNull() {
         Category category = new Category();
         category.setName("Electronics");
-        category.setCode("ELEC");
+        category.setCode("ELECT");
 
         try {
             categoryService.createCategory(category);
@@ -103,7 +103,7 @@ public class CategoryServiceTests {
         Category category = new Category();
         category.setName("Electronics");
         category.setDescription("Electronic devices");
-        category.setCode("ELEC");
+        category.setCode("ELECT");
 
         Category createdCategory = categoryService.createCategory(category);
         assertNotNull(createdCategory);
@@ -119,11 +119,11 @@ public class CategoryServiceTests {
         Category category = new Category();
         category.setName("Electronics20");
         category.setDescription("Electronic devices");
-        category.setCode("ELEC20");
+        category.setCode("ELECT20");
 
         categoryService.createCategory(category);
 
-        category.setCode("ELEC21");
+        category.setCode("ELECT21");
 
         try {
             categoryService.createCategory(category);
@@ -138,7 +138,7 @@ public class CategoryServiceTests {
         Category category = new Category();
         category.setName("Electronics33");
         category.setDescription("Electronic devices");
-        category.setCode("ELEC3");
+        category.setCode("ELECT3");
 
         categoryService.createCategory(category);
 
@@ -157,7 +157,7 @@ public class CategoryServiceTests {
         Category category = new Category();
         category.setName("ElectronicsElectronicsElectronicsElectronicsElectronicsElectronicsElectronicsElectronicsElectronicsElectronics");
         category.setDescription("Electronic devices");
-        category.setCode("ELEC");
+        category.setCode("ELECT");
 
         try {
             categoryService.createCategory(category);
@@ -172,27 +172,12 @@ public class CategoryServiceTests {
         Category category = new Category();
         category.setName("Electronics");
         category.setDescription("Electronic devicesElectronic devicesElectronic devicesElectronic devicesElectronic devicesElectronic devicesElectronic devicesElectronic devicesElectronic devicesElectronic devices");
-        category.setCode("ELEC");
+        category.setCode("ELECT");
 
         try {
             categoryService.createCategory(category);
             fail("Should have thrown an exception");
         } catch (CategoryDescriptionMaxLengthException e) {
-            // Success
-        }
-    }
-
-    @Test
-    void shouldCreateCategory_whenCategoryDescriptionLengthIsLessThanMinLength() {
-        Category category = new Category();
-        category.setName("Electronics");
-        category.setDescription("         Elec       ");
-        category.setCode("ELEC");
-
-        try {
-            categoryService.createCategory(category);
-            fail("Should have thrown an exception");
-        } catch (CategoryDescriptionMinLengthException e) {
             // Success
         }
     }

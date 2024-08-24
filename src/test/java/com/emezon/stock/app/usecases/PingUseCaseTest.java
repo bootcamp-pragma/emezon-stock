@@ -1,10 +1,11 @@
 package com.emezon.stock.app.usecases;
 
+import com.emezon.stock.domain.usecases.PingUseCase;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class PingUseCaseTest {
+class PingUseCaseTest {
 
     @Test
     void testPing() {

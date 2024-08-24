@@ -1,4 +1,4 @@
-package com.emezon.stock.app.usecases.category;
+package com.emezon.stock.domain.usecases.category;
 
 import com.emezon.stock.domain.models.Category;
 import com.emezon.stock.domain.ports.input.category.IRetrieveCategoryInPort;

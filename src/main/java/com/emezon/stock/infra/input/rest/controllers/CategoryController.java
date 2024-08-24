@@ -4,6 +4,7 @@ import com.emezon.stock.app.dtos.CreateCategoryDTO;
 import com.emezon.stock.app.mappers.CreateCategoryDTOMapper;
 import com.emezon.stock.app.services.CategoryService;
 import com.emezon.stock.domain.models.Category;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,7 +23,7 @@ public class CategoryController {
     private final CategoryService categoryService;
 
     @PostMapping
-    public ResponseEntity<Category> createCategory(@RequestBody CreateCategoryDTO createCategoryDTO) {
+    public ResponseEntity<Category> createCategory(@RequestBody @Valid CreateCategoryDTO createCategoryDTO) {
         Category newCategory = CreateCategoryDTOMapper.toModel(createCategoryDTO);
         Category createdCategory = categoryService.createCategory(newCategory);
         URI location = ServletUriComponentsBuilder
