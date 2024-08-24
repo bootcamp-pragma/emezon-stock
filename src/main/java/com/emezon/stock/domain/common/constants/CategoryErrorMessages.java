@@ -1,4 +1,4 @@
-package com.emezon.stock.app.errorhandling.messages;
+package com.emezon.stock.domain.common.constants;
 
 public class CategoryErrorMessages {
     public static final String CATEGORY_NOT_FOUND = "Category with id %s not found";
