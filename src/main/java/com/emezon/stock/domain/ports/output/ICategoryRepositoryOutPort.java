@@ -1,5 +1,6 @@
 package com.emezon.stock.domain.ports.output;
 
+import com.emezon.stock.domain.common.classes.PaginatedResponse;
 import com.emezon.stock.domain.models.Category;
 
 import java.util.Optional;
@@ -15,6 +16,6 @@ public interface ICategoryRepositoryOutPort {
 
     Optional<Category> findByCode(String code);
 
-    Set<Category> findAll();
+    PaginatedResponse<Category> findAll(int page, int size);
 
 }

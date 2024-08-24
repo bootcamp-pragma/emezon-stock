@@ -1,5 +1,6 @@
 package com.emezon.stock.domain.usecases.category;
 
+import com.emezon.stock.domain.common.classes.PaginatedResponse;
 import com.emezon.stock.domain.common.constants.CategoryConstraints;
 import com.emezon.stock.domain.exceptions.category.*;
 import com.emezon.stock.domain.models.Category;
@@ -9,7 +10,6 @@ import com.emezon.stock.domain.ports.output.ICategoryRepositoryOutPort;
 import lombok.RequiredArgsConstructor;
 
 import java.util.Optional;
-import java.util.Set;
 
 @RequiredArgsConstructor
 public class CreateCategoryUseCase implements ICreateCategoryInPort, IRetrieveCategoryInPort {
@@ -46,8 +46,8 @@ public class CreateCategoryUseCase implements ICreateCategoryInPort, IRetrieveCa
     }
 
     @Override
-    public Set<Category> getAllCategories() {
-        return categoryRepositoryOutPort.findAll();
+    public PaginatedResponse<Category> getAllCategories(int page, int size) {
+        return categoryRepositoryOutPort.findAll(page, size);
     }
 
     private Category processAndValidateCategory(Category category) {

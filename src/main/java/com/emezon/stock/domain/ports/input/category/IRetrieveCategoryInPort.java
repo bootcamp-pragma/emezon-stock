@@ -1,5 +1,6 @@
 package com.emezon.stock.domain.ports.input.category;
 
+import com.emezon.stock.domain.common.classes.PaginatedResponse;
 import com.emezon.stock.domain.models.Category;
 
 import java.util.Optional;
@@ -13,6 +14,6 @@ public interface IRetrieveCategoryInPort {
 
     Optional<Category> getCategoryByCode(String code);
 
-    Set<Category> getAllCategories();
+    PaginatedResponse<Category> getAllCategories(int page, int size);
 
 }

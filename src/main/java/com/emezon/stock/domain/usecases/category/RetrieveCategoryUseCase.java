@@ -1,12 +1,12 @@
 package com.emezon.stock.domain.usecases.category;
 
+import com.emezon.stock.domain.common.classes.PaginatedResponse;
 import com.emezon.stock.domain.models.Category;
 import com.emezon.stock.domain.ports.input.category.IRetrieveCategoryInPort;
 import com.emezon.stock.domain.ports.output.ICategoryRepositoryOutPort;
 import lombok.RequiredArgsConstructor;
 
 import java.util.Optional;
-import java.util.Set;
 
 @RequiredArgsConstructor
 public class RetrieveCategoryUseCase implements IRetrieveCategoryInPort {
@@ -29,7 +29,7 @@ public class RetrieveCategoryUseCase implements IRetrieveCategoryInPort {
     }
 
     @Override
-    public Set<Category> getAllCategories() {
-        return categoryRepositoryOutPort.findAll();
+    public PaginatedResponse<Category> getAllCategories(int page, int size) {
+        return categoryRepositoryOutPort.findAll(page, size);
     }
 }

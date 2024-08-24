@@ -1,16 +1,20 @@
 package com.emezon.stock.infra.output.mysql.jpa.adapters;
 
+import com.emezon.stock.domain.common.classes.PaginatedResponse;
 import com.emezon.stock.domain.models.Category;
 import com.emezon.stock.domain.ports.output.ICategoryRepositoryOutPort;
 import com.emezon.stock.infra.output.mysql.jpa.entities.CategoryEntity;
 import com.emezon.stock.infra.output.mysql.jpa.mappers.CategoryEntityMapper;
 import com.emezon.stock.infra.output.mysql.jpa.repositories.IMySQLJPACategoryRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
-import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @Component
 @RequiredArgsConstructor
@@ -53,9 +57,16 @@ public class MySQLJPACategoryAdapter implements ICategoryRepositoryOutPort {
     }
 
     @Override
-    public Set<Category> findAll() {
-        Set<CategoryEntity> categoryEntities = new HashSet<>(repository.findAll());
-        return CategoryEntityMapper.toModels(categoryEntities);
+    public PaginatedResponse<Category> findAll(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<CategoryEntity> pageRes = repository.findAll(pageable);
+        PaginatedResponse<Category> paginatedResponse = new PaginatedResponse<>();
+        paginatedResponse.setData(CategoryEntityMapper.toModels(pageRes.getContent()));
+        paginatedResponse.setPage(pageRes.getNumber());
+        paginatedResponse.setSize(pageRes.getSize());
+        paginatedResponse.setTotalItems(pageRes.getTotalElements());
+        paginatedResponse.setTotalPages(pageRes.getTotalPages());
+        return paginatedResponse;
     }
 
 }
