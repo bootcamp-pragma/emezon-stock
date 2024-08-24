@@ -1,7 +1,7 @@
 package com.emezon.stock.app.services;
 
-import com.emezon.stock.app.usecases.category.CreateCategoryUseCase;
-import com.emezon.stock.app.usecases.category.RetrieveCategoryUseCase;
+import com.emezon.stock.domain.usecases.category.CreateCategoryUseCase;
+import com.emezon.stock.domain.usecases.category.RetrieveCategoryUseCase;
 import com.emezon.stock.domain.models.Category;
 import com.emezon.stock.domain.ports.input.category.ICreateCategoryInPort;
 import com.emezon.stock.domain.ports.input.category.IRetrieveCategoryInPort;
