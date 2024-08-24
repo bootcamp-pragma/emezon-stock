@@ -182,19 +182,4 @@ class CategoryServiceTests {
         }
     }
 
-    @Test
-    void shouldCreateCategory_whenCategoryDescriptionLengthIsLessThanMinLength() {
-        Category category = new Category();
-        category.setName("Electronics132");
-        category.setDescription("         E       ");
-        category.setCode("ELECT212");
-
-        try {
-            categoryService.createCategory(category);
-            fail("Should have thrown an exception");
-        } catch (CategoryDescriptionMinLengthException e) {
-            // Success
-        }
-    }
-
 }

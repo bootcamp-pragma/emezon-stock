@@ -18,4 +18,5 @@ public class CategoryErrorMessages {
     private CategoryErrorMessages() {
         throw new IllegalStateException("Utility class");
     }
+
 }

@@ -1,5 +1,6 @@
 package com.emezon.stock.domain.usecases.category;
 
+import com.emezon.stock.domain.common.constants.CategoryConstraints;
 import com.emezon.stock.domain.exceptions.category.*;
 import com.emezon.stock.domain.models.Category;
 import com.emezon.stock.domain.ports.input.category.ICreateCategoryInPort;
@@ -12,44 +13,21 @@ import java.util.Set;
 
 @RequiredArgsConstructor
 public class CreateCategoryUseCase implements ICreateCategoryInPort, IRetrieveCategoryInPort {
-    public static final Integer NAME_MAX_LENGTH = 50;
-    public static final Integer DESCRIPTION_MAX_LENGTH = 90;
-    public static final Integer DESCRIPTION_MIN_LENGTH = 5;
 
     private final ICategoryRepositoryOutPort categoryRepositoryOutPort;
 
     @Override
     public Category createCategory(Category category) {
-        if (category.getName() == null) {
-            throw new CategoryNameRequiredException();
-        }
-        if (category.getCode() == null) {
-            throw new CategoryCodeRequiredException();
-        }
-        if (category.getDescription() == null) {
-            throw new CategoryDescriptionRequiredException();
-        }
-        category.setName(category.getName().trim());
-        category.setCode(category.getCode().trim());
-        category.setDescription(category.getDescription().trim());
-        if (category.getName().length() > NAME_MAX_LENGTH) {
-            throw new CategoryNameMaxLengthException(NAME_MAX_LENGTH);
-        }
-        if (category.getDescription().length() > DESCRIPTION_MAX_LENGTH) {
-            throw new CategoryDescriptionMaxLengthException(DESCRIPTION_MAX_LENGTH);
-        }
-        if (category.getDescription().length() < DESCRIPTION_MIN_LENGTH) {
-            throw new CategoryDescriptionMinLengthException(DESCRIPTION_MIN_LENGTH);
-        }
-        Optional<Category> categoryByName = getCategoryByName(category.getName());
+        Category processedCategory = processAndValidateCategory(category);
+        Optional<Category> categoryByName = getCategoryByName(processedCategory.getName());
         if (categoryByName.isPresent()) {
-            throw new CategoryNameAlreadyExistsException(category.getName());
+            throw new CategoryNameAlreadyExistsException(processedCategory.getName());
         }
-        Optional<Category> categoryByCode = getCategoryByCode(category.getCode());
+        Optional<Category> categoryByCode = getCategoryByCode(processedCategory.getCode());
         if (categoryByCode.isPresent()) {
-            throw new CategoryCodeAlreadyExistsException(category.getCode());
+            throw new CategoryCodeAlreadyExistsException(processedCategory.getCode());
         }
-        return categoryRepositoryOutPort.save(category);
+        return categoryRepositoryOutPort.save(processedCategory);
     }
 
     @Override
@@ -71,4 +49,21 @@ public class CreateCategoryUseCase implements ICreateCategoryInPort, IRetrieveCa
     public Set<Category> getAllCategories() {
         return categoryRepositoryOutPort.findAll();
     }
+
+    private Category processAndValidateCategory(Category category) {
+        if (category.getName() == null) { throw new CategoryNameRequiredException(); }
+        category.setName(category.getName().trim());
+        if (category.getName().length() > CategoryConstraints.NAME_MAX_LENGTH) {
+            throw new CategoryNameMaxLengthException(CategoryConstraints.NAME_MAX_LENGTH);
+        }
+        if (category.getCode() == null) { throw new CategoryCodeRequiredException(); }
+        category.setCode(category.getCode().trim());
+        if (category.getDescription() == null) { throw new CategoryDescriptionRequiredException(); }
+        category.setDescription(category.getDescription().trim());
+        if (category.getDescription().length() > CategoryConstraints.DESCRIPTION_MAX_LENGTH) {
+            throw new CategoryDescriptionMaxLengthException(CategoryConstraints.DESCRIPTION_MAX_LENGTH);
+        }
+        return category;
+    }
+
 }

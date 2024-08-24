@@ -2,9 +2,6 @@ package com.emezon.stock.app.mappers;
 
 import com.emezon.stock.app.dtos.CreateCategoryDTO;
 import com.emezon.stock.domain.models.Category;
-
-import java.util.HashSet;
-
 public class CreateCategoryDTOMapper {
 
     private CreateCategoryDTOMapper() {

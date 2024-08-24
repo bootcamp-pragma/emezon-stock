@@ -67,41 +67,8 @@ public class CategoryControllerAdvice {
         return new ResponseEntity<>(response, status);
     }
 
-    @ExceptionHandler(CategoryNameMinLengthException.class)
-    public ResponseEntity<ExceptionResponse> handleCategoryNameMinLengthException(CategoryNameMinLengthException ex, WebRequest request) {
-        HttpStatus status = HttpStatus.BAD_REQUEST;
-        ExceptionResponse response = new ExceptionResponse(
-                ex.getMessage(),
-                request.getDescription(false),
-                status.value(),
-                ex.getMessage());
-        return new ResponseEntity<>(response, status);
-    }
-
     @ExceptionHandler(CategoryNameMaxLengthException.class)
     public ResponseEntity<ExceptionResponse> handleCategoryNameMaxLengthException(CategoryNameMaxLengthException ex, WebRequest request) {
-        HttpStatus status = HttpStatus.BAD_REQUEST;
-        ExceptionResponse response = new ExceptionResponse(
-                ex.getMessage(),
-                request.getDescription(false),
-                status.value(),
-                ex.getMessage());
-        return new ResponseEntity<>(response, status);
-    }
-
-    @ExceptionHandler(CategoryCodeMinLengthException.class)
-    public ResponseEntity<ExceptionResponse> handleCategoryCodeMinLengthException(CategoryCodeMinLengthException ex, WebRequest request) {
-        HttpStatus status = HttpStatus.BAD_REQUEST;
-        ExceptionResponse response = new ExceptionResponse(
-                ex.getMessage(),
-                request.getDescription(false),
-                status.value(),
-                ex.getMessage());
-        return new ResponseEntity<>(response, status);
-    }
-
-    @ExceptionHandler(CategoryDescriptionMinLengthException.class)
-    public ResponseEntity<ExceptionResponse> handleCategoryDescriptionMinLengthException(CategoryDescriptionMinLengthException ex, WebRequest request) {
         HttpStatus status = HttpStatus.BAD_REQUEST;
         ExceptionResponse response = new ExceptionResponse(
                 ex.getMessage(),
