@@ -2,7 +2,7 @@ package com.emezon.stock.app.errorhandling.advices;
 
 import com.emezon.stock.app.errorhandling.ExceptionResponse;
 import com.emezon.stock.app.errorhandling.messages.CategoryErrorMessages;
-import com.emezon.stock.app.exceptions.category.*;
+import com.emezon.stock.domain.exceptions.category.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

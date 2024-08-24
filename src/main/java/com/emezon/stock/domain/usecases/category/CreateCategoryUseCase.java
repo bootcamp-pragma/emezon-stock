@@ -1,6 +1,6 @@
 package com.emezon.stock.domain.usecases.category;
 
-import com.emezon.stock.app.exceptions.category.*;
+import com.emezon.stock.domain.exceptions.category.*;
 import com.emezon.stock.domain.models.Category;
 import com.emezon.stock.domain.ports.input.category.ICreateCategoryInPort;
 import com.emezon.stock.domain.ports.input.category.IRetrieveCategoryInPort;

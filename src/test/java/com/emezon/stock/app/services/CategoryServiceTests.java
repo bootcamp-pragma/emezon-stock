@@ -1,6 +1,6 @@
 package com.emezon.stock.app.services;
 
-import com.emezon.stock.app.exceptions.category.*;
+import com.emezon.stock.domain.exceptions.category.*;
 import com.emezon.stock.domain.models.Category;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

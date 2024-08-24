@@ -1,4 +1,4 @@
-package com.emezon.stock.app.exceptions.category;
+package com.emezon.stock.domain.exceptions.category;
 
 import com.emezon.stock.app.errorhandling.messages.CategoryErrorMessages;
 
