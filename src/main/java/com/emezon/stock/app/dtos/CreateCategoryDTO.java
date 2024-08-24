@@ -5,12 +5,10 @@ import lombok.Data;
 @Data
 public class CreateCategoryDTO {
 
-    @NotNull(message = "Name is required")
     private String name;
 
     private String description;
 
-    @NotNull(message = "Code is required")
     private String code;
 
 }

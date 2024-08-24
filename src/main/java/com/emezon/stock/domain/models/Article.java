@@ -1,8 +1,5 @@
 package com.emezon.stock.domain.models;
 
-import java.util.HashSet;
-import java.util.Set;
-
 public class Article {
 
     private String id;
@@ -12,9 +9,8 @@ public class Article {
     private double price;
     private int stock;
     private Brand brand;
-    private Set<Category> categories;
 
-    public Article(String id, String name, String description, String code, double price, int stock, Brand brand, Set<Category> categories) {
+    public Article(String id, String name, String description, String code, double price, int stock, Brand brand) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -22,20 +18,9 @@ public class Article {
         this.price = price;
         this.stock = stock;
         this.brand = brand;
-        this.categories = categories;
     }
 
-    public Article(String id, String name, String description, String code, double price, int stock, Brand brand) {
-        new Article(id, name, description, code, price, stock, brand, new HashSet<>());
-    }
-
-    public Article(String id, String name, String description, String code, double price, int stock) {
-        new Article(id, name, description, code, price, stock, null, new HashSet<>());
-    }
-
-    public Article(String id, String name, String description, String code, double price, int stock, Set<Category> categories) {
-        new Article(id, name, description, code, price, stock, null, categories);
-    }
+    public Article() {}
 
     public String getId() {
         return id;
@@ -91,14 +76,6 @@ public class Article {
 
     public void setBrand(Brand brand) {
         this.brand = brand;
-    }
-
-    public Set<Category> getCategories() {
-        return categories;
-    }
-
-    public void setCategories(Set<Category> categories) {
-        this.categories = categories;
     }
 
 }
