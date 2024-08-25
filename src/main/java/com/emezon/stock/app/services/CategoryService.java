@@ -24,16 +24,19 @@ public class CategoryService {
         return CreateCategoryDTOMapper.toDTO(createdCategory);
     }
 
-    public Optional<Category> getCategoryById(String id) {
-        return retrieveCategoryUseCase.getCategoryById(id);
+    public Optional<CategoryDTO> getCategoryById(String id) {
+        Optional<Category> category = retrieveCategoryUseCase.getCategoryById(id);
+        return category.map(CreateCategoryDTOMapper::toDTO);
     }
 
-    public Optional<Category> getCategoryByName(String name) {
-        return retrieveCategoryUseCase.getCategoryByName(name);
+    public Optional<CategoryDTO> getCategoryByName(String name) {
+        Optional<Category> category = retrieveCategoryUseCase.getCategoryByName(name);
+        return category.map(CreateCategoryDTOMapper::toDTO);
     }
 
-    public Optional<Category> getCategoryByCode(String code) {
-        return retrieveCategoryUseCase.getCategoryByCode(code);
+    public Optional<CategoryDTO> getCategoryByCode(String code) {
+        Optional<Category> category = retrieveCategoryUseCase.getCategoryByCode(code);
+        return category.map(CreateCategoryDTOMapper::toDTO);
     }
 
     public PaginatedResponse<CategoryDTO> getAllCategories(int page, int size, String sortDirection) {

@@ -59,7 +59,7 @@ class CategoryServiceTests {
     void findCategoryById_whenCategoryExists_thenCategoryIsReturned() {
         when(retrieveCategoryUseCase.getCategoryById(any())).thenReturn(Optional.of(category));
 
-        Optional<Category> categoryById = categoryService.getCategoryById("1");
+        Optional<CategoryDTO> categoryById = categoryService.getCategoryById("1");
 
         assertTrue(categoryById.isPresent());
         assertEquals(category.getName(), categoryById.get().getName());
@@ -71,7 +71,7 @@ class CategoryServiceTests {
     void findCategoryById_whenCategoryDoesNotExist_thenEmptyOptionalIsReturned() {
         when(retrieveCategoryUseCase.getCategoryById(any())).thenReturn(Optional.empty());
 
-        Optional<Category> categoryById = categoryService.getCategoryById("1");
+        Optional<CategoryDTO> categoryById = categoryService.getCategoryById("1");
 
         assertTrue(categoryById.isEmpty());
 
@@ -82,7 +82,7 @@ class CategoryServiceTests {
     void findCategoryByName_whenCategoryExists_thenCategoryIsReturned() {
         when(retrieveCategoryUseCase.getCategoryByName(any())).thenReturn(Optional.of(category));
 
-        Optional<Category> categoryByName = categoryService.getCategoryByName("Electronics");
+        Optional<CategoryDTO> categoryByName = categoryService.getCategoryByName("Electronics");
 
         assertTrue(categoryByName.isPresent());
         assertEquals(category.getName(), categoryByName.get().getName());
@@ -94,7 +94,7 @@ class CategoryServiceTests {
     void findCategoryByName_whenCategoryDoesNotExist_thenEmptyOptionalIsReturned() {
         when(retrieveCategoryUseCase.getCategoryByName(any())).thenReturn(Optional.empty());
 
-        Optional<Category> categoryByName = categoryService.getCategoryByName("Electronics");
+        Optional<CategoryDTO> categoryByName = categoryService.getCategoryByName("Electronics");
 
         assertTrue(categoryByName.isEmpty());
 
@@ -105,7 +105,7 @@ class CategoryServiceTests {
     void findCategoryByCode_whenCategoryExists_thenCategoryIsReturned() {
         when(retrieveCategoryUseCase.getCategoryByCode(any())).thenReturn(Optional.of(category));
 
-        Optional<Category> categoryByCode = categoryService.getCategoryByCode("ELECT");
+        Optional<CategoryDTO> categoryByCode = categoryService.getCategoryByCode("ELECT");
 
         assertTrue(categoryByCode.isPresent());
         assertEquals(category.getName(), categoryByCode.get().getName());
@@ -117,7 +117,7 @@ class CategoryServiceTests {
     void findCategoryByCode_whenCategoryDoesNotExist_thenEmptyOptionalIsReturned() {
         when(retrieveCategoryUseCase.getCategoryByCode(any())).thenReturn(Optional.empty());
 
-        Optional<Category> categoryByCode = categoryService.getCategoryByCode("ELECT");
+        Optional<CategoryDTO> categoryByCode = categoryService.getCategoryByCode("ELECT");
 
         assertTrue(categoryByCode.isEmpty());
 
