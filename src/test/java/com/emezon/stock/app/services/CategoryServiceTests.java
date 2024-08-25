@@ -1,185 +1,146 @@
 package com.emezon.stock.app.services;
 
-import com.emezon.stock.domain.exceptions.category.*;
+import com.emezon.stock.domain.common.classes.PaginatedResponse;
 import com.emezon.stock.domain.models.Category;
+import com.emezon.stock.domain.usecases.category.CreateCategoryUseCase;
+import com.emezon.stock.domain.usecases.category.RetrieveCategoryUseCase;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
 
-@SpringBootTest
+@ExtendWith(MockitoExtension.class)
 class CategoryServiceTests {
 
-    @Autowired
+    @Mock
+    private CreateCategoryUseCase createCategoryUseCase;
+
+    @Mock
+    private RetrieveCategoryUseCase retrieveCategoryUseCase;
+
+    @InjectMocks
     private CategoryService categoryService;
 
-    @Test
-    void shouldThrowException_whenNameIsNull() {
-        Category category = new Category();
-        category.setDescription("Electronic devices");
-        category.setCode("ELECT");
+    private Category category;
 
-        try {
-            categoryService.createCategory(category);
-            fail("Should have thrown an exception");
-        } catch (CategoryNameRequiredException e) {
-            // Success
-        }
+    @BeforeEach
+    public void setUp() {
+        category = new Category("Electronics", "ELECT", "Devices and gadgets");
     }
 
     @Test
-    void shouldThrowException_whenCodeIsNull() {
-        Category category = new Category();
-        category.setName("Electronics");
-        category.setDescription("Electronic devices");
+    void createCategory_whenCategoryPropertiesAreValid_thenCategoryIsCreated() {
+        when(createCategoryUseCase.createCategory(any())).thenReturn(category);
 
-        try {
-            categoryService.createCategory(category);
-            fail("Should have thrown an exception");
-        } catch (CategoryCodeRequiredException e) {
-            // Success
-        }
-    }
-
-    @Test
-    void shouldThrowException_whenDescriptionIsNull() {
-        Category category = new Category();
-        category.setName("Electronics");
-        category.setCode("ELECT");
-
-        try {
-            categoryService.createCategory(category);
-            fail("Should have thrown an exception");
-        } catch (CategoryDescriptionRequiredException e) {
-            // Success
-        }
-    }
-
-    @Test
-    void shouldFindCategoryById_whenCategoryExists() {
-        Category category = new Category();
-        category.setName("shouldFindCategoryById");
-        category.setDescription("Electronic devices");
-        category.setCode("shouldFindCategoryById");
         Category createdCategory = categoryService.createCategory(category);
-        Optional<Category> categoryById = categoryService.getCategoryById(createdCategory.getId());
+
+        assertNotNull(createdCategory);
+        assertEquals(category.getName(), createdCategory.getName());
+        assertEquals(category.getCode(), createdCategory.getCode());
+        assertEquals(category.getDescription(), createdCategory.getDescription());
+
+        verify(createCategoryUseCase, times(1)).createCategory(any());
+    }
+
+    @Test
+    void findCategoryById_whenCategoryExists_thenCategoryIsReturned() {
+        when(retrieveCategoryUseCase.getCategoryById(any())).thenReturn(Optional.of(category));
+
+        Optional<Category> categoryById = categoryService.getCategoryById("1");
+
         assertTrue(categoryById.isPresent());
-        assertEquals(createdCategory.getId(), categoryById.get().getId());
+        assertEquals(category.getName(), categoryById.get().getName());
+
+        verify(retrieveCategoryUseCase, times(1)).getCategoryById(any());
     }
 
     @Test
-    void shouldFindCategoryByCode_whenCategoryExists() {
-        Category category = new Category();
-        category.setName("shouldFindCategoryByCode");
-        category.setDescription("Electronic devices");
-        category.setCode("shouldFindCategoryByCode");
+    void findCategoryById_whenCategoryDoesNotExist_thenEmptyOptionalIsReturned() {
+        when(retrieveCategoryUseCase.getCategoryById(any())).thenReturn(Optional.empty());
 
-        categoryService.createCategory(category);
+        Optional<Category> categoryById = categoryService.getCategoryById("1");
 
-        Optional<Category> categoryByCode = categoryService.getCategoryByCode(category.getCode());
-        assertTrue(categoryByCode.isPresent());
-        assertEquals(category.getCode(), categoryByCode.get().getCode());
+        assertTrue(categoryById.isEmpty());
+
+        verify(retrieveCategoryUseCase, times(1)).getCategoryById(any());
     }
 
     @Test
-    void shouldFindCategoryByName_whenCategoryExists() {
-        Category category = new Category();
-        category.setName("shouldFindCategoryByName");
-        category.setDescription("Electronic devices");
-        category.setCode("shouldFindCategoryByName");
+    void findCategoryByName_whenCategoryExists_thenCategoryIsReturned() {
+        when(retrieveCategoryUseCase.getCategoryByName(any())).thenReturn(Optional.of(category));
 
-        categoryService.createCategory(category);
+        Optional<Category> categoryByName = categoryService.getCategoryByName("Electronics");
 
-        Optional<Category> categoryByName = categoryService.getCategoryByName(category.getName());
         assertTrue(categoryByName.isPresent());
         assertEquals(category.getName(), categoryByName.get().getName());
+
+        verify(retrieveCategoryUseCase, times(1)).getCategoryByName(any());
     }
 
     @Test
-    void shouldCreateCategory_whenValidProperties() {
-        Category category = new Category();
-        category.setName("Electronics");
-        category.setDescription("Electronic devices");
-        category.setCode("ELECT");
+    void findCategoryByName_whenCategoryDoesNotExist_thenEmptyOptionalIsReturned() {
+        when(retrieveCategoryUseCase.getCategoryByName(any())).thenReturn(Optional.empty());
 
-        Category createdCategory = categoryService.createCategory(category);
-        assertNotNull(createdCategory);
-        assertNotNull(createdCategory.getId());
-        assertEquals(category.getName(), createdCategory.getName());
-        assertEquals(category.getDescription(), createdCategory.getDescription());
-        assertEquals(category.getCode(), createdCategory.getCode());
+        Optional<Category> categoryByName = categoryService.getCategoryByName("Electronics");
 
+        assertTrue(categoryByName.isEmpty());
+
+        verify(retrieveCategoryUseCase, times(1)).getCategoryByName(any());
     }
 
     @Test
-    void shouldThrowException_whenCategoryNameAlreadyExists() {
-        Category category = new Category();
-        category.setName("Electronics20");
-        category.setDescription("Electronic devices");
-        category.setCode("ELECT20");
+    void findCategoryByCode_whenCategoryExists_thenCategoryIsReturned() {
+        when(retrieveCategoryUseCase.getCategoryByCode(any())).thenReturn(Optional.of(category));
 
-        categoryService.createCategory(category);
+        Optional<Category> categoryByCode = categoryService.getCategoryByCode("ELECT");
 
-        category.setCode("ELECT21");
+        assertTrue(categoryByCode.isPresent());
+        assertEquals(category.getName(), categoryByCode.get().getName());
 
-        try {
-            categoryService.createCategory(category);
-            fail("Should have thrown an exception");
-        } catch (CategoryNameAlreadyExistsException e) {
-            // Success
-        }
+        verify(retrieveCategoryUseCase, times(1)).getCategoryByCode(any());
     }
 
     @Test
-    void shouldThrowException_whenCategoryCodeAlreadyExists() {
-        Category category = new Category();
-        category.setName("Electronics33");
-        category.setDescription("Electronic devices");
-        category.setCode("ELECT3");
+    void findCategoryByCode_whenCategoryDoesNotExist_thenEmptyOptionalIsReturned() {
+        when(retrieveCategoryUseCase.getCategoryByCode(any())).thenReturn(Optional.empty());
 
-        categoryService.createCategory(category);
+        Optional<Category> categoryByCode = categoryService.getCategoryByCode("ELECT");
 
-        category.setName("Electronics34");
+        assertTrue(categoryByCode.isEmpty());
 
-        try {
-            categoryService.createCategory(category);
-            fail("Should have thrown an exception");
-        } catch (CategoryCodeAlreadyExistsException e) {
-            // Success
-        }
+        verify(retrieveCategoryUseCase, times(1)).getCategoryByCode(any());
     }
 
     @Test
-    void shouldCreateCategory_whenCategoryNameLengthExceedsMaxLength() {
-        Category category = new Category();
-        category.setName("ElectronicsElectronicsElectronicsElectronicsElectronicsElectronicsElectronicsElectronicsElectronicsElectronics");
-        category.setDescription("Electronic devices");
-        category.setCode("ELECT");
+    void getAllCategories_whenCategoriesExist_thenPaginatedResponseIsReturned() {
+        PaginatedResponse<Category> paginatedResponse = new PaginatedResponse<>();
+        int page = 0;
+        int size = 10;
+        paginatedResponse.setTotalElements(1);
+        paginatedResponse.setTotalPages(1);
+        paginatedResponse.setPage(page);
+        paginatedResponse.setSize(size);
+        paginatedResponse.setElements(List.of(category));
 
-        try {
-            categoryService.createCategory(category);
-            fail("Should have thrown an exception");
-        } catch (CategoryNameMaxLengthException e) {
-            // Success
-        }
-    }
+        when(retrieveCategoryUseCase.getAllCategories(page, size, "asc")).thenReturn(paginatedResponse);
 
-    @Test
-    void shouldCreateCategory_whenCategoryDescriptionLengthExceedsMaxLength() {
-        Category category = new Category();
-        category.setName("Electronics");
-        category.setDescription("Electronic devicesElectronic devicesElectronic devicesElectronic devicesElectronic devicesElectronic devicesElectronic devicesElectronic devicesElectronic devicesElectronic devices");
-        category.setCode("ELECT");
+        PaginatedResponse<Category> allCategories = categoryService.getAllCategories(page, size, "asc");
 
-        try {
-            categoryService.createCategory(category);
-            fail("Should have thrown an exception");
-        } catch (CategoryDescriptionMaxLengthException e) {
-            // Success
-        }
+        assertNotNull(allCategories);
+        assertEquals(1, allCategories.getTotalElements());
+        assertEquals(1, allCategories.getElements().size());
+        assertEquals(category.getName(), allCategories.getElements().get(0).getName());
+
+        verify(retrieveCategoryUseCase, times(1)).getAllCategories(page, size, "asc");
     }
 
 }
