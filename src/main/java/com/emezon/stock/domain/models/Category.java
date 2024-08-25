@@ -14,6 +14,12 @@ public class Category {
         this.code = code;
     }
 
+    public Category(String name, String code, String description) {
+        this.name = name;
+        this.code = code;
+        this.description = description;
+    }
+
     public Category() {}
 
     public String getId() {
