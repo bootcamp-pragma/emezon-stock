@@ -12,42 +12,22 @@ import lombok.RequiredArgsConstructor;
 import java.util.Optional;
 
 @RequiredArgsConstructor
-public class CreateCategoryUseCase implements ICreateCategoryInPort, IRetrieveCategoryInPort {
+public class CreateCategoryUseCase implements ICreateCategoryInPort {
 
     private final ICategoryRepositoryOutPort categoryRepositoryOutPort;
 
     @Override
     public Category createCategory(Category category) {
         Category processedCategory = processAndValidateCategory(category);
-        Optional<Category> categoryByName = getCategoryByName(processedCategory.getName());
+        Optional<Category> categoryByName = categoryRepositoryOutPort.findByName(processedCategory.getName());
         if (categoryByName.isPresent()) {
             throw new CategoryNameAlreadyExistsException(processedCategory.getName());
         }
-        Optional<Category> categoryByCode = getCategoryByCode(processedCategory.getCode());
+        Optional<Category> categoryByCode = categoryRepositoryOutPort.findByCode(processedCategory.getCode());
         if (categoryByCode.isPresent()) {
             throw new CategoryCodeAlreadyExistsException(processedCategory.getCode());
         }
         return categoryRepositoryOutPort.save(processedCategory);
-    }
-
-    @Override
-    public Optional<Category> getCategoryById(String id) {
-        return categoryRepositoryOutPort.findById(id);
-    }
-
-    @Override
-    public Optional<Category> getCategoryByName(String name) {
-        return categoryRepositoryOutPort.findByName(name);
-    }
-
-    @Override
-    public Optional<Category> getCategoryByCode(String code) {
-        return categoryRepositoryOutPort.findByCode(code);
-    }
-
-    @Override
-    public PaginatedResponse<Category> getAllCategories(int page, int size, String sortDirection) {
-        return categoryRepositoryOutPort.findAll(page, size, sortDirection);
     }
 
     private Category processAndValidateCategory(Category category) {
