@@ -3,9 +3,9 @@ package com.emezon.stock.infra.output.mysql.jpa.mappers;
 import com.emezon.stock.domain.models.Category;
 import com.emezon.stock.infra.output.mysql.jpa.entities.CategoryEntity;
 
-public class JavaEntityMapper {
+public class BrandEntityMapper {
 
-    private JavaEntityMapper() {
+    private BrandEntityMapper() {
         throw new IllegalStateException("Utility class");
     }
 
