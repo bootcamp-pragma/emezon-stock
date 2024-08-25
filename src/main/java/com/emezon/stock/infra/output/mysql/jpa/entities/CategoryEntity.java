@@ -7,7 +7,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.annotations.UuidGenerator;
 
 import java.time.LocalDateTime;
-import java.util.Set;
+import java.util.List;
 
 @Entity(name = "categories")
 @Data
@@ -24,7 +24,7 @@ public class CategoryEntity {
     private String code;
 
     @ManyToMany(mappedBy = "categories")
-    private Set<ArticleEntity> articles;
+    private List<ArticleEntity> articles;
 
     @CreationTimestamp
     private LocalDateTime createdAt;
