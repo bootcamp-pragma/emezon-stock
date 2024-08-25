@@ -7,8 +7,6 @@ import com.emezon.stock.domain.common.classes.PaginatedResponse;
 import com.emezon.stock.domain.usecases.category.CreateCategoryUseCase;
 import com.emezon.stock.domain.usecases.category.RetrieveCategoryUseCase;
 import com.emezon.stock.domain.models.Category;
-import com.emezon.stock.domain.ports.input.category.ICreateCategoryInPort;
-import com.emezon.stock.domain.ports.input.category.IRetrieveCategoryInPort;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;

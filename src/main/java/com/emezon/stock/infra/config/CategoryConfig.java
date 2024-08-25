@@ -3,7 +3,7 @@ package com.emezon.stock.infra.config;
 import com.emezon.stock.app.services.CategoryService;
 import com.emezon.stock.domain.usecases.category.CreateCategoryUseCase;
 import com.emezon.stock.domain.usecases.category.RetrieveCategoryUseCase;
-import com.emezon.stock.domain.ports.output.ICategoryRepositoryOutPort;
+import com.emezon.stock.domain.ports.outbound.ICategoryRepositoryOutPort;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

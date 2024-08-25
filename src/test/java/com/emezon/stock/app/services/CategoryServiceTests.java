@@ -43,7 +43,8 @@ class CategoryServiceTests {
     void createCategory_whenCategoryPropertiesAreValid_thenCategoryIsCreated() {
         when(createCategoryUseCase.createCategory(any())).thenReturn(category);
 
-        CreateCategoryDTO categoryDTO = new CreateCategoryDTO("Electronics", "ELECT", "Devices and gadgets");
+        CreateCategoryDTO categoryDTO = new CreateCategoryDTO("  Electronics", "ELECT", "Devices and gadgets ");
+        categoryDTO.init();
         CategoryDTO createdCategory = categoryService.createCategory(categoryDTO);
 
         assertNotNull(createdCategory);

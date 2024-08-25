@@ -1,10 +1,9 @@
-package com.emezon.stock.domain.ports.input.category;
+package com.emezon.stock.domain.ports.inbound.category;
 
 import com.emezon.stock.domain.common.classes.PaginatedResponse;
 import com.emezon.stock.domain.models.Category;
 
 import java.util.Optional;
-import java.util.Set;
 
 public interface IRetrieveCategoryInPort {
 
