@@ -1,7 +1,7 @@
 package com.emezon.stock.infra.output.mysql.jpa.mappers;
 
-import com.emezon.stock.domain.models.Category;
-import com.emezon.stock.infra.output.mysql.jpa.entities.CategoryEntity;
+import com.emezon.stock.domain.models.Brand;
+import com.emezon.stock.infra.output.mysql.jpa.entities.BrandEntity;
 
 public class BrandEntityMapper {
 
@@ -9,22 +9,19 @@ public class BrandEntityMapper {
         throw new IllegalStateException("Utility class");
     }
 
-    public static CategoryEntity toEntity(Category category) {
-        CategoryEntity categoryEntity = new CategoryEntity();
-        categoryEntity.setId(category.getId());
-        categoryEntity.setName(category.getName());
-        categoryEntity.setDescription(category.getDescription());
-        categoryEntity.setCode(category.getCode());
-        return categoryEntity;
+    public static BrandEntity toEntity(Brand brand) {
+        BrandEntity brandEntity = new BrandEntity();
+        brandEntity.setId(brand.getId());
+        brandEntity.setName(brand.getName());
+        brandEntity.setDescription(brand.getDescription());
+        return brandEntity;
     }
 
-    public static Category toModel(CategoryEntity categoryEntity) {
-        Category category = new Category();
-        category.setId(categoryEntity.getId());
-        category.setName(categoryEntity.getName());
-        category.setDescription(categoryEntity.getDescription());
-        category.setCode(categoryEntity.getCode());
-        return category;
+    public static Brand toModel(BrandEntity brandEntity) {
+        Brand brand = new Brand();
+        brand.setId(brandEntity.getId());
+        brand.setName(brandEntity.getName());
+        brand.setDescription(brandEntity.getDescription());
+        return brand;
     }
-
 }
