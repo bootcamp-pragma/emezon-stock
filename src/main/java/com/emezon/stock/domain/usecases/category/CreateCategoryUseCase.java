@@ -46,8 +46,8 @@ public class CreateCategoryUseCase implements ICreateCategoryInPort, IRetrieveCa
     }
 
     @Override
-    public PaginatedResponse<Category> getAllCategories(int page, int size) {
-        return categoryRepositoryOutPort.findAll(page, size);
+    public PaginatedResponse<Category> getAllCategories(int page, int size, String sortDirection) {
+        return categoryRepositoryOutPort.findAll(page, size, sortDirection);
     }
 
     private Category processAndValidateCategory(Category category) {

@@ -37,8 +37,8 @@ public class CategoryService implements ICreateCategoryInPort, IRetrieveCategory
     }
 
     @Override
-    public PaginatedResponse<Category> getAllCategories(int page, int size) {
-        return retrieveCategoryUseCase.getAllCategories(page, size);
+    public PaginatedResponse<Category> getAllCategories(int page, int size, String sortDirection) {
+        return retrieveCategoryUseCase.getAllCategories(page, size, sortDirection);
     }
 
 }

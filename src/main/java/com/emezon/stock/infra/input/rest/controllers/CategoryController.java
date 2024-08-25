@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
-import java.util.List;
 
 @RestController
 @RequestMapping("/category")
@@ -36,9 +35,10 @@ public class CategoryController {
     @GetMapping
     public ResponseEntity<PaginatedResponse<Category>> getAllCategories(
             @RequestParam(defaultValue = "0") Integer page,
-            @RequestParam(defaultValue = "10") Integer size
+            @RequestParam(defaultValue = "10") Integer size,
+            @RequestParam(defaultValue = "none") String sortDirection
     ) {
-        PaginatedResponse<Category> categories = categoryService.getAllCategories(page, size);
+        PaginatedResponse<Category> categories = categoryService.getAllCategories(page, size, sortDirection.toLowerCase().trim());
         return ResponseEntity.ok(categories);
     }
 

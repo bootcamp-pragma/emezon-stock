@@ -16,6 +16,6 @@ public interface ICategoryRepositoryOutPort {
 
     Optional<Category> findByCode(String code);
 
-    PaginatedResponse<Category> findAll(int page, int size);
+    PaginatedResponse<Category> findAll(int page, int size, String sortDirection);
 
 }
