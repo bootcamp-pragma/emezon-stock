@@ -3,6 +3,7 @@ package com.emezon.stock.infra.output.mysql.jpa.mappers;
 import com.emezon.stock.domain.models.Category;
 import com.emezon.stock.infra.output.mysql.jpa.entities.CategoryEntity;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -30,16 +31,16 @@ public class CategoryEntityMapper {
         return category;
     }
 
-    public static Set<Category> toModels(Set<CategoryEntity> categoryEntities) {
+    public static List<Category> toModels(List<CategoryEntity> categoryEntities) {
         return categoryEntities.stream()
                 .map(CategoryEntityMapper::toModel)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
     }
 
-    public static Set<CategoryEntity> toEntities(Set<Category> categories) {
+    public static List<CategoryEntity> toEntities(List<Category> categories) {
         return categories.stream()
                 .map(CategoryEntityMapper::toEntity)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
     }
 
 }

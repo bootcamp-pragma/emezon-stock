@@ -3,14 +3,12 @@ package com.emezon.stock.infra.input.rest.controllers;
 import com.emezon.stock.app.dtos.CreateCategoryDTO;
 import com.emezon.stock.app.mappers.CreateCategoryDTOMapper;
 import com.emezon.stock.app.services.CategoryService;
+import com.emezon.stock.domain.common.classes.PaginatedResponse;
 import com.emezon.stock.domain.models.Category;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
@@ -32,6 +30,16 @@ public class CategoryController {
                 .buildAndExpand(createdCategory.getId())
                 .toUri();
         return ResponseEntity.created(location).body(createdCategory);
+    }
+
+    @GetMapping
+    public ResponseEntity<PaginatedResponse<Category>> getAllCategories(
+            @RequestParam(defaultValue = "0") Integer page,
+            @RequestParam(defaultValue = "10") Integer size,
+            @RequestParam(defaultValue = "none") String sortDirection
+    ) {
+        PaginatedResponse<Category> categories = categoryService.getAllCategories(page, size, sortDirection.toLowerCase().trim());
+        return ResponseEntity.ok(categories);
     }
 
 }

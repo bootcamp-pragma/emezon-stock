@@ -1,5 +1,6 @@
 package com.emezon.stock.domain.usecases.category;
 
+import com.emezon.stock.domain.common.classes.PaginatedResponse;
 import com.emezon.stock.domain.common.constants.CategoryConstraints;
 import com.emezon.stock.domain.exceptions.category.*;
 import com.emezon.stock.domain.models.Category;
@@ -9,45 +10,24 @@ import com.emezon.stock.domain.ports.output.ICategoryRepositoryOutPort;
 import lombok.RequiredArgsConstructor;
 
 import java.util.Optional;
-import java.util.Set;
 
 @RequiredArgsConstructor
-public class CreateCategoryUseCase implements ICreateCategoryInPort, IRetrieveCategoryInPort {
+public class CreateCategoryUseCase implements ICreateCategoryInPort {
 
     private final ICategoryRepositoryOutPort categoryRepositoryOutPort;
 
     @Override
     public Category createCategory(Category category) {
         Category processedCategory = processAndValidateCategory(category);
-        Optional<Category> categoryByName = getCategoryByName(processedCategory.getName());
+        Optional<Category> categoryByName = categoryRepositoryOutPort.findByName(processedCategory.getName());
         if (categoryByName.isPresent()) {
             throw new CategoryNameAlreadyExistsException(processedCategory.getName());
         }
-        Optional<Category> categoryByCode = getCategoryByCode(processedCategory.getCode());
+        Optional<Category> categoryByCode = categoryRepositoryOutPort.findByCode(processedCategory.getCode());
         if (categoryByCode.isPresent()) {
             throw new CategoryCodeAlreadyExistsException(processedCategory.getCode());
         }
         return categoryRepositoryOutPort.save(processedCategory);
-    }
-
-    @Override
-    public Optional<Category> getCategoryById(String id) {
-        return categoryRepositoryOutPort.findById(id);
-    }
-
-    @Override
-    public Optional<Category> getCategoryByName(String name) {
-        return categoryRepositoryOutPort.findByName(name);
-    }
-
-    @Override
-    public Optional<Category> getCategoryByCode(String code) {
-        return categoryRepositoryOutPort.findByCode(code);
-    }
-
-    @Override
-    public Set<Category> getAllCategories() {
-        return categoryRepositoryOutPort.findAll();
     }
 
     private Category processAndValidateCategory(Category category) {

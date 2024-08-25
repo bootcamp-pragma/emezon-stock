@@ -1,5 +1,6 @@
 package com.emezon.stock.app.services;
 
+import com.emezon.stock.domain.common.classes.PaginatedResponse;
 import com.emezon.stock.domain.usecases.category.CreateCategoryUseCase;
 import com.emezon.stock.domain.usecases.category.RetrieveCategoryUseCase;
 import com.emezon.stock.domain.models.Category;
@@ -8,7 +9,6 @@ import com.emezon.stock.domain.ports.input.category.IRetrieveCategoryInPort;
 import lombok.RequiredArgsConstructor;
 
 import java.util.Optional;
-import java.util.Set;
 
 @RequiredArgsConstructor
 public class CategoryService implements ICreateCategoryInPort, IRetrieveCategoryInPort {
@@ -37,8 +37,8 @@ public class CategoryService implements ICreateCategoryInPort, IRetrieveCategory
     }
 
     @Override
-    public Set<Category> getAllCategories() {
-        return retrieveCategoryUseCase.getAllCategories();
+    public PaginatedResponse<Category> getAllCategories(int page, int size, String sortDirection) {
+        return retrieveCategoryUseCase.getAllCategories(page, size, sortDirection);
     }
 
 }
