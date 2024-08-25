@@ -5,14 +5,16 @@ import com.emezon.stock.domain.exceptions.category.*;
 import com.emezon.stock.domain.models.Category;
 import com.emezon.stock.domain.ports.inbound.category.ICreateCategoryInPort;
 import com.emezon.stock.domain.ports.outbound.ICategoryRepositoryOutPort;
-import lombok.RequiredArgsConstructor;
 
 import java.util.Optional;
 
-@RequiredArgsConstructor
 public class CreateCategoryUseCase implements ICreateCategoryInPort {
 
     private final ICategoryRepositoryOutPort categoryRepositoryOutPort;
+
+    public CreateCategoryUseCase(ICategoryRepositoryOutPort categoryRepositoryOutPort) {
+        this.categoryRepositoryOutPort = categoryRepositoryOutPort;
+    }
 
     @Override
     public Category createCategory(Category category) {
