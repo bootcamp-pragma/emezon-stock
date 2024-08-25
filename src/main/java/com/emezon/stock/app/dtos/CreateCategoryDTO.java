@@ -2,9 +2,10 @@ package com.emezon.stock.app.dtos;
 import com.emezon.stock.domain.common.constants.CategoryErrorMessages;
 import jakarta.annotation.PostConstruct;
 import jakarta.validation.constraints.NotBlank;
-import lombok.Data;
+import lombok.*;
 
 @Data
+@NoArgsConstructor
 public class CreateCategoryDTO {
 
     @NotBlank(message = CategoryErrorMessages.CATEGORY_NAME_REQUIRED)
@@ -15,6 +16,12 @@ public class CreateCategoryDTO {
 
     @NotBlank(message = CategoryErrorMessages.CATEGORY_CODE_REQUIRED)
     private String code;
+
+    public CreateCategoryDTO(String name, String code, String description) {
+        this.name = name;
+        this.code = code;
+        this.description = description;
+    }
 
     @PostConstruct
     public void init() {

@@ -1,5 +1,7 @@
 package com.emezon.stock.app.services;
 
+import com.emezon.stock.app.dtos.CategoryDTO;
+import com.emezon.stock.app.dtos.CreateCategoryDTO;
 import com.emezon.stock.domain.common.classes.PaginatedResponse;
 import com.emezon.stock.domain.models.Category;
 import com.emezon.stock.domain.usecases.category.CreateCategoryUseCase;
@@ -41,7 +43,8 @@ class CategoryServiceTests {
     void createCategory_whenCategoryPropertiesAreValid_thenCategoryIsCreated() {
         when(createCategoryUseCase.createCategory(any())).thenReturn(category);
 
-        Category createdCategory = categoryService.createCategory(category);
+        CreateCategoryDTO categoryDTO = new CreateCategoryDTO("Electronics", "ELECT", "Devices and gadgets");
+        CategoryDTO createdCategory = categoryService.createCategory(categoryDTO);
 
         assertNotNull(createdCategory);
         assertEquals(category.getName(), createdCategory.getName());
@@ -133,7 +136,7 @@ class CategoryServiceTests {
 
         when(retrieveCategoryUseCase.getAllCategories(page, size, "asc")).thenReturn(paginatedResponse);
 
-        PaginatedResponse<Category> allCategories = categoryService.getAllCategories(page, size, "asc");
+        PaginatedResponse<CategoryDTO> allCategories = categoryService.getAllCategories(page, size, "asc");
 
         assertNotNull(allCategories);
         assertEquals(1, allCategories.getTotalElements());

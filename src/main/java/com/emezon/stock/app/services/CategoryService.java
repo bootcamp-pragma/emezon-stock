@@ -1,5 +1,8 @@
 package com.emezon.stock.app.services;
 
+import com.emezon.stock.app.dtos.CategoryDTO;
+import com.emezon.stock.app.dtos.CreateCategoryDTO;
+import com.emezon.stock.app.mappers.CreateCategoryDTOMapper;
 import com.emezon.stock.domain.common.classes.PaginatedResponse;
 import com.emezon.stock.domain.usecases.category.CreateCategoryUseCase;
 import com.emezon.stock.domain.usecases.category.RetrieveCategoryUseCase;
@@ -8,37 +11,43 @@ import com.emezon.stock.domain.ports.input.category.ICreateCategoryInPort;
 import com.emezon.stock.domain.ports.input.category.IRetrieveCategoryInPort;
 import lombok.RequiredArgsConstructor;
 
+import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
-public class CategoryService implements ICreateCategoryInPort, IRetrieveCategoryInPort {
+public class CategoryService {
 
     private final CreateCategoryUseCase createCategoryUseCase;
     private final RetrieveCategoryUseCase retrieveCategoryUseCase;
 
-    @Override
-    public Category createCategory(Category category) {
-        return createCategoryUseCase.createCategory(category);
+    public CategoryDTO createCategory(CreateCategoryDTO category) {
+        Category categoryModel = CreateCategoryDTOMapper.toModel(category);
+        Category createdCategory = createCategoryUseCase.createCategory(categoryModel);
+        return CreateCategoryDTOMapper.toDTO(createdCategory);
     }
 
-    @Override
     public Optional<Category> getCategoryById(String id) {
         return retrieveCategoryUseCase.getCategoryById(id);
     }
 
-    @Override
     public Optional<Category> getCategoryByName(String name) {
         return retrieveCategoryUseCase.getCategoryByName(name);
     }
 
-    @Override
     public Optional<Category> getCategoryByCode(String code) {
         return retrieveCategoryUseCase.getCategoryByCode(code);
     }
 
-    @Override
-    public PaginatedResponse<Category> getAllCategories(int page, int size, String sortDirection) {
-        return retrieveCategoryUseCase.getAllCategories(page, size, sortDirection);
+    public PaginatedResponse<CategoryDTO> getAllCategories(int page, int size, String sortDirection) {
+        PaginatedResponse<Category> categories = retrieveCategoryUseCase.getAllCategories(page, size, sortDirection);
+        List<CategoryDTO> categoryDTOS = CreateCategoryDTOMapper.toDTOList(categories.getElements());
+        return new PaginatedResponse<>(
+                categoryDTOS,
+                categories.getPage(),
+                categories.getSize(),
+                categories.getTotalElements(),
+                categories.getTotalPages()
+        );
     }
 
 }
