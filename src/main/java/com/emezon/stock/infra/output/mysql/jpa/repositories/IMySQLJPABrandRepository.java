@@ -5,10 +5,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public interface IMySQLJPABrandRepository extends JpaRepository<BrandEntity, String> {
 
     @Query("SELECT b FROM brands b WHERE LOWER(b.name)  = LOWER(:name)")
-    BrandEntity findByName(String name);
+    Optional<BrandEntity> findByName(String name);
 
 }
