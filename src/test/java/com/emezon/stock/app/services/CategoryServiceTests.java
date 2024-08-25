@@ -1,5 +1,7 @@
 package com.emezon.stock.app.services;
 
+import com.emezon.stock.app.dtos.CategoryDTO;
+import com.emezon.stock.app.dtos.CreateCategoryDTO;
 import com.emezon.stock.domain.common.classes.PaginatedResponse;
 import com.emezon.stock.domain.models.Category;
 import com.emezon.stock.domain.usecases.category.CreateCategoryUseCase;
@@ -41,7 +43,9 @@ class CategoryServiceTests {
     void createCategory_whenCategoryPropertiesAreValid_thenCategoryIsCreated() {
         when(createCategoryUseCase.createCategory(any())).thenReturn(category);
 
-        Category createdCategory = categoryService.createCategory(category);
+        CreateCategoryDTO categoryDTO = new CreateCategoryDTO("  Electronics", "ELECT", "Devices and gadgets ");
+        categoryDTO.init();
+        CategoryDTO createdCategory = categoryService.createCategory(categoryDTO);
 
         assertNotNull(createdCategory);
         assertEquals(category.getName(), createdCategory.getName());
@@ -55,7 +59,7 @@ class CategoryServiceTests {
     void findCategoryById_whenCategoryExists_thenCategoryIsReturned() {
         when(retrieveCategoryUseCase.getCategoryById(any())).thenReturn(Optional.of(category));
 
-        Optional<Category> categoryById = categoryService.getCategoryById("1");
+        Optional<CategoryDTO> categoryById = categoryService.getCategoryById("1");
 
         assertTrue(categoryById.isPresent());
         assertEquals(category.getName(), categoryById.get().getName());
@@ -67,7 +71,7 @@ class CategoryServiceTests {
     void findCategoryById_whenCategoryDoesNotExist_thenEmptyOptionalIsReturned() {
         when(retrieveCategoryUseCase.getCategoryById(any())).thenReturn(Optional.empty());
 
-        Optional<Category> categoryById = categoryService.getCategoryById("1");
+        Optional<CategoryDTO> categoryById = categoryService.getCategoryById("1");
 
         assertTrue(categoryById.isEmpty());
 
@@ -78,7 +82,7 @@ class CategoryServiceTests {
     void findCategoryByName_whenCategoryExists_thenCategoryIsReturned() {
         when(retrieveCategoryUseCase.getCategoryByName(any())).thenReturn(Optional.of(category));
 
-        Optional<Category> categoryByName = categoryService.getCategoryByName("Electronics");
+        Optional<CategoryDTO> categoryByName = categoryService.getCategoryByName("Electronics");
 
         assertTrue(categoryByName.isPresent());
         assertEquals(category.getName(), categoryByName.get().getName());
@@ -90,7 +94,7 @@ class CategoryServiceTests {
     void findCategoryByName_whenCategoryDoesNotExist_thenEmptyOptionalIsReturned() {
         when(retrieveCategoryUseCase.getCategoryByName(any())).thenReturn(Optional.empty());
 
-        Optional<Category> categoryByName = categoryService.getCategoryByName("Electronics");
+        Optional<CategoryDTO> categoryByName = categoryService.getCategoryByName("Electronics");
 
         assertTrue(categoryByName.isEmpty());
 
@@ -101,7 +105,7 @@ class CategoryServiceTests {
     void findCategoryByCode_whenCategoryExists_thenCategoryIsReturned() {
         when(retrieveCategoryUseCase.getCategoryByCode(any())).thenReturn(Optional.of(category));
 
-        Optional<Category> categoryByCode = categoryService.getCategoryByCode("ELECT");
+        Optional<CategoryDTO> categoryByCode = categoryService.getCategoryByCode("ELECT");
 
         assertTrue(categoryByCode.isPresent());
         assertEquals(category.getName(), categoryByCode.get().getName());
@@ -113,7 +117,7 @@ class CategoryServiceTests {
     void findCategoryByCode_whenCategoryDoesNotExist_thenEmptyOptionalIsReturned() {
         when(retrieveCategoryUseCase.getCategoryByCode(any())).thenReturn(Optional.empty());
 
-        Optional<Category> categoryByCode = categoryService.getCategoryByCode("ELECT");
+        Optional<CategoryDTO> categoryByCode = categoryService.getCategoryByCode("ELECT");
 
         assertTrue(categoryByCode.isEmpty());
 
@@ -133,7 +137,7 @@ class CategoryServiceTests {
 
         when(retrieveCategoryUseCase.getAllCategories(page, size, "asc")).thenReturn(paginatedResponse);
 
-        PaginatedResponse<Category> allCategories = categoryService.getAllCategories(page, size, "asc");
+        PaginatedResponse<CategoryDTO> allCategories = categoryService.getAllCategories(page, size, "asc");
 
         assertNotNull(allCategories);
         assertEquals(1, allCategories.getTotalElements());

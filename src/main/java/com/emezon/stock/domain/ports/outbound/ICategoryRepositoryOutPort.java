@@ -1,10 +1,9 @@
-package com.emezon.stock.domain.ports.output;
+package com.emezon.stock.domain.ports.outbound;
 
 import com.emezon.stock.domain.common.classes.PaginatedResponse;
 import com.emezon.stock.domain.models.Category;
 
 import java.util.Optional;
-import java.util.Set;
 
 public interface ICategoryRepositoryOutPort {
 

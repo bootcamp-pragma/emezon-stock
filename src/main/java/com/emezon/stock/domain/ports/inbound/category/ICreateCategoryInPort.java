@@ -1,4 +1,4 @@
-package com.emezon.stock.domain.ports.input.category;
+package com.emezon.stock.domain.ports.inbound.category;
 
 import com.emezon.stock.domain.models.Category;
 

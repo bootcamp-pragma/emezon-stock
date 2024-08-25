@@ -2,7 +2,7 @@ package com.emezon.stock.app.usecases;
 
 import com.emezon.stock.domain.exceptions.category.*;
 import com.emezon.stock.domain.models.Category;
-import com.emezon.stock.domain.ports.output.ICategoryRepositoryOutPort;
+import com.emezon.stock.domain.ports.outbound.ICategoryRepositoryOutPort;
 import com.emezon.stock.domain.usecases.category.CreateCategoryUseCase;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class CreateCategoryUseCaseTests {
+class CreateCategoryUseCaseTests {
 
     @Mock
     private ICategoryRepositoryOutPort categoryRepositoryOutPort;

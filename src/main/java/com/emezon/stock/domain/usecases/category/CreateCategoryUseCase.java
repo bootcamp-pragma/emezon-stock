@@ -1,12 +1,10 @@
 package com.emezon.stock.domain.usecases.category;
 
-import com.emezon.stock.domain.common.classes.PaginatedResponse;
 import com.emezon.stock.domain.common.constants.CategoryConstraints;
 import com.emezon.stock.domain.exceptions.category.*;
 import com.emezon.stock.domain.models.Category;
-import com.emezon.stock.domain.ports.input.category.ICreateCategoryInPort;
-import com.emezon.stock.domain.ports.input.category.IRetrieveCategoryInPort;
-import com.emezon.stock.domain.ports.output.ICategoryRepositoryOutPort;
+import com.emezon.stock.domain.ports.inbound.category.ICreateCategoryInPort;
+import com.emezon.stock.domain.ports.outbound.ICategoryRepositoryOutPort;
 import lombok.RequiredArgsConstructor;
 
 import java.util.Optional;

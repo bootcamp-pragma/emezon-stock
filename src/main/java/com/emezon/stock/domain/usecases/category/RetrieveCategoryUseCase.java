@@ -6,8 +6,8 @@ import com.emezon.stock.domain.exceptions.category.CategoryPageNumberInvalidExce
 import com.emezon.stock.domain.exceptions.category.CategoryPageSizeInvalidException;
 import com.emezon.stock.domain.exceptions.category.CategorySortDirectionInvalidException;
 import com.emezon.stock.domain.models.Category;
-import com.emezon.stock.domain.ports.input.category.IRetrieveCategoryInPort;
-import com.emezon.stock.domain.ports.output.ICategoryRepositoryOutPort;
+import com.emezon.stock.domain.ports.inbound.category.IRetrieveCategoryInPort;
+import com.emezon.stock.domain.ports.outbound.ICategoryRepositoryOutPort;
 import lombok.RequiredArgsConstructor;
 
 import java.util.Optional;

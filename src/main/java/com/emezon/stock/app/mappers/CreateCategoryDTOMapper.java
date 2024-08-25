@@ -1,7 +1,11 @@
 package com.emezon.stock.app.mappers;
 
+import com.emezon.stock.app.dtos.CategoryDTO;
 import com.emezon.stock.app.dtos.CreateCategoryDTO;
 import com.emezon.stock.domain.models.Category;
+
+import java.util.List;
+
 public class CreateCategoryDTOMapper {
 
     private CreateCategoryDTOMapper() {
@@ -16,12 +20,17 @@ public class CreateCategoryDTOMapper {
         return category;
     }
 
-    public static CreateCategoryDTO toDTO(Category category) {
-        CreateCategoryDTO createCategoryDTO = new CreateCategoryDTO();
+    public static CategoryDTO toDTO(Category category) {
+        CategoryDTO createCategoryDTO = new CategoryDTO();
+        createCategoryDTO.setId(category.getId());
         createCategoryDTO.setName(category.getName());
         createCategoryDTO.setDescription(category.getDescription());
         createCategoryDTO.setCode(category.getCode());
         return createCategoryDTO;
+    }
+
+    public static List<CategoryDTO> toDTOList(List<Category> categories) {
+        return categories.stream().map(CreateCategoryDTOMapper::toDTO).toList();
     }
 
 }

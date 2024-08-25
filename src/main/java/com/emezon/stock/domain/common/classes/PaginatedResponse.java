@@ -10,7 +10,17 @@ public class PaginatedResponse <T> {
     private long totalElements;
     private int totalPages;
 
-    public PaginatedResponse() { }
+    public PaginatedResponse(List<T> elements, int page, int size, long totalElements, int totalPages) {
+        this.elements = elements;
+        this.page = page;
+        this.size = size;
+        this.totalElements = totalElements;
+        this.totalPages = totalPages;
+    }
+
+    public PaginatedResponse() {
+        // Empty constructor
+    }
 
     public List<T> getElements() {
         return elements;

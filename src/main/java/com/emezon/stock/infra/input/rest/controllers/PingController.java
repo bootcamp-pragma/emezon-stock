@@ -1,6 +1,6 @@
 package com.emezon.stock.infra.input.rest.controllers;
 
-import com.emezon.stock.domain.ports.input.IPingInputPort;
+import com.emezon.stock.domain.ports.inbound.IPingInputPort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

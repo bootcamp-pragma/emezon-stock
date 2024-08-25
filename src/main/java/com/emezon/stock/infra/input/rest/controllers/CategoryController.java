@@ -1,7 +1,7 @@
 package com.emezon.stock.infra.input.rest.controllers;
 
+import com.emezon.stock.app.dtos.CategoryDTO;
 import com.emezon.stock.app.dtos.CreateCategoryDTO;
-import com.emezon.stock.app.mappers.CreateCategoryDTOMapper;
 import com.emezon.stock.app.services.CategoryService;
 import com.emezon.stock.domain.common.classes.PaginatedResponse;
 import com.emezon.stock.domain.models.Category;
@@ -21,24 +21,19 @@ public class CategoryController {
     private final CategoryService categoryService;
 
     @PostMapping
-    public ResponseEntity<Category> createCategory(@RequestBody @Valid CreateCategoryDTO createCategoryDTO) {
-        Category newCategory = CreateCategoryDTOMapper.toModel(createCategoryDTO);
-        Category createdCategory = categoryService.createCategory(newCategory);
-        URI location = ServletUriComponentsBuilder
-                .fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(createdCategory.getId())
-                .toUri();
+    public ResponseEntity<CategoryDTO> createCategory(@RequestBody @Valid CreateCategoryDTO createCategoryDTO) {
+        CategoryDTO createdCategory = categoryService.createCategory(createCategoryDTO);
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest().build().toUri();
         return ResponseEntity.created(location).body(createdCategory);
     }
 
     @GetMapping
-    public ResponseEntity<PaginatedResponse<Category>> getAllCategories(
+    public ResponseEntity<PaginatedResponse<CategoryDTO>> getAllCategories(
             @RequestParam(defaultValue = "0") Integer page,
             @RequestParam(defaultValue = "10") Integer size,
             @RequestParam(defaultValue = "none") String sortDirection
     ) {
-        PaginatedResponse<Category> categories = categoryService.getAllCategories(page, size, sortDirection.toLowerCase().trim());
+        PaginatedResponse<CategoryDTO> categories = categoryService.getAllCategories(page, size, sortDirection.toLowerCase().trim());
         return ResponseEntity.ok(categories);
     }
 
