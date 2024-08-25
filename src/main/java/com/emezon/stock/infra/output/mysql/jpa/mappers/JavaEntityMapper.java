@@ -3,9 +3,6 @@ package com.emezon.stock.infra.output.mysql.jpa.mappers;
 import com.emezon.stock.domain.models.Category;
 import com.emezon.stock.infra.output.mysql.jpa.entities.CategoryEntity;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 public class JavaEntityMapper {
 
     private JavaEntityMapper() {
