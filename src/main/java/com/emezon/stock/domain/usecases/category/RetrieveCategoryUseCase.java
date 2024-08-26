@@ -1,7 +1,7 @@
 package com.emezon.stock.domain.usecases.category;
 
 import com.emezon.stock.domain.common.classes.PaginatedResponse;
-import com.emezon.stock.domain.common.constants.CategoryConstraints;
+import com.emezon.stock.domain.common.constants.PaginatedResponseConstraints;
 import com.emezon.stock.domain.exceptions.category.CategoryPageNumberInvalidException;
 import com.emezon.stock.domain.exceptions.category.CategoryPageSizeInvalidException;
 import com.emezon.stock.domain.exceptions.category.CategorySortDirectionInvalidException;
@@ -40,13 +40,13 @@ public class RetrieveCategoryUseCase implements IRetrieveCategoryInPort {
     }
 
     private void validateParameters(int page, int size, String sortDirection) {
-        if (page < CategoryConstraints.PAGE_NUMBER_MIN) {
+        if (page < PaginatedResponseConstraints.PAGE_NUMBER_MIN) {
             throw new CategoryPageNumberInvalidException();
         }
-        if (size < CategoryConstraints.PAGE_SIZE_MIN) {
+        if (size < PaginatedResponseConstraints.PAGE_SIZE_MIN) {
             throw new CategoryPageSizeInvalidException();
         }
-        if (!CategoryConstraints.SORT_DIRECTIONS.contains(sortDirection)) {
+        if (!PaginatedResponseConstraints.SORT_DIRECTIONS.contains(sortDirection)) {
             throw new CategorySortDirectionInvalidException();
         }
     }
