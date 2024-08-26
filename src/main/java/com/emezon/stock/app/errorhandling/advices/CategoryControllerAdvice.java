@@ -89,37 +89,4 @@ public class CategoryControllerAdvice {
         return new ResponseEntity<>(response, status);
     }
 
-    @ExceptionHandler(CategoryPageNumberInvalidException.class)
-    public ResponseEntity<ExceptionResponse> handleCategoryPageNumberInvalidException(CategoryPageNumberInvalidException ex, WebRequest request) {
-        HttpStatus status = HttpStatus.BAD_REQUEST;
-        ExceptionResponse response = new ExceptionResponse(
-                ex.getMessage(),
-                request.getDescription(false),
-                status.value(),
-                CategoryErrorMessages.CATEGORY_PAGE_NUMBER_INVALID);
-        return new ResponseEntity<>(response, status);
-    }
-
-    @ExceptionHandler(CategoryPageSizeInvalidException.class)
-    public ResponseEntity<ExceptionResponse> handleCategoryPageSizeInvalidException(CategoryPageSizeInvalidException ex, WebRequest request) {
-        HttpStatus status = HttpStatus.BAD_REQUEST;
-        ExceptionResponse response = new ExceptionResponse(
-                ex.getMessage(),
-                request.getDescription(false),
-                status.value(),
-                CategoryErrorMessages.CATEGORY_PAGE_SIZE_INVALID);
-        return new ResponseEntity<>(response, status);
-    }
-
-    @ExceptionHandler(CategorySortDirectionInvalidException.class)
-    public ResponseEntity<ExceptionResponse> handleCategorySortDirectionInvalidException(CategorySortDirectionInvalidException ex, WebRequest request) {
-        HttpStatus status = HttpStatus.BAD_REQUEST;
-        ExceptionResponse response = new ExceptionResponse(
-                ex.getMessage(),
-                request.getDescription(false),
-                status.value(),
-                CategoryErrorMessages.CATEGORY_SORT_DIRECTION_INVALID);
-        return new ResponseEntity<>(response, status);
-    }
-
 }

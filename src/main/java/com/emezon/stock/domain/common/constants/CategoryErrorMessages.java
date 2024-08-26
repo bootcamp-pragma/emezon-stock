@@ -10,9 +10,6 @@ public class CategoryErrorMessages {
     public static final String CATEGORY_DESCRIPTION_REQUIRED = "Category description is required";
     public static final String CATEGORY_NAME_MAX_LENGTH = "Category name must not exceed %d characters";
     public static final String CATEGORY_DESCRIPTION_MAX_LENGTH = "Category description must not exceed %d characters";
-    public static final String CATEGORY_PAGE_SIZE_INVALID = "Page size must be greater than 0";
-    public static final String CATEGORY_PAGE_NUMBER_INVALID = "Page number must be greater than or equal to 0";
-    public static final String CATEGORY_SORT_DIRECTION_INVALID = "Sort direction must be 'none', 'asc' or 'desc'";
 
     private CategoryErrorMessages() {
         throw new IllegalStateException("Utility class");

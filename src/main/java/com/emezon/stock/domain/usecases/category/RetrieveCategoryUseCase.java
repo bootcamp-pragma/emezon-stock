@@ -2,9 +2,9 @@ package com.emezon.stock.domain.usecases.category;
 
 import com.emezon.stock.domain.common.classes.PaginatedResponse;
 import com.emezon.stock.domain.common.constants.PaginatedResponseConstraints;
-import com.emezon.stock.domain.exceptions.category.CategoryPageNumberInvalidException;
-import com.emezon.stock.domain.exceptions.category.CategoryPageSizeInvalidException;
-import com.emezon.stock.domain.exceptions.category.CategorySortDirectionInvalidException;
+import com.emezon.stock.domain.exceptions.paginatedresponse.PaginatedResponsePageNumberInvalidException;
+import com.emezon.stock.domain.exceptions.paginatedresponse.PaginatedResponsePageSizeInvalidException;
+import com.emezon.stock.domain.exceptions.paginatedresponse.PaginatedResponseSortDirectionInvalidException;
 import com.emezon.stock.domain.models.Category;
 import com.emezon.stock.domain.ports.inbound.category.IRetrieveCategoryInPort;
 import com.emezon.stock.domain.ports.outbound.ICategoryRepositoryOutPort;
@@ -41,13 +41,13 @@ public class RetrieveCategoryUseCase implements IRetrieveCategoryInPort {
 
     private void validateParameters(int page, int size, String sortDirection) {
         if (page < PaginatedResponseConstraints.PAGE_NUMBER_MIN) {
-            throw new CategoryPageNumberInvalidException();
+            throw new PaginatedResponsePageNumberInvalidException();
         }
         if (size < PaginatedResponseConstraints.PAGE_SIZE_MIN) {
-            throw new CategoryPageSizeInvalidException();
+            throw new PaginatedResponsePageSizeInvalidException();
         }
         if (!PaginatedResponseConstraints.SORT_DIRECTIONS.contains(sortDirection)) {
-            throw new CategorySortDirectionInvalidException();
+            throw new PaginatedResponseSortDirectionInvalidException();
         }
     }
 
