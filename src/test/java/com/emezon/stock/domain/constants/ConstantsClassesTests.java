@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class ConstantsClassesTests {
@@ -72,6 +71,19 @@ class ConstantsClassesTests {
     @Test
     void PaginatedResponseConstraints_shouldThrowExceptionWhenInstantiated() throws NoSuchMethodException {
         Constructor<PaginatedResponseConstraints> constructor = PaginatedResponseConstraints.class.getDeclaredConstructor();
+        constructor.setAccessible(true);
+        assertThrows(InvocationTargetException.class, constructor::newInstance);
+    }
+
+    @Test
+    void PaginatedResponseErrorMessages_shouldHavePrivateConstructor() throws NoSuchMethodException {
+        Constructor<PaginatedResponseErrorMessages> constructor = PaginatedResponseErrorMessages.class.getDeclaredConstructor();
+        assertThrows(IllegalAccessException.class, constructor::newInstance);
+    }
+
+    @Test
+    void PaginatedResponseErrorMessages_shouldThrowExceptionWhenInstantiated() throws NoSuchMethodException {
+        Constructor<PaginatedResponseErrorMessages> constructor = PaginatedResponseErrorMessages.class.getDeclaredConstructor();
         constructor.setAccessible(true);
         assertThrows(InvocationTargetException.class, constructor::newInstance);
     }
