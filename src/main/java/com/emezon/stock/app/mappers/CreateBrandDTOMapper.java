@@ -4,6 +4,8 @@ import com.emezon.stock.app.dtos.BrandDTO;
 import com.emezon.stock.app.dtos.CreateBrandDTO;
 import com.emezon.stock.domain.models.Brand;
 
+import java.util.List;
+
 public class CreateBrandDTOMapper {
 
     private CreateBrandDTOMapper() {
@@ -23,6 +25,12 @@ public class CreateBrandDTOMapper {
         brandDTO.setName(brand.getName());
         brandDTO.setDescription(brand.getDescription());
         return brandDTO;
+    }
+
+    public static List<BrandDTO> toDTOList(List<Brand> brands) {
+        return brands.stream()
+                .map(CreateBrandDTOMapper::toDTO)
+                .toList();
     }
 
 }
