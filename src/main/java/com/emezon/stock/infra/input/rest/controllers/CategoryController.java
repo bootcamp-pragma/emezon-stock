@@ -4,7 +4,6 @@ import com.emezon.stock.app.dtos.CategoryDTO;
 import com.emezon.stock.app.dtos.CreateCategoryDTO;
 import com.emezon.stock.app.services.CategoryService;
 import com.emezon.stock.domain.common.classes.PaginatedResponse;
-import com.emezon.stock.domain.models.Category;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
