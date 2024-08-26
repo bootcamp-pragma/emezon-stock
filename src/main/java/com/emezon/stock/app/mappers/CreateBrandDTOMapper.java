@@ -6,6 +6,10 @@ import com.emezon.stock.domain.models.Brand;
 
 public class CreateBrandDTOMapper {
 
+    private CreateBrandDTOMapper() {
+        throw new IllegalStateException("Utility class");
+    }
+
     public static Brand toModel(CreateBrandDTO brand) {
         Brand brandModel = new Brand();
         brandModel.setName(brand.getName());
