@@ -5,13 +5,15 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public interface IMySQLJPACategoryRepository extends JpaRepository<CategoryEntity, String> {
 
     @Query("SELECT c FROM categories c WHERE LOWER(c.name)  = LOWER(:name)")
-    CategoryEntity findByName(String name);
+    Optional<CategoryEntity> findByName(String name);
 
     @Query("SELECT c FROM categories c WHERE LOWER(c.code)  = LOWER(:code)")
-    CategoryEntity findByCode(String code);
+    Optional<CategoryEntity> findByCode(String code);
 
 }
