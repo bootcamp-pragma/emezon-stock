@@ -5,13 +5,16 @@ public class Brand {
     private String id;
     private String name;
     private String description;
-    private String code;
 
-    public Brand(String id, String name, String description, String code) {
+    public Brand(String id, String name, String description) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.code = code;
+    }
+
+    public Brand(String name, String description) {
+        this.name = name;
+        this.description = description;
     }
 
     public Brand() {}
@@ -38,14 +41,6 @@ public class Brand {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
     }
 
 }
