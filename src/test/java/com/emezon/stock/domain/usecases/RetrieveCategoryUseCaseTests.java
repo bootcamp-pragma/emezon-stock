@@ -1,4 +1,4 @@
-package com.emezon.stock.app.usecases;
+package com.emezon.stock.domain.usecases;
 
 import com.emezon.stock.domain.common.classes.PaginatedResponse;
 import com.emezon.stock.domain.exceptions.paginatedresponse.PaginatedResponsePageNumberInvalidException;
