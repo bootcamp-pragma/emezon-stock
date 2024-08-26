@@ -1,9 +1,9 @@
 package com.emezon.stock.app.usecases;
 
 import com.emezon.stock.domain.common.classes.PaginatedResponse;
-import com.emezon.stock.domain.exceptions.category.CategoryPageNumberInvalidException;
-import com.emezon.stock.domain.exceptions.category.CategoryPageSizeInvalidException;
-import com.emezon.stock.domain.exceptions.category.CategorySortDirectionInvalidException;
+import com.emezon.stock.domain.exceptions.paginatedresponse.PaginatedResponsePageNumberInvalidException;
+import com.emezon.stock.domain.exceptions.paginatedresponse.PaginatedResponsePageSizeInvalidException;
+import com.emezon.stock.domain.exceptions.paginatedresponse.PaginatedResponseSortDirectionInvalidException;
 import com.emezon.stock.domain.models.Category;
 import com.emezon.stock.domain.ports.outbound.ICategoryRepositoryOutPort;
 import com.emezon.stock.domain.usecases.category.RetrieveCategoryUseCase;
@@ -109,22 +109,22 @@ class RetrieveCategoryUseCaseTests {
     }
 
     @Test
-    void getAllCategories_whenPageNumberIsInvalid_thenCategoryPageNumberInvalidExceptionIsThrown() {
-        assertThrows(CategoryPageNumberInvalidException.class, () -> retrieveCategoryUseCase.getAllCategories(-1, 10, "asc"));
+    void getAllCategories_whenPageNumberIsInvalid_thenPaginatedResponsePageNumberInvalidExceptionIsThrown() {
+        assertThrows(PaginatedResponsePageNumberInvalidException.class, () -> retrieveCategoryUseCase.getAllCategories(-1, 10, "asc"));
 
         verify(categoryRepositoryOutPort, never()).findAll(anyInt(), anyInt(), anyString());
     }
 
     @Test
-    void getAllCategories_whenPageSizeIsInvalid_thenCategoryPageSizeInvalidExceptionIsThrown() {
-        assertThrows(CategoryPageSizeInvalidException.class, () -> retrieveCategoryUseCase.getAllCategories(1, 0, "asc"));
+    void getAllCategories_whenPageSizeIsInvalid_thenPaginatedResponsePageSizeInvalidExceptionIsThrown() {
+        assertThrows(PaginatedResponsePageSizeInvalidException.class, () -> retrieveCategoryUseCase.getAllCategories(1, 0, "asc"));
 
         verify(categoryRepositoryOutPort, never()).findAll(anyInt(), anyInt(), anyString());
     }
 
     @Test
-    void getAllCategories_whenSortDirectionIsInvalid_thenCategorySortDirectionInvalidExceptionIsThrown() {
-        assertThrows(CategorySortDirectionInvalidException.class, () -> retrieveCategoryUseCase.getAllCategories(1, 10, "invalid"));
+    void getAllCategories_whenSortDirectionIsInvalid_thenPaginatedResponseSortDirectionInvalidExceptionIsThrown() {
+        assertThrows(PaginatedResponseSortDirectionInvalidException.class, () -> retrieveCategoryUseCase.getAllCategories(1, 10, "invalid"));
 
         verify(categoryRepositoryOutPort, never()).findAll(anyInt(), anyInt(), anyString());
     }
