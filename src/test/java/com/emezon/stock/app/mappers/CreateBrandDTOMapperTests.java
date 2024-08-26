@@ -7,7 +7,7 @@ import java.lang.reflect.InvocationTargetException;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class CreateBrandDTOMapperTests {
+class CreateBrandDTOMapperTests {
 
     @Test
     void CreateBrandDTOMapper_shouldHavePrivateConstructor() throws NoSuchMethodException {
