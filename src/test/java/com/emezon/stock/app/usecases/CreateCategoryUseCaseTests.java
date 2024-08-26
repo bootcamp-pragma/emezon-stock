@@ -101,6 +101,8 @@ class CreateCategoryUseCaseTests {
 
     @Test
     void createCategory_whenCategoryIsValid_thenCategoryIsCreated() {
+        when(categoryRepositoryOutPort.findByName(category.getName())).thenReturn(Optional.empty());
+        when(categoryRepositoryOutPort.findByCode(category.getCode())).thenReturn(Optional.empty());
         when(categoryRepositoryOutPort.save(category)).thenReturn(category);
 
         Category createdCategory = createCategoryUseCase.createCategory(category);
@@ -108,6 +110,8 @@ class CreateCategoryUseCaseTests {
         assertNotNull(createdCategory);
         assertEquals(category.getName(), createdCategory.getName());
 
+        verify(categoryRepositoryOutPort, times(1)).findByName(category.getName());
+        verify(categoryRepositoryOutPort, times(1)).findByCode(category.getCode());
         verify(categoryRepositoryOutPort, times(1)).save(category);
     }
 
