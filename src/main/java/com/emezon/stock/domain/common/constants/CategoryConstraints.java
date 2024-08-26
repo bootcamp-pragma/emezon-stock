@@ -1,7 +1,5 @@
 package com.emezon.stock.domain.common.constants;
 
-import java.util.List;
-
 public class CategoryConstraints {
 
     public static final int NAME_MAX_LENGTH = 50;

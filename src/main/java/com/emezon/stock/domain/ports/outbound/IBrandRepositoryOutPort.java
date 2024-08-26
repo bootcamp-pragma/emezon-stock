@@ -1,6 +1,5 @@
 package com.emezon.stock.domain.ports.outbound;
 
-import com.emezon.stock.domain.common.classes.PaginatedResponse;
 import com.emezon.stock.domain.models.Brand;
 
 import java.util.Optional;
