@@ -9,4 +9,8 @@ public class BrandErrorMessages {
     public static final String BRAND_DESCRIPTION_REQUIRED = "Brand description is required";
     public static final String BRAND_DESCRIPTION_MAX_LENGTH = "Brand description must not exceed %d characters";
 
+    private BrandErrorMessages() {
+        throw new IllegalStateException("Utility class");
+    }
+
 }
