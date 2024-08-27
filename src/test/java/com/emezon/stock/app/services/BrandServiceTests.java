@@ -56,15 +56,16 @@ class BrandServiceTests {
 
     @Test
     void findBrandById_whenBrandExists_thenBrandIsReturned() {
-        when(retrieveBrandUseCase.getBrandById(any())).thenReturn(Optional.of(brand));
+        brand.setId("1");
+        when(retrieveBrandUseCase.getBrandById(brand.getId())).thenReturn(Optional.of(brand));
 
-        BrandDTO foundBrand = brandService.getBrandById("1").orElse(null);
+        BrandDTO foundBrand = brandService.getBrandById(brand.getId()).orElse(null);
 
         assertNotNull(foundBrand);
         assertEquals(brand.getName(), foundBrand.getName());
         assertEquals(brand.getDescription(), foundBrand.getDescription());
 
-        verify(retrieveBrandUseCase, times(1)).getBrandById(any());
+        verify(retrieveBrandUseCase, times(1)).getBrandById(brand.getId());
     }
 
     @Test
