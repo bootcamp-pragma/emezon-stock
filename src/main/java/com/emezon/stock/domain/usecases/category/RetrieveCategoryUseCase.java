@@ -8,14 +8,16 @@ import com.emezon.stock.domain.exceptions.paginatedresponse.PaginatedResponseSor
 import com.emezon.stock.domain.models.Category;
 import com.emezon.stock.domain.ports.inbound.category.IRetrieveCategoryInPort;
 import com.emezon.stock.domain.ports.outbound.ICategoryRepositoryOutPort;
-import lombok.RequiredArgsConstructor;
 
 import java.util.Optional;
 
-@RequiredArgsConstructor
 public class RetrieveCategoryUseCase implements IRetrieveCategoryInPort {
 
     private final ICategoryRepositoryOutPort categoryRepositoryOutPort;
+
+    public RetrieveCategoryUseCase(ICategoryRepositoryOutPort categoryRepositoryOutPort) {
+        this.categoryRepositoryOutPort = categoryRepositoryOutPort;
+    }
 
     @Override
     public Optional<Category> getCategoryById(String id) {

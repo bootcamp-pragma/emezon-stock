@@ -30,29 +30,20 @@ public class MySQLJPACategoryAdapter implements ICategoryRepositoryOutPort {
 
     @Override
     public Optional<Category> findById(String id) {
-        CategoryEntity categoryEntity = repository.findById(id).orElse(null);
-        if (categoryEntity == null) {
-            return Optional.empty();
-        }
-        return Optional.of(CategoryEntityMapper.toModel(categoryEntity));
+        Optional<CategoryEntity> categoryEntity = repository.findById(id);
+        return categoryEntity.map(CategoryEntityMapper::toModel);
     }
 
     @Override
     public Optional<Category> findByName(String name) {
-        CategoryEntity categoryEntity = repository.findByName(name);
-        if (categoryEntity == null) {
-            return Optional.empty();
-        }
-        return Optional.of(CategoryEntityMapper.toModel(categoryEntity));
+        Optional<CategoryEntity> categoryEntity = repository.findByName(name);
+        return categoryEntity.map(CategoryEntityMapper::toModel);
     }
 
     @Override
     public Optional<Category> findByCode(String code) {
-        CategoryEntity categoryEntity = repository.findByCode(code);
-        if (categoryEntity == null) {
-            return Optional.empty();
-        }
-        return Optional.of(CategoryEntityMapper.toModel(categoryEntity));
+        Optional<CategoryEntity> categoryEntity = repository.findByCode(code);
+        return categoryEntity.map(CategoryEntityMapper::toModel);
     }
 
     @Override
@@ -66,10 +57,10 @@ public class MySQLJPACategoryAdapter implements ICategoryRepositoryOutPort {
         Pageable pageable = PageRequest.of(page, size, sort);
         Page<CategoryEntity> pageRes = repository.findAll(pageable);
         PaginatedResponse<Category> paginatedResponse = new PaginatedResponse<>();
-        paginatedResponse.setElements(CategoryEntityMapper.toModels(pageRes.getContent()));
+        paginatedResponse.setItems(CategoryEntityMapper.toModels(pageRes.getContent()));
         paginatedResponse.setPage(pageRes.getNumber());
         paginatedResponse.setSize(pageRes.getSize());
-        paginatedResponse.setTotalElements(pageRes.getTotalElements());
+        paginatedResponse.setTotalItems(pageRes.getTotalElements());
         paginatedResponse.setTotalPages(pageRes.getTotalPages());
         return paginatedResponse;
     }

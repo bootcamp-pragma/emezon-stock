@@ -4,17 +4,17 @@ import java.util.List;
 
 public class PaginatedResponse <T> {
 
-    private List<T> elements;
+    private List<T> items;
     private int page;
     private int size;
-    private long totalElements;
+    private long totalItems;
     private int totalPages;
 
-    public PaginatedResponse(List<T> elements, int page, int size, long totalElements, int totalPages) {
-        this.elements = elements;
+    public PaginatedResponse(List<T> items, int page, int size, long totalItems, int totalPages) {
+        this.items = items;
         this.page = page;
         this.size = size;
-        this.totalElements = totalElements;
+        this.totalItems = totalItems;
         this.totalPages = totalPages;
     }
 
@@ -22,12 +22,12 @@ public class PaginatedResponse <T> {
         // Empty constructor
     }
 
-    public List<T> getElements() {
-        return elements;
+    public List<T> getItems() {
+        return items;
     }
 
-    public void setElements(List<T> elements) {
-        this.elements = elements;
+    public void setItems(List<T> items) {
+        this.items = items;
     }
 
     public int getPage() {
@@ -46,12 +46,12 @@ public class PaginatedResponse <T> {
         this.size = size;
     }
 
-    public long getTotalElements() {
-        return totalElements;
+    public long getTotalItems() {
+        return totalItems;
     }
 
-    public void setTotalElements(long totalElements) {
-        this.totalElements = totalElements;
+    public void setTotalItems(long totalItems) {
+        this.totalItems = totalItems;
     }
 
     public int getTotalPages() {

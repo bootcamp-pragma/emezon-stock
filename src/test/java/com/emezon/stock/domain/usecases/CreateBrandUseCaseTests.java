@@ -1,4 +1,4 @@
-package com.emezon.stock.app.usecases;
+package com.emezon.stock.domain.usecases;
 
 import com.emezon.stock.domain.exceptions.brand.*;
 import com.emezon.stock.domain.models.Brand;
@@ -18,7 +18,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class CreateBrandUseCaseTests {
+class CreateBrandUseCaseTests {
 
     @Mock
     private IBrandRepositoryOutPort brandRepositoryOutPort;

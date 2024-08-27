@@ -1,4 +1,4 @@
-package com.emezon.stock.app.usecases;
+package com.emezon.stock.domain.usecases;
 
 import com.emezon.stock.domain.exceptions.category.*;
 import com.emezon.stock.domain.models.Category;

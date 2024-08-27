@@ -1,6 +1,5 @@
 package com.emezon.stock.domain.exceptions.brand;
 
-import com.emezon.stock.domain.common.constants.BrandConstraints;
 import com.emezon.stock.domain.common.constants.BrandErrorMessages;
 
 public class BrandNameMaxLengthException extends RuntimeException {

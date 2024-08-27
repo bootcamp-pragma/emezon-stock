@@ -1,4 +1,4 @@
-package com.emezon.stock.app.usecases;
+package com.emezon.stock.domain.usecases;
 
 import com.emezon.stock.domain.common.classes.PaginatedResponse;
 import com.emezon.stock.domain.exceptions.paginatedresponse.PaginatedResponsePageNumberInvalidException;
@@ -136,8 +136,8 @@ class RetrieveCategoryUseCaseTests {
         int size = 10;
         paginatedResponse.setPage(0);
         paginatedResponse.setSize(size);
-        paginatedResponse.setElements(List.of(category));
-        paginatedResponse.setTotalElements(1);
+        paginatedResponse.setItems(List.of(category));
+        paginatedResponse.setTotalItems(1);
         paginatedResponse.setTotalPages(1);
 
         when(categoryRepositoryOutPort.findAll(page, size, "asc")).thenReturn(paginatedResponse);
@@ -147,9 +147,9 @@ class RetrieveCategoryUseCaseTests {
         assertNotNull(result);
         assertEquals(page, result.getPage());
         assertEquals(size, result.getSize());
-        assertEquals(1, result.getTotalElements());
+        assertEquals(1, result.getTotalItems());
         assertEquals(1, result.getTotalPages());
-        assertEquals(category.getId(), result.getElements().get(0).getId());
+        assertEquals(category.getId(), result.getItems().get(0).getId());
 
         verify(categoryRepositoryOutPort, times(1)).findAll(page, size, "asc");
     }

@@ -13,4 +13,6 @@ public interface IBrandRepositoryOutPort {
 
     Optional<Brand> findByName(String name);
 
+    PaginatedResponse<Brand> findAll(int page, int size, String sortDirection);
+
 }
