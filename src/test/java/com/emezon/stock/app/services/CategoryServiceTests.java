@@ -126,25 +126,20 @@ class CategoryServiceTests {
 
     @Test
     void getAllCategories_whenCategoriesExist_thenPaginatedResponseIsReturned() {
-        PaginatedResponse<Category> paginatedResponse = new PaginatedResponse<>();
-        int page = 0;
-        int size = 10;
-        paginatedResponse.setTotalElements(1);
-        paginatedResponse.setTotalPages(1);
-        paginatedResponse.setPage(page);
-        paginatedResponse.setSize(size);
-        paginatedResponse.setElements(List.of(category));
+        int page = 1, size = 1;
+        PaginatedResponse<Category> categories = new PaginatedResponse<>(List.of(category), page, size, 1, 1);
+        when(retrieveCategoryUseCase.getAllCategories(page, size, "ASC")).thenReturn(categories);
 
-        when(retrieveCategoryUseCase.getAllCategories(page, size, "asc")).thenReturn(paginatedResponse);
-
-        PaginatedResponse<CategoryDTO> allCategories = categoryService.getAllCategories(page, size, "asc");
+        PaginatedResponse<CategoryDTO> allCategories = categoryService.getAllCategories(page, size, "ASC");
 
         assertNotNull(allCategories);
-        assertEquals(1, allCategories.getTotalElements());
-        assertEquals(1, allCategories.getElements().size());
-        assertEquals(category.getName(), allCategories.getElements().get(0).getName());
+        assertEquals(1, allCategories.getItems().size());
+        assertEquals(page, allCategories.getPage());
+        assertEquals(size, allCategories.getSize());
+        assertEquals(1, allCategories.getTotalItems());
+        assertEquals(1, allCategories.getTotalPages());
 
-        verify(retrieveCategoryUseCase, times(1)).getAllCategories(page, size, "asc");
+        verify(retrieveCategoryUseCase, times(1)).getAllCategories(page, size, "ASC");
     }
 
 }
