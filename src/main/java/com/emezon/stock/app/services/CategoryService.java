@@ -41,12 +41,12 @@ public class CategoryService {
 
     public PaginatedResponse<CategoryDTO> getAllCategories(int page, int size, String sortDirection) {
         PaginatedResponse<Category> categories = retrieveCategoryUseCase.getAllCategories(page, size, sortDirection);
-        List<CategoryDTO> categoryDTOS = CreateCategoryDTOMapper.toDTOList(categories.getElements());
+        List<CategoryDTO> categoryDTOS = CreateCategoryDTOMapper.toDTOList(categories.getItems());
         return new PaginatedResponse<>(
                 categoryDTOS,
                 categories.getPage(),
                 categories.getSize(),
-                categories.getTotalElements(),
+                categories.getTotalItems(),
                 categories.getTotalPages()
         );
     }

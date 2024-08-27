@@ -52,8 +52,8 @@ public class MySQLJPABrandAdapter implements IBrandRepositoryOutPort {
         Pageable pageable = PageRequest.of(page, size, sortObj);
         Page<BrandEntity> pageRes = repository.findAll(pageable);
         PaginatedResponse<Brand> paginatedResponse = new PaginatedResponse<>();
-        paginatedResponse.setElements(BrandEntityMapper.toModels(pageRes.getContent()));
-        paginatedResponse.setTotalElements(pageRes.getTotalElements());
+        paginatedResponse.setItems(BrandEntityMapper.toModels(pageRes.getContent()));
+        paginatedResponse.setTotalItems(pageRes.getTotalElements());
         paginatedResponse.setTotalPages(pageRes.getTotalPages());
         paginatedResponse.setPage(pageRes.getNumber());
         paginatedResponse.setSize(pageRes.getSize());

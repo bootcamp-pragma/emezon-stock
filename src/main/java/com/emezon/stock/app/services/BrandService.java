@@ -36,10 +36,10 @@ public class BrandService {
     public PaginatedResponse<BrandDTO> getAllBrands(int page, int size, String sortDirection) {
         PaginatedResponse<Brand> brands = retrieveBrandUseCase.getAllBrands(page, size, sortDirection);
         return new PaginatedResponse<>(
-                CreateBrandDTOMapper.toDTOList(brands.getElements()),
+                CreateBrandDTOMapper.toDTOList(brands.getItems()),
                 brands.getPage(),
                 brands.getSize(),
-                brands.getTotalElements(),
+                brands.getTotalItems(),
                 brands.getTotalPages()
         );
     }
