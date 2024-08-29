@@ -12,6 +12,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 
 import java.util.List;
 import java.util.Optional;
@@ -128,9 +130,15 @@ class CategoryServiceTests {
     void getAllCategories_whenCategoriesExist_thenPaginatedResponseIsReturned() {
         int page = 1, size = 1;
         PaginatedResponse<Category> categories = new PaginatedResponse<>(List.of(category), page, size, 1, 1);
-        when(retrieveCategoryUseCase.getAllCategories(page, size, "ASC")).thenReturn(categories);
+        List<String> sort = List.of("name,asc");
+        when(retrieveCategoryUseCase.getAllCategories(page, size, sort)).thenReturn(categories);
 
-        PaginatedResponse<CategoryDTO> allCategories = categoryService.getAllCategories(page, size, "ASC");
+        MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<>();
+        queryParams.add("page", String.valueOf(page));
+        queryParams.add("size", String.valueOf(size));
+        queryParams.add("sort", "name,asc");
+
+        PaginatedResponse<CategoryDTO> allCategories = categoryService.getAllCategories(queryParams);
 
         assertNotNull(allCategories);
         assertEquals(1, allCategories.getItems().size());
@@ -139,7 +147,7 @@ class CategoryServiceTests {
         assertEquals(1, allCategories.getTotalItems());
         assertEquals(1, allCategories.getTotalPages());
 
-        verify(retrieveCategoryUseCase, times(1)).getAllCategories(page, size, "ASC");
+        verify(retrieveCategoryUseCase, times(1)).getAllCategories(page, size, sort);
     }
 
 }
