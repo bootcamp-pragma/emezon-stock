@@ -21,7 +21,7 @@ public class PaginatedResponseControllerAdvice {
                 ex.getMessage(),
                 request.getDescription(false),
                 status.value(),
-                PaginatedResponseErrorMessages.CATEGORY_PAGE_NUMBER_INVALID);
+                PaginatedResponseErrorMessages.PAGE_NUMBER_INVALID);
         return new ResponseEntity<>(response, status);
     }
 
@@ -32,7 +32,7 @@ public class PaginatedResponseControllerAdvice {
                 ex.getMessage(),
                 request.getDescription(false),
                 status.value(),
-                PaginatedResponseErrorMessages.CATEGORY_PAGE_SIZE_INVALID);
+                PaginatedResponseErrorMessages.PAGE_SIZE_INVALID);
         return new ResponseEntity<>(response, status);
     }
 
@@ -43,7 +43,7 @@ public class PaginatedResponseControllerAdvice {
                 ex.getMessage(),
                 request.getDescription(false),
                 status.value(),
-                PaginatedResponseErrorMessages.CATEGORY_SORT_DIRECTION_INVALID);
+                PaginatedResponseErrorMessages.SORT_DIRECTION_INVALID);
         return new ResponseEntity<>(response, status);
     }
 

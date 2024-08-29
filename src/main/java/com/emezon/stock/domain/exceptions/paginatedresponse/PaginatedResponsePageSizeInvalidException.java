@@ -4,6 +4,6 @@ import com.emezon.stock.domain.common.constants.PaginatedResponseErrorMessages;
 
 public class PaginatedResponsePageSizeInvalidException extends RuntimeException {
     public PaginatedResponsePageSizeInvalidException() {
-        super(PaginatedResponseErrorMessages.CATEGORY_PAGE_SIZE_INVALID);
+        super(PaginatedResponseErrorMessages.PAGE_SIZE_INVALID);
     }
 }

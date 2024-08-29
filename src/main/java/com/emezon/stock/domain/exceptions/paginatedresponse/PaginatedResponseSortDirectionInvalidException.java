@@ -5,7 +5,7 @@ import com.emezon.stock.domain.common.constants.PaginatedResponseErrorMessages;
 public class PaginatedResponseSortDirectionInvalidException extends RuntimeException {
 
     public PaginatedResponseSortDirectionInvalidException() {
-        super(PaginatedResponseErrorMessages.CATEGORY_SORT_DIRECTION_INVALID);
+        super(PaginatedResponseErrorMessages.SORT_DIRECTION_INVALID);
     }
 
 }
