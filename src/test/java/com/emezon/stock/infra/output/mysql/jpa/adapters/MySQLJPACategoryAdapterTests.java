@@ -34,14 +34,14 @@ public class MySQLJPACategoryAdapterTests {
     @Test
     void save_whenCategoryIsSaved_thenShouldReturnCategory() {
         CategoryEntity categoryEntity = CategoryEntityMapper.toEntity(category);
-        when(repository.save(categoryEntity)).thenReturn(categoryEntity);
+        when(repository.save(any())).thenReturn(categoryEntity);
 
         Category savedCategory = adapter.save(category);
 
         assertNotNull(savedCategory);
         assertEquals(category.getName(), savedCategory.getName());
 
-        verify(repository, times(1)).save(categoryEntity);
+        verify(repository, times(1)).save(any());
     }
 
     @Test

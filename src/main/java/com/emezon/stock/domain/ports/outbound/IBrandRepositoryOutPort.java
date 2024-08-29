@@ -3,6 +3,7 @@ package com.emezon.stock.domain.ports.outbound;
 import com.emezon.stock.domain.common.classes.PaginatedResponse;
 import com.emezon.stock.domain.models.Brand;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface IBrandRepositoryOutPort {
@@ -13,6 +14,6 @@ public interface IBrandRepositoryOutPort {
 
     Optional<Brand> findByName(String name);
 
-    PaginatedResponse<Brand> findAll(int page, int size, String sortDirection);
+    PaginatedResponse<Brand> findAll(int page, int size, List<String> sorting);
 
 }

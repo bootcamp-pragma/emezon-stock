@@ -14,6 +14,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -42,14 +44,16 @@ public class MySQLJPABrandAdapter implements IBrandRepositoryOutPort {
     }
 
     @Override
-    public PaginatedResponse<Brand> findAll(int page, int size, String sortDirection) {
-        Sort sortObj = Sort.unsorted();
-        if (sortDirection.equalsIgnoreCase("asc")) {
-            sortObj = Sort.by(Sort.Order.asc("name"));
-        } else if (sortDirection.equalsIgnoreCase("desc")) {
-            sortObj = Sort.by(Sort.Order.desc("name"));
+    public PaginatedResponse<Brand> findAll(int page, int size, List<String> sorting) {
+        List<Sort.Order> orders = new ArrayList<>();
+        for (String sort : sorting) {
+            String[] sortArr = sort.split(",");
+            if (sortArr.length == 2) {
+                Sort.Order order = new Sort.Order(Sort.Direction.fromString(sortArr[1]), sortArr[0]);
+                orders.add(order);
+            }
         }
-        Pageable pageable = PageRequest.of(page, size, sortObj);
+        Pageable pageable = PageRequest.of(page, size, Sort.by(orders));
         Page<BrandEntity> pageRes = repository.findAll(pageable);
         PaginatedResponse<Brand> paginatedResponse = new PaginatedResponse<>();
         paginatedResponse.setItems(BrandEntityMapper.toModels(pageRes.getContent()));
