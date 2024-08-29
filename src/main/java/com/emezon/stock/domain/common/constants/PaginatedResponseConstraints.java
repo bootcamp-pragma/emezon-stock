@@ -7,6 +7,8 @@ public class PaginatedResponseConstraints {
     public static final int PAGE_SIZE_MIN = 1;
     public static final int PAGE_NUMBER_MIN = 0;
     public static final List<String> SORT_DIRECTIONS = List.of("asc", "desc");
+    public static final int DEFAULT_PAGE_NUMBER = 0;
+    public static final int DEFAULT_PAGE_SIZE = 10;
 
     private PaginatedResponseConstraints() {
         throw new IllegalStateException("Utility class");
