@@ -1,7 +1,8 @@
 package com.emezon.stock.infra.output.mysql.jpa.entities;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.annotations.UuidGenerator;
@@ -10,7 +11,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity(name = "categories")
-@Data
+@Getter
+@Setter
 public class CategoryEntity {
 
     @Id

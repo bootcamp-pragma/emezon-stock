@@ -4,7 +4,8 @@ import jakarta.annotation.PostConstruct;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 public class CreateCategoryDTO {
 

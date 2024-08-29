@@ -3,7 +3,8 @@ package com.emezon.stock.infra.output.mysql.jpa.entities;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.annotations.UuidGenerator;
@@ -12,7 +13,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity(name = "brands")
-@Data
+@Getter
+@Setter
 public class BrandEntity {
 
     @Id
