@@ -19,10 +19,13 @@ public class CategoryEntity {
     @UuidGenerator
     private String id;
 
+    @Column(nullable = false)
     private String name;
 
+    @Column(nullable = false)
     private String description;
 
+    @Column(unique = true, nullable = false)
     private String code;
 
     @ManyToMany(mappedBy = "categories")
