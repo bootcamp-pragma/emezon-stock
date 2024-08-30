@@ -29,10 +29,10 @@ public class ArticleEntity {
 
     private int stock;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private BrandEntity brand;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable
     private List<CategoryEntity> categories;
 
