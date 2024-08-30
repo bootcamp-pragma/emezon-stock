@@ -1,7 +1,13 @@
 package com.emezon.stock.app.mappers;
 
 import com.emezon.stock.app.dtos.article.ArticleDTO;
+import com.emezon.stock.app.dtos.article.CreateArticleDTO;
 import com.emezon.stock.domain.models.Article;
+import com.emezon.stock.domain.models.Brand;
+import com.emezon.stock.domain.models.Category;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ArticleDTOMapper {
 
@@ -17,6 +23,25 @@ public class ArticleDTOMapper {
         article.setStock(articleDTO.getStock());
         article.setBrand(BrandDTOMapper.toModel(articleDTO.getBrand()));
         article.setCategories(articleDTO.getCategories().stream().map(CategoryDTOMapper::toModel).toList());
+        return article;
+    }
+
+    public static Article toModel(CreateArticleDTO createArticleDTO) {
+        Article article = new Article();
+        article.setName(createArticleDTO.getName());
+        article.setDescription(createArticleDTO.getDescription());
+        article.setPrice(createArticleDTO.getPrice());
+        article.setStock(createArticleDTO.getStock());
+        Brand brand = new Brand();
+        brand.setId(createArticleDTO.getBrandId());
+        article.setBrand(brand);
+        List<Category> categories = new ArrayList<>();
+        for (String categoryId : createArticleDTO.getCategoryIds()) {
+            Category category = new Category();
+            category.setId(categoryId);
+            categories.add(category);
+        }
+        article.setCategories(categories);
         return article;
     }
 
