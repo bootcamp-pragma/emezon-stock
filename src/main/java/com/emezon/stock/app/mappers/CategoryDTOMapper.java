@@ -6,9 +6,9 @@ import com.emezon.stock.domain.models.Category;
 
 import java.util.List;
 
-public class CreateCategoryDTOMapper {
+public class CategoryDTOMapper {
 
-    private CreateCategoryDTOMapper() {
+    private CategoryDTOMapper() {
         throw new IllegalStateException("Utility class");
     }
 
@@ -20,6 +20,15 @@ public class CreateCategoryDTOMapper {
         return category;
     }
 
+    public static Category toModel(CategoryDTO categoryDTO) {
+        Category category = new Category();
+        category.setId(categoryDTO.getId());
+        category.setName(categoryDTO.getName());
+        category.setDescription(categoryDTO.getDescription());
+        category.setCode(categoryDTO.getCode());
+        return category;
+    }
+
     public static CategoryDTO toDTO(Category category) {
         CategoryDTO createCategoryDTO = new CategoryDTO();
         createCategoryDTO.setId(category.getId());
@@ -27,10 +36,6 @@ public class CreateCategoryDTOMapper {
         createCategoryDTO.setDescription(category.getDescription());
         createCategoryDTO.setCode(category.getCode());
         return createCategoryDTO;
-    }
-
-    public static List<CategoryDTO> toDTOList(List<Category> categories) {
-        return categories.stream().map(CreateCategoryDTOMapper::toDTO).toList();
     }
 
 }

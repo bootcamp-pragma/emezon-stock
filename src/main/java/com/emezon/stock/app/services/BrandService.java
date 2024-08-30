@@ -2,7 +2,7 @@ package com.emezon.stock.app.services;
 
 import com.emezon.stock.app.dtos.brand.BrandDTO;
 import com.emezon.stock.app.dtos.brand.CreateBrandDTO;
-import com.emezon.stock.app.mappers.CreateBrandDTOMapper;
+import com.emezon.stock.app.mappers.BrandDTOMapper;
 import com.emezon.stock.domain.common.PaginatedResponse;
 import com.emezon.stock.domain.constants.PaginatedResponseConstraints;
 import com.emezon.stock.domain.models.Brand;
@@ -22,19 +22,19 @@ public class BrandService {
     private final RetrieveBrandUseCase retrieveBrandUseCase;
 
     public BrandDTO createBrand(CreateBrandDTO brand) {
-        Brand brandModel = CreateBrandDTOMapper.toModel(brand);
+        Brand brandModel = BrandDTOMapper.toModel(brand);
         Brand createdBrand = createBrandUseCase.createBrand(brandModel);
-        return CreateBrandDTOMapper.toDTO(createdBrand);
+        return BrandDTOMapper.toDTO(createdBrand);
     }
 
     public Optional<BrandDTO> getBrandById(String id) {
         Optional<Brand> brand = retrieveBrandUseCase.getBrandById(id);
-        return brand.map(CreateBrandDTOMapper::toDTO);
+        return brand.map(BrandDTOMapper::toDTO);
     }
 
     public Optional<BrandDTO> getBrandByName(String name) {
         Optional<Brand> brand = retrieveBrandUseCase.getBrandByName(name);
-        return brand.map(CreateBrandDTOMapper::toDTO);
+        return brand.map(BrandDTOMapper::toDTO);
     }
 
     public PaginatedResponse<BrandDTO> getAllBrands(MultiValueMap<String, String> queryParams) {
@@ -48,8 +48,11 @@ public class BrandService {
                 queryParams.get("sort") : List.of();
 
         PaginatedResponse<Brand> brands = retrieveBrandUseCase.getAllBrands(page, size, sort);
+        List<BrandDTO> brandDTOs = brands.getItems().stream()
+                .map(BrandDTOMapper::toDTO)
+                .toList();
         return new PaginatedResponse<>(
-                CreateBrandDTOMapper.toDTOList(brands.getItems()),
+                brandDTOs,
                 brands.getPage(),
                 brands.getSize(),
                 brands.getTotalItems(),

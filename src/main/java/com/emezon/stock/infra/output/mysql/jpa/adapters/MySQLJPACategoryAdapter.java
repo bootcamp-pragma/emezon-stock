@@ -61,7 +61,7 @@ public class MySQLJPACategoryAdapter implements ICategoryRepositoryOutPort {
         Pageable pageable = PageRequest.of(page, size, Sort.by(orders));
         Page<CategoryEntity> pageRes = repository.findAll(pageable);
         PaginatedResponse<Category> paginatedResponse = new PaginatedResponse<>();
-        paginatedResponse.setItems(CategoryEntityMapper.toModels(pageRes.getContent()));
+        paginatedResponse.setItems(pageRes.getContent().stream().map(CategoryEntityMapper::toModel).toList());
         paginatedResponse.setPage(pageRes.getNumber());
         paginatedResponse.setSize(pageRes.getSize());
         paginatedResponse.setTotalItems(pageRes.getTotalElements());

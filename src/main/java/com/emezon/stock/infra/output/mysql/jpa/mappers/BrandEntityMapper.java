@@ -1,5 +1,6 @@
 package com.emezon.stock.infra.output.mysql.jpa.mappers;
 
+import com.emezon.stock.app.dtos.brand.BrandDTO;
 import com.emezon.stock.domain.models.Brand;
 import com.emezon.stock.infra.output.mysql.jpa.entities.BrandEntity;
 
@@ -17,6 +18,13 @@ public class BrandEntityMapper {
         brandEntity.setId(brand.getId());
         brandEntity.setName(brand.getName());
         brandEntity.setDescription(brand.getDescription());
+        return brandEntity;
+    }
+
+    public static BrandEntity toEntity(BrandDTO brandDTO) {
+        BrandEntity brandEntity = new BrandEntity();
+        brandEntity.setName(brandDTO.getName());
+        brandEntity.setDescription(brandDTO.getDescription());
         return brandEntity;
     }
 

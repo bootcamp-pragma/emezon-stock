@@ -1,5 +1,6 @@
 package com.emezon.stock.infra.output.mysql.jpa.mappers;
 
+import com.emezon.stock.app.dtos.category.CategoryDTO;
 import com.emezon.stock.domain.models.Category;
 import com.emezon.stock.infra.output.mysql.jpa.entities.CategoryEntity;
 
@@ -23,6 +24,14 @@ public class CategoryEntityMapper {
         return categoryEntity;
     }
 
+    public static CategoryEntity toEntity(CategoryDTO categoryDTO) {
+        CategoryEntity categoryEntity = new CategoryEntity();
+        categoryEntity.setName(categoryDTO.getName());
+        categoryEntity.setDescription(categoryDTO.getDescription());
+        categoryEntity.setCode(categoryDTO.getCode());
+        return categoryEntity;
+    }
+
     public static Category toModel(CategoryEntity categoryEntity) {
         Category category = new Category();
         category.setId(categoryEntity.getId());
@@ -30,12 +39,6 @@ public class CategoryEntityMapper {
         category.setDescription(categoryEntity.getDescription());
         category.setCode(categoryEntity.getCode());
         return category;
-    }
-
-    public static List<Category> toModels(List<CategoryEntity> categoryEntities) {
-        return categoryEntities.stream()
-                .map(CategoryEntityMapper::toModel)
-                .collect(Collectors.toList());
     }
 
 }

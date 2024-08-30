@@ -2,7 +2,7 @@ package com.emezon.stock.app.services;
 
 import com.emezon.stock.app.dtos.category.CategoryDTO;
 import com.emezon.stock.app.dtos.category.CreateCategoryDTO;
-import com.emezon.stock.app.mappers.CreateCategoryDTOMapper;
+import com.emezon.stock.app.mappers.CategoryDTOMapper;
 import com.emezon.stock.domain.common.PaginatedResponse;
 import com.emezon.stock.domain.constants.PaginatedResponseConstraints;
 import com.emezon.stock.domain.usecases.category.CreateCategoryUseCase;
@@ -22,24 +22,24 @@ public class CategoryService {
     private final RetrieveCategoryUseCase retrieveCategoryUseCase;
 
     public CategoryDTO createCategory(CreateCategoryDTO category) {
-        Category categoryModel = CreateCategoryDTOMapper.toModel(category);
+        Category categoryModel = CategoryDTOMapper.toModel(category);
         Category createdCategory = createCategoryUseCase.createCategory(categoryModel);
-        return CreateCategoryDTOMapper.toDTO(createdCategory);
+        return CategoryDTOMapper.toDTO(createdCategory);
     }
 
     public Optional<CategoryDTO> getCategoryById(String id) {
         Optional<Category> category = retrieveCategoryUseCase.getCategoryById(id);
-        return category.map(CreateCategoryDTOMapper::toDTO);
+        return category.map(CategoryDTOMapper::toDTO);
     }
 
     public Optional<CategoryDTO> getCategoryByName(String name) {
         Optional<Category> category = retrieveCategoryUseCase.getCategoryByName(name);
-        return category.map(CreateCategoryDTOMapper::toDTO);
+        return category.map(CategoryDTOMapper::toDTO);
     }
 
     public Optional<CategoryDTO> getCategoryByCode(String code) {
         Optional<Category> category = retrieveCategoryUseCase.getCategoryByCode(code);
-        return category.map(CreateCategoryDTOMapper::toDTO);
+        return category.map(CategoryDTOMapper::toDTO);
     }
 
     public PaginatedResponse<CategoryDTO> getAllCategories(MultiValueMap<String, String> queryParams) {
@@ -52,7 +52,7 @@ public class CategoryService {
         List<String> sort = queryParams.containsKey("sort") ?
                 queryParams.get("sort") : List.of();
         PaginatedResponse<Category> categories = retrieveCategoryUseCase.getAllCategories(page, size, sort);
-        List<CategoryDTO> categoryDTOS = CreateCategoryDTOMapper.toDTOList(categories.getItems());
+        List<CategoryDTO> categoryDTOS = categories.getItems().stream().map(CategoryDTOMapper::toDTO).toList();
         return new PaginatedResponse<>(
                 categoryDTOS,
                 categories.getPage(),
