@@ -1,6 +1,6 @@
 package com.emezon.stock.domain.exceptions.category;
 
-import com.emezon.stock.domain.common.constants.CategoryErrorMessages;
+import com.emezon.stock.domain.constants.CategoryErrorMessages;
 
 public class CategoryDescriptionMaxLengthException extends RuntimeException {
     public CategoryDescriptionMaxLengthException(Integer maxLength) {

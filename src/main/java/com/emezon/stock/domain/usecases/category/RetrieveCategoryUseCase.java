@@ -1,7 +1,7 @@
 package com.emezon.stock.domain.usecases.category;
 
-import com.emezon.stock.domain.common.classes.PaginatedResponse;
-import com.emezon.stock.domain.common.constants.PaginatedResponseConstraints;
+import com.emezon.stock.domain.common.PaginatedResponse;
+import com.emezon.stock.domain.constants.PaginatedResponseConstraints;
 import com.emezon.stock.domain.exceptions.paginatedresponse.PaginatedResponsePageNumberInvalidException;
 import com.emezon.stock.domain.exceptions.paginatedresponse.PaginatedResponsePageSizeInvalidException;
 import com.emezon.stock.domain.exceptions.paginatedresponse.PaginatedResponseSortDirectionInvalidException;

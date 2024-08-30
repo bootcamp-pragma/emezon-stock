@@ -1,7 +1,7 @@
 package com.emezon.stock.app.errorhandling.advices;
 
 import com.emezon.stock.app.errorhandling.ExceptionResponse;
-import com.emezon.stock.domain.common.constants.PaginatedResponseErrorMessages;
+import com.emezon.stock.domain.constants.PaginatedResponseErrorMessages;
 import com.emezon.stock.domain.exceptions.paginatedresponse.PaginatedResponsePageNumberInvalidException;
 import com.emezon.stock.domain.exceptions.paginatedresponse.PaginatedResponsePageSizeInvalidException;
 import com.emezon.stock.domain.exceptions.paginatedresponse.PaginatedResponseSortDirectionInvalidException;

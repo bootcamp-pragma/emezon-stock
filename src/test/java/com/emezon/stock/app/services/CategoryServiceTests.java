@@ -1,8 +1,8 @@
 package com.emezon.stock.app.services;
 
-import com.emezon.stock.app.dtos.CategoryDTO;
-import com.emezon.stock.app.dtos.CreateCategoryDTO;
-import com.emezon.stock.domain.common.classes.PaginatedResponse;
+import com.emezon.stock.app.dtos.category.CategoryDTO;
+import com.emezon.stock.app.dtos.category.CreateCategoryDTO;
+import com.emezon.stock.domain.common.PaginatedResponse;
 import com.emezon.stock.domain.models.Category;
 import com.emezon.stock.domain.usecases.category.CreateCategoryUseCase;
 import com.emezon.stock.domain.usecases.category.RetrieveCategoryUseCase;

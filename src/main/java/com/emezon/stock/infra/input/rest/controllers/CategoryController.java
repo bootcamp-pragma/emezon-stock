@@ -1,10 +1,10 @@
 package com.emezon.stock.infra.input.rest.controllers;
 
-import com.emezon.stock.app.dtos.CategoryDTO;
-import com.emezon.stock.app.dtos.CreateCategoryDTO;
+import com.emezon.stock.app.dtos.category.CategoryDTO;
+import com.emezon.stock.app.dtos.category.CreateCategoryDTO;
 import com.emezon.stock.app.services.CategoryService;
-import com.emezon.stock.domain.common.annotations.ValidPageableRequest;
-import com.emezon.stock.domain.common.classes.PaginatedResponse;
+import com.emezon.stock.domain.utils.annotations.ValidPageableRequest;
+import com.emezon.stock.domain.common.PaginatedResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

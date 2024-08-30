@@ -1,6 +1,6 @@
 package com.emezon.stock.domain.ports.inbound.brand;
 
-import com.emezon.stock.domain.common.classes.PaginatedResponse;
+import com.emezon.stock.domain.common.PaginatedResponse;
 import com.emezon.stock.domain.models.Brand;
 
 import java.util.List;

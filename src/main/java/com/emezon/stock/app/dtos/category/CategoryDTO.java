@@ -1,4 +1,4 @@
-package com.emezon.stock.app.dtos;
+package com.emezon.stock.app.dtos.category;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -7,16 +7,18 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class BrandDTO {
+public class CategoryDTO {
 
     private String id;
     private String name;
     private String description;
+    private String code;
 
-    public BrandDTO(String id, String name, String description) {
+    public CategoryDTO(String id, String name, String description, String code) {
         this.id = id;
         this.name = name;
         this.description = description;
+        this.code = code;
     }
 
 }

@@ -1,4 +1,4 @@
-package com.emezon.stock.domain.common.constants;
+package com.emezon.stock.domain.constants;
 
 public class CategoryErrorMessages {
     public static final String CATEGORY_ALREADY_EXISTS = "Category with name '%s' already exists";

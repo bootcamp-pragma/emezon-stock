@@ -1,5 +1,5 @@
-package com.emezon.stock.app.dtos;
-import com.emezon.stock.domain.common.constants.CategoryErrorMessages;
+package com.emezon.stock.app.dtos.category;
+import com.emezon.stock.domain.constants.CategoryErrorMessages;
 import jakarta.annotation.PostConstruct;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;

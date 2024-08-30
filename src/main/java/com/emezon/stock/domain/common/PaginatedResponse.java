@@ -1,4 +1,4 @@
-package com.emezon.stock.domain.common.classes;
+package com.emezon.stock.domain.common;
 
 import java.util.List;
 

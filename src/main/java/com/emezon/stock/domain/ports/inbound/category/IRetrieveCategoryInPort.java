@@ -1,6 +1,6 @@
 package com.emezon.stock.domain.ports.inbound.category;
 
-import com.emezon.stock.domain.common.classes.PaginatedResponse;
+import com.emezon.stock.domain.common.PaginatedResponse;
 import com.emezon.stock.domain.models.Category;
 
 import java.util.List;

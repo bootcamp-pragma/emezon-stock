@@ -1,10 +1,10 @@
 package com.emezon.stock.app.services;
 
-import com.emezon.stock.app.dtos.BrandDTO;
-import com.emezon.stock.app.dtos.CreateBrandDTO;
+import com.emezon.stock.app.dtos.brand.BrandDTO;
+import com.emezon.stock.app.dtos.brand.CreateBrandDTO;
 import com.emezon.stock.app.mappers.CreateBrandDTOMapper;
-import com.emezon.stock.domain.common.classes.PaginatedResponse;
-import com.emezon.stock.domain.common.constants.PaginatedResponseConstraints;
+import com.emezon.stock.domain.common.PaginatedResponse;
+import com.emezon.stock.domain.constants.PaginatedResponseConstraints;
 import com.emezon.stock.domain.models.Brand;
 import com.emezon.stock.domain.usecases.brand.CreateBrandUseCase;
 import com.emezon.stock.domain.usecases.brand.RetrieveBrandUseCase;

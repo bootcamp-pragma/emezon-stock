@@ -1,4 +1,4 @@
-package com.emezon.stock.domain.common.constants;
+package com.emezon.stock.domain.constants;
 
 public class PaginatedResponseErrorMessages {
 

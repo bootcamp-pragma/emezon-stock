@@ -1,7 +1,7 @@
 package com.emezon.stock.app.mappers;
 
-import com.emezon.stock.app.dtos.BrandDTO;
-import com.emezon.stock.app.dtos.CreateBrandDTO;
+import com.emezon.stock.app.dtos.brand.BrandDTO;
+import com.emezon.stock.app.dtos.brand.CreateBrandDTO;
 import com.emezon.stock.domain.models.Brand;
 
 import java.util.List;

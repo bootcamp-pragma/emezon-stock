@@ -1,7 +1,7 @@
-package com.emezon.stock.app.dtos;
+package com.emezon.stock.app.dtos.common;
 
-import com.emezon.stock.domain.common.constants.PaginatedResponseConstraints;
-import com.emezon.stock.domain.common.constants.PaginatedResponseErrorMessages;
+import com.emezon.stock.domain.constants.PaginatedResponseConstraints;
+import com.emezon.stock.domain.constants.PaginatedResponseErrorMessages;
 import jakarta.annotation.PostConstruct;
 import jakarta.validation.constraints.Min;
 import lombok.Getter;

@@ -1,6 +1,6 @@
 package com.emezon.stock.infra.output.mysql.jpa.adapters;
 
-import com.emezon.stock.domain.common.classes.PaginatedResponse;
+import com.emezon.stock.domain.common.PaginatedResponse;
 import com.emezon.stock.domain.models.Category;
 import com.emezon.stock.domain.ports.outbound.ICategoryRepositoryOutPort;
 import com.emezon.stock.infra.output.mysql.jpa.entities.CategoryEntity;

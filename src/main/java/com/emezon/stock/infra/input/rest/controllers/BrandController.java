@@ -1,10 +1,10 @@
 package com.emezon.stock.infra.input.rest.controllers;
 
-import com.emezon.stock.app.dtos.BrandDTO;
-import com.emezon.stock.app.dtos.CreateBrandDTO;
+import com.emezon.stock.app.dtos.brand.BrandDTO;
+import com.emezon.stock.app.dtos.brand.CreateBrandDTO;
 import com.emezon.stock.app.services.BrandService;
-import com.emezon.stock.domain.common.annotations.ValidPageableRequest;
-import com.emezon.stock.domain.common.classes.PaginatedResponse;
+import com.emezon.stock.domain.utils.annotations.ValidPageableRequest;
+import com.emezon.stock.domain.common.PaginatedResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

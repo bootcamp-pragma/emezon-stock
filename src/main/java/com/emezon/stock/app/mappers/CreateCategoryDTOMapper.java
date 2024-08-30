@@ -1,7 +1,7 @@
 package com.emezon.stock.app.mappers;
 
-import com.emezon.stock.app.dtos.CategoryDTO;
-import com.emezon.stock.app.dtos.CreateCategoryDTO;
+import com.emezon.stock.app.dtos.category.CategoryDTO;
+import com.emezon.stock.app.dtos.category.CreateCategoryDTO;
 import com.emezon.stock.domain.models.Category;
 
 import java.util.List;

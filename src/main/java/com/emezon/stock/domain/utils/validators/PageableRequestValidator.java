@@ -1,8 +1,8 @@
-package com.emezon.stock.domain.common.validators;
+package com.emezon.stock.domain.utils.validators;
 
-import com.emezon.stock.domain.common.annotations.ValidPageableRequest;
-import com.emezon.stock.domain.common.constants.PaginatedResponseConstraints;
-import com.emezon.stock.domain.common.constants.PaginatedResponseErrorMessages;
+import com.emezon.stock.domain.utils.annotations.ValidPageableRequest;
+import com.emezon.stock.domain.constants.PaginatedResponseConstraints;
+import com.emezon.stock.domain.constants.PaginatedResponseErrorMessages;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 import org.springframework.util.MultiValueMap;

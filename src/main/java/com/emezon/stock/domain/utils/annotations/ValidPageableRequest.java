@@ -1,6 +1,6 @@
-package com.emezon.stock.domain.common.annotations;
+package com.emezon.stock.domain.utils.annotations;
 
-import com.emezon.stock.domain.common.validators.PageableRequestValidator;
+import com.emezon.stock.domain.utils.validators.PageableRequestValidator;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 
