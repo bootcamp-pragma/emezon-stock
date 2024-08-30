@@ -13,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -49,8 +50,15 @@ public class MySQLJPACategoryAdapter implements ICategoryRepositoryOutPort {
 
     @Override
     public PaginatedResponse<Category> findAll(int page, int size, List<String> sorting) {
-        Sort sort = Sort.unsorted();
-        Pageable pageable = PageRequest.of(page, size, sort);
+        List<Sort.Order> orders = new ArrayList<>();
+        for (String sort : sorting) {
+            String[] sortArr = sort.split(",");
+            if (sortArr.length == 2) {
+                Sort.Order order = new Sort.Order(Sort.Direction.fromString(sortArr[1]), sortArr[0]);
+                orders.add(order);
+            }
+        }
+        Pageable pageable = PageRequest.of(page, size, Sort.by(orders));
         Page<CategoryEntity> pageRes = repository.findAll(pageable);
         PaginatedResponse<Category> paginatedResponse = new PaginatedResponse<>();
         paginatedResponse.setItems(CategoryEntityMapper.toModels(pageRes.getContent()));
