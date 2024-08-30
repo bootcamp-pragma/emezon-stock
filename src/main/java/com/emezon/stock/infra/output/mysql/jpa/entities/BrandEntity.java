@@ -22,12 +22,11 @@ public class BrandEntity {
     @UuidGenerator
     private String id;
 
-    @Column(unique = true)
+    @Column(unique = true, nullable = false, length = 50)
     private String name;
 
+    @Column(nullable = false, length = 120)
     private String description;
-
-    private String code;
 
     @OneToMany(mappedBy = "brand")
     private List<ArticleEntity> articles;
