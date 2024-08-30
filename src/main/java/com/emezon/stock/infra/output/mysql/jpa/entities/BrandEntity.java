@@ -1,9 +1,6 @@
 package com.emezon.stock.infra.output.mysql.jpa.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
@@ -28,7 +25,7 @@ public class BrandEntity {
     @Column(nullable = false, length = 120)
     private String description;
 
-    @OneToMany(mappedBy = "brand")
+    @OneToMany(mappedBy = "brand", fetch = FetchType.LAZY)
     private List<ArticleEntity> articles;
 
     @CreationTimestamp

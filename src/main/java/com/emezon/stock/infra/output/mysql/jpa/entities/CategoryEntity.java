@@ -28,7 +28,7 @@ public class CategoryEntity {
     @Column(unique = true, nullable = false)
     private String code;
 
-    @ManyToMany(mappedBy = "categories")
+    @ManyToMany(mappedBy = "categories", fetch = FetchType.LAZY)
     private List<ArticleEntity> articles;
 
     @CreationTimestamp
