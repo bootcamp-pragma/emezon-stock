@@ -7,7 +7,12 @@ import com.emezon.stock.infra.output.mysql.jpa.entities.ArticleEntity;
 import com.emezon.stock.infra.output.mysql.jpa.mappers.ArticleEntityMapper;
 import com.emezon.stock.infra.output.mysql.jpa.repositories.IMySQLJPAArticleRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,11 +30,28 @@ public class MySQLJPAArticleAdapter implements IArticleRepositoryOutPort {
 
     @Override
     public Optional<Article> findById(String id) {
-        return Optional.empty();
+        Optional<ArticleEntity> articleEntity = repository.findById(id);
+        return articleEntity.map(ArticleEntityMapper::toModel);
     }
 
     @Override
     public PaginatedResponse<Article> findAll(int page, int size, List<String> sorting) {
-        return null;
+        List<Sort.Order> orders = new ArrayList<>();
+        for (String sort : sorting) {
+            String[] sortArr = sort.split(",");
+            if (sortArr.length == 2) {
+                Sort.Order order = new Sort.Order(Sort.Direction.fromString(sortArr[1]), sortArr[0]);
+                orders.add(order);
+            }
+        }
+        Pageable pageable = PageRequest.of(page, size, Sort.by(orders));
+        Page<ArticleEntity> pageRes = repository.findAll(pageable);
+        PaginatedResponse<Article> paginatedResponse = new PaginatedResponse<>();
+        paginatedResponse.setItems(pageRes.getContent().stream().map(ArticleEntityMapper::toModel).toList());
+        paginatedResponse.setTotalItems(pageRes.getTotalElements());
+        paginatedResponse.setTotalPages(pageRes.getTotalPages());
+        paginatedResponse.setPage(pageRes.getNumber());
+        paginatedResponse.setSize(pageRes.getSize());
+        return paginatedResponse;
     }
 }
