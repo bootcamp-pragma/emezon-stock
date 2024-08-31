@@ -1,5 +1,6 @@
 package com.emezon.stock.infra.output.mysql.jpa.entities;
 
+import com.emezon.stock.domain.constants.ArticleConstraints;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import lombok.Getter;
@@ -27,11 +28,11 @@ public class ArticleEntity {
     private String description;
 
     @Column(nullable = false)
-    @Min(0)
+    @Min(ArticleConstraints.PRICE_MIN_VALUE)
     private double price;
 
     @Column(nullable = false)
-    @Min(0)
+    @Min(ArticleConstraints.STOCK_MIN_VALUE)
     private int stock;
 
     @ManyToOne(fetch = FetchType.LAZY)
