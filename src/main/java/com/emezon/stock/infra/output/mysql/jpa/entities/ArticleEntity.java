@@ -37,10 +37,10 @@ public class ArticleEntity {
     @Min(ArticleConstraints.STOCK_MIN_VALUE)
     private int stock;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private BrandEntity brand;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany
     @JoinTable(
             name = "article_category",
             joinColumns = @JoinColumn(name = "article_id"),

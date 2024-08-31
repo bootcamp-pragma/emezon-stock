@@ -25,7 +25,7 @@ public class BrandEntity {
     @Column(nullable = false, length = 120)
     private String description;
 
-    @OneToMany(mappedBy = "brand", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "brand")
     private List<ArticleEntity> articles;
 
     @CreationTimestamp
