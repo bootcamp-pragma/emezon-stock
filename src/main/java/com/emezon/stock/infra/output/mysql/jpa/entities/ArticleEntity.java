@@ -10,6 +10,8 @@ import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.annotations.UuidGenerator;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @Entity(name = "articles")
@@ -52,5 +54,22 @@ public class ArticleEntity {
 
     @UpdateTimestamp
     private LocalDateTime updatedAt;
+
+    @Override
+    public String toString() {
+        List<String> categoriesStr = new ArrayList<>();
+        for (CategoryEntity category : categories) {
+            categoriesStr.add(category.toString());
+        }
+        return "\n{\n" +
+                "id='" + id + "',\n" +
+                "name='" + name + "',\n" +
+                "description='" + description + "',\n" +
+                "price=" + price + "\n" +
+                "stock=" + stock + "\n" +
+                "brand= " + brand.toString() + "\n" +
+                "categories= [" + String.join(", ", categoriesStr) + " ]\n" +
+                "}";
+    }
 
 }

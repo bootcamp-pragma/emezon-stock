@@ -89,4 +89,15 @@ public class CategoryControllerAdvice {
         return new ResponseEntity<>(response, status);
     }
 
+    @ExceptionHandler(CategoryNotFoundByIdException.class)
+    public ResponseEntity<ExceptionResponse> handleCategoryNotFoundByIdException(CategoryNotFoundByIdException ex, WebRequest request) {
+        HttpStatus status = HttpStatus.NOT_FOUND;
+        ExceptionResponse response = new ExceptionResponse(
+                ex.getMessage(),
+                request.getDescription(false),
+                status.value(),
+                ex.getMessage());
+        return new ResponseEntity<>(response, status);
+    }
+
 }

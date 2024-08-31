@@ -37,4 +37,14 @@ public class CategoryEntity {
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
+    @Override
+    public String toString() {
+        return "\n{\n" +
+                "id='" + id + "'\n" +
+                "name='" + name + "'\n" +
+                "description='" + description + "'\n" +
+                "code='" + code + "'\n" +
+                "}";
+    }
+
 }

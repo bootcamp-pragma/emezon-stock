@@ -67,4 +67,15 @@ public class BrandControllerAdvice {
         return new ResponseEntity<>(response, status);
     }
 
+    @ExceptionHandler(BrandNotFoundByIdException.class)
+    public ResponseEntity<ExceptionResponse> handleBrandNotFoundByIdException(BrandNotFoundByIdException ex, WebRequest request) {
+        HttpStatus status = HttpStatus.NOT_FOUND;
+        ExceptionResponse response = new ExceptionResponse(
+                ex.getMessage(),
+                request.getDescription(false),
+                status.value(),
+                BrandErrorMessages.BRAND_NOT_FOUND_BY_ID);
+        return new ResponseEntity<>(response, status);
+    }
+
 }
