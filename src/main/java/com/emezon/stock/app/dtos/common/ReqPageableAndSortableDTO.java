@@ -16,10 +16,12 @@ import java.util.List;
 @NoArgsConstructor
 public class ReqPageableAndSortableDTO {
 
-    @Min(value = 0, message = PaginatedResponseErrorMessages.PAGE_NUMBER_INVALID)
+    @Min(value = PaginatedResponseConstraints.PAGE_NUMBER_MIN,
+            message = PaginatedResponseErrorMessages.PAGE_NUMBER_INVALID)
     private Integer page;
 
-    @Min(value = 1, message = PaginatedResponseErrorMessages.PAGE_SIZE_INVALID)
+    @Min(value = PaginatedResponseConstraints.PAGE_SIZE_MIN,
+            message = PaginatedResponseErrorMessages.PAGE_SIZE_INVALID)
     private Integer size;
 
     private MultiValueMap<String, String> sort;
