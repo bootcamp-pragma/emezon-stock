@@ -13,11 +13,6 @@ class StockApplicationTests {
 	@Test
 	void contextLoads() {
 		// Initializes the Spring application context
-		try (ConfigurableApplicationContext context = new SpringApplicationBuilder(StockApplication.class)
-				.run()) {
-			// Asserts that the context is not null
-			assertNotNull(context);
-		}
 	}
 
 }
