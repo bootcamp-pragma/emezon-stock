@@ -15,10 +15,7 @@ import com.emezon.stock.domain.ports.outbound.IArticleRepositoryOutPort;
 import com.emezon.stock.domain.usecases.brand.RetrieveBrandUseCase;
 import com.emezon.stock.domain.usecases.category.RetrieveCategoryUseCase;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 public class CreateArticleUseCase implements ICreateArticleInPort {
 
@@ -41,12 +38,15 @@ public class CreateArticleUseCase implements ICreateArticleInPort {
         if (brandById.isEmpty()) {
             throw new BrandNotFoundByIdException(processedArticle.getBrand().getId());
         }
+        processedArticle.setBrand(brandById.get());
         List<Category> categories = processedArticle.getCategories();
+        processedArticle.setCategories(new ArrayList<>());
         for (Category category : categories) {
             Optional<Category> categoryById = retrieveCategoryUseCase.getCategoryById(category.getId());
             if (categoryById.isEmpty()) {
                 throw new CategoryNotFoundByIdException(category.getId());
             }
+            processedArticle.getCategories().add(categoryById.get());
         }
         return articleRepositoryOutPort.save(processedArticle);
     }

@@ -32,21 +32,7 @@ public class RetrieveBrandUseCase implements IRetrieveBrandInPort {
 
     @Override
     public PaginatedResponse<Brand> getAllBrands(int page, int size, List<String> sorting) {
-        validateParameters(page, size, sorting);
+        PaginatedResponseConstraints.validateParameters(page, size, sorting);
         return brandRepositoryOutPort.findAll(page, size, sorting);
-    }
-
-    private void validateParameters(int page, int size, List<String> sorting) {
-        if (page < PaginatedResponseConstraints.PAGE_NUMBER_MIN) {
-            throw new PaginatedResponsePageNumberInvalidException();
-        }
-        if (size < PaginatedResponseConstraints.PAGE_SIZE_MIN) {
-            throw new PaginatedResponsePageSizeInvalidException();
-        }
-        for (String sort : sorting) {
-            if (!sort.matches(PaginatedResponseConstraints.VALID_SORT_FORMAT)) {
-                throw new PaginatedResponseSortDirectionInvalidException();
-            }
-        }
     }
 }
