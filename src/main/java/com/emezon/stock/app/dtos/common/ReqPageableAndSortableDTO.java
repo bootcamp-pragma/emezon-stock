@@ -10,6 +10,7 @@ import lombok.Setter;
 import org.springframework.util.MultiValueMap;
 
 import java.util.List;
+import java.util.Map;
 
 @Getter
 @Setter
@@ -45,9 +46,9 @@ public class ReqPageableAndSortableDTO {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        for (String key : this.sort.keySet()) {
-            List<String> values = this.sort.get(key);
-            sb.append(key).append(": [");
+        for (Map.Entry<String, List<String>> entry : this.sort.entrySet()) {
+            List<String> values = entry.getValue();
+            sb.append(entry.getKey()).append(": [");
             for (String value : values) {
                 sb.append(value).append("*");
             }
@@ -56,7 +57,7 @@ public class ReqPageableAndSortableDTO {
         return "ReqPageableAndSortableDTO{" +
                 "page=" + page +
                 ", size=" + size +
-                ", params=" + sb.toString() +
+                ", params=" + sb +
                 '}';
     }
 

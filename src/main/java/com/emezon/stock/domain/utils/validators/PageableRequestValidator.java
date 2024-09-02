@@ -7,10 +7,7 @@ import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 import org.springframework.util.MultiValueMap;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 
 public class PageableRequestValidator implements ConstraintValidator<ValidPageableRequest, MultiValueMap<String, String>> {
@@ -28,7 +25,8 @@ public class PageableRequestValidator implements ConstraintValidator<ValidPageab
     public boolean isValid(MultiValueMap<String, String> s, ConstraintValidatorContext context) {
         boolean error = false;
         context.disableDefaultConstraintViolation();
-        for (String key : s.keySet()) {
+        for (Map.Entry<String, List<String>> entry : s.entrySet()) {
+            String key = entry.getKey();
             if (!allowedParams.contains(key)) {
                 context.buildConstraintViolationWithTemplate("Unknown parameter: " + key).addConstraintViolation();
                 error = true;
