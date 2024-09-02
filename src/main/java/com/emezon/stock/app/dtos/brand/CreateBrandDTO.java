@@ -1,12 +1,14 @@
-package com.emezon.stock.app.dtos;
+package com.emezon.stock.app.dtos.brand;
 
-import com.emezon.stock.domain.common.constants.BrandErrorMessages;
+import com.emezon.stock.domain.constants.BrandErrorMessages;
 import jakarta.annotation.PostConstruct;
 import jakarta.validation.constraints.NotBlank;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 public class CreateBrandDTO {
 

@@ -1,6 +1,6 @@
 package com.emezon.stock.domain.exceptions.brand;
 
-import com.emezon.stock.domain.common.constants.BrandErrorMessages;
+import com.emezon.stock.domain.constants.BrandErrorMessages;
 
 public class BrandNameRequiredException extends RuntimeException {
     public BrandNameRequiredException() {

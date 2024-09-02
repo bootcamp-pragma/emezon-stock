@@ -1,7 +1,7 @@
 package com.emezon.stock.app.errorhandling.advices;
 
 import com.emezon.stock.app.errorhandling.ExceptionResponse;
-import com.emezon.stock.domain.common.constants.BrandErrorMessages;
+import com.emezon.stock.domain.constants.BrandErrorMessages;
 import com.emezon.stock.domain.exceptions.brand.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -64,6 +64,17 @@ public class BrandControllerAdvice {
                 request.getDescription(false),
                 status.value(),
                 ex.getMessage());
+        return new ResponseEntity<>(response, status);
+    }
+
+    @ExceptionHandler(BrandNotFoundByIdException.class)
+    public ResponseEntity<ExceptionResponse> handleBrandNotFoundByIdException(BrandNotFoundByIdException ex, WebRequest request) {
+        HttpStatus status = HttpStatus.NOT_FOUND;
+        ExceptionResponse response = new ExceptionResponse(
+                ex.getMessage(),
+                request.getDescription(false),
+                status.value(),
+                BrandErrorMessages.BRAND_NOT_FOUND_BY_ID);
         return new ResponseEntity<>(response, status);
     }
 

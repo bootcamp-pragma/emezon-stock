@@ -1,7 +1,7 @@
 package com.emezon.stock.app.errorhandling.advices;
 
 import com.emezon.stock.app.errorhandling.ExceptionResponse;
-import com.emezon.stock.domain.common.constants.PaginatedResponseErrorMessages;
+import com.emezon.stock.domain.constants.PaginatedResponseErrorMessages;
 import com.emezon.stock.domain.exceptions.paginatedresponse.PaginatedResponsePageNumberInvalidException;
 import com.emezon.stock.domain.exceptions.paginatedresponse.PaginatedResponsePageSizeInvalidException;
 import com.emezon.stock.domain.exceptions.paginatedresponse.PaginatedResponseSortDirectionInvalidException;
@@ -21,7 +21,7 @@ public class PaginatedResponseControllerAdvice {
                 ex.getMessage(),
                 request.getDescription(false),
                 status.value(),
-                PaginatedResponseErrorMessages.CATEGORY_PAGE_NUMBER_INVALID);
+                PaginatedResponseErrorMessages.PAGE_NUMBER_INVALID);
         return new ResponseEntity<>(response, status);
     }
 
@@ -32,7 +32,7 @@ public class PaginatedResponseControllerAdvice {
                 ex.getMessage(),
                 request.getDescription(false),
                 status.value(),
-                PaginatedResponseErrorMessages.CATEGORY_PAGE_SIZE_INVALID);
+                PaginatedResponseErrorMessages.PAGE_SIZE_INVALID);
         return new ResponseEntity<>(response, status);
     }
 
@@ -43,7 +43,7 @@ public class PaginatedResponseControllerAdvice {
                 ex.getMessage(),
                 request.getDescription(false),
                 status.value(),
-                PaginatedResponseErrorMessages.CATEGORY_SORT_DIRECTION_INVALID);
+                PaginatedResponseErrorMessages.SORT_DIRECTION_INVALID);
         return new ResponseEntity<>(response, status);
     }
 

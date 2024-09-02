@@ -1,6 +1,6 @@
 package com.emezon.stock.domain.usecases.brand;
 
-import com.emezon.stock.domain.common.constants.BrandConstraints;
+import com.emezon.stock.domain.constants.BrandConstraints;
 import com.emezon.stock.domain.exceptions.brand.*;
 import com.emezon.stock.domain.models.Brand;
 import com.emezon.stock.domain.ports.inbound.brand.ICreateBrandInPort;

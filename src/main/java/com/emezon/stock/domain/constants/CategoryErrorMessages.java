@@ -1,4 +1,4 @@
-package com.emezon.stock.domain.common.constants;
+package com.emezon.stock.domain.constants;
 
 public class CategoryErrorMessages {
     public static final String CATEGORY_ALREADY_EXISTS = "Category with name '%s' already exists";
@@ -10,6 +10,7 @@ public class CategoryErrorMessages {
     public static final String CATEGORY_DESCRIPTION_REQUIRED = "Category description is required";
     public static final String CATEGORY_NAME_MAX_LENGTH = "Category name must not exceed %d characters";
     public static final String CATEGORY_DESCRIPTION_MAX_LENGTH = "Category description must not exceed %d characters";
+    public static final String CATEGORY_NOT_FOUND_BY_ID = "Category with id '%s' not found";
 
     private CategoryErrorMessages() {
         throw new IllegalStateException("Utility class");

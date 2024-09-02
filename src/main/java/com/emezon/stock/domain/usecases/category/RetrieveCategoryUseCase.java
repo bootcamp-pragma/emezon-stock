@@ -1,7 +1,7 @@
 package com.emezon.stock.domain.usecases.category;
 
-import com.emezon.stock.domain.common.classes.PaginatedResponse;
-import com.emezon.stock.domain.common.constants.PaginatedResponseConstraints;
+import com.emezon.stock.domain.common.PaginatedResponse;
+import com.emezon.stock.domain.constants.PaginatedResponseConstraints;
 import com.emezon.stock.domain.exceptions.paginatedresponse.PaginatedResponsePageNumberInvalidException;
 import com.emezon.stock.domain.exceptions.paginatedresponse.PaginatedResponsePageSizeInvalidException;
 import com.emezon.stock.domain.exceptions.paginatedresponse.PaginatedResponseSortDirectionInvalidException;
@@ -9,6 +9,7 @@ import com.emezon.stock.domain.models.Category;
 import com.emezon.stock.domain.ports.inbound.category.IRetrieveCategoryInPort;
 import com.emezon.stock.domain.ports.outbound.ICategoryRepositoryOutPort;
 
+import java.util.List;
 import java.util.Optional;
 
 public class RetrieveCategoryUseCase implements IRetrieveCategoryInPort {
@@ -35,22 +36,9 @@ public class RetrieveCategoryUseCase implements IRetrieveCategoryInPort {
     }
 
     @Override
-    public PaginatedResponse<Category> getAllCategories(int page, int size, String sortDirection) {
-        sortDirection = sortDirection.toLowerCase().trim();
-        validateParameters(page, size, sortDirection);
-        return categoryRepositoryOutPort.findAll(page, size, sortDirection);
-    }
-
-    private void validateParameters(int page, int size, String sortDirection) {
-        if (page < PaginatedResponseConstraints.PAGE_NUMBER_MIN) {
-            throw new PaginatedResponsePageNumberInvalidException();
-        }
-        if (size < PaginatedResponseConstraints.PAGE_SIZE_MIN) {
-            throw new PaginatedResponsePageSizeInvalidException();
-        }
-        if (!PaginatedResponseConstraints.SORT_DIRECTIONS.contains(sortDirection)) {
-            throw new PaginatedResponseSortDirectionInvalidException();
-        }
+    public PaginatedResponse<Category> getAllCategories(int page, int size, List<String> sorting) {
+        PaginatedResponseConstraints.validateParameters(page, size, sorting);
+        return categoryRepositoryOutPort.findAll(page, size, sorting);
     }
 
 }

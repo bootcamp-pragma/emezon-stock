@@ -1,8 +1,8 @@
 package com.emezon.stock.app.services;
 
-import com.emezon.stock.app.dtos.BrandDTO;
-import com.emezon.stock.app.dtos.CreateBrandDTO;
-import com.emezon.stock.domain.common.classes.PaginatedResponse;
+import com.emezon.stock.app.dtos.brand.BrandDTO;
+import com.emezon.stock.app.dtos.brand.CreateBrandDTO;
+import com.emezon.stock.domain.common.PaginatedResponse;
 import com.emezon.stock.domain.models.Brand;
 import com.emezon.stock.domain.usecases.brand.CreateBrandUseCase;
 import com.emezon.stock.domain.usecases.brand.RetrieveBrandUseCase;
@@ -12,6 +12,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 
 import java.util.List;
 import java.util.Optional;
@@ -105,9 +107,13 @@ class BrandServiceTests {
     void getAllBrands_whenBrandsExist_thenBrandsAreReturned() {
         int page = 0, size = 1;
         PaginatedResponse<Brand> brands = new PaginatedResponse<>(List.of(brand), page, size, 1, 1);
-        when(retrieveBrandUseCase.getAllBrands(page, size, "ASC")).thenReturn(brands);
-
-        PaginatedResponse<BrandDTO> allBrands = brandService.getAllBrands(page, size, "ASC");
+        List<String> sorting = List.of("name,asc");
+        when(retrieveBrandUseCase.getAllBrands(page, size, sorting)).thenReturn(brands);
+        MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<>();
+        queryParams.add("page", String.valueOf(page));
+        queryParams.add("size", String.valueOf(size));
+        queryParams.add("sort", "name,asc");
+        PaginatedResponse<BrandDTO> allBrands = brandService.getAllBrands(queryParams);
 
         assertNotNull(allBrands);
         assertEquals(1, allBrands.getItems().size());
@@ -116,7 +122,7 @@ class BrandServiceTests {
         assertEquals(page, allBrands.getPage());
         assertEquals(size, allBrands.getSize());
 
-        verify(retrieveBrandUseCase, times(1)).getAllBrands(page, size, "ASC");
+        verify(retrieveBrandUseCase, times(1)).getAllBrands(page, size, sorting);
     }
 
 }

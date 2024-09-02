@@ -1,6 +1,5 @@
 package com.emezon.stock.domain.constants;
 
-import com.emezon.stock.domain.common.constants.*;
 import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.Constructor;

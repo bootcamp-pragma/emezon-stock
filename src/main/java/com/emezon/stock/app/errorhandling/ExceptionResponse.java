@@ -1,10 +1,12 @@
 package com.emezon.stock.app.errorhandling;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 
-@Data
+@Getter
+@Setter
 public class ExceptionResponse {
     private String errorMessage;
     private String requestedURI;
