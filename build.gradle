@@ -59,6 +59,7 @@ jacocoTestReport {
 			fileTree(dir: it, exclude: [
 					'**/app/errorhandling/advices/**',
 					'**/app/errorhandling/**',
+					'**/infra/output/mysql/**',
 			])
 		}))
 	}
