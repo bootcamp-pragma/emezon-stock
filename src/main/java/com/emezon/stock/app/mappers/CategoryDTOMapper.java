@@ -1,6 +1,7 @@
 package com.emezon.stock.app.mappers;
 
 import com.emezon.stock.app.dtos.category.CategoryDTO;
+import com.emezon.stock.app.dtos.category.CategoryIdNameDTO;
 import com.emezon.stock.app.dtos.category.CreateCategoryDTO;
 import com.emezon.stock.domain.models.Category;
 
@@ -36,6 +37,13 @@ public class CategoryDTOMapper {
         createCategoryDTO.setDescription(category.getDescription());
         createCategoryDTO.setCode(category.getCode());
         return createCategoryDTO;
+    }
+
+    public static CategoryIdNameDTO toIdNameDTO(Category category) {
+        CategoryIdNameDTO categoryIdNameDTO = new CategoryIdNameDTO();
+        categoryIdNameDTO.setId(category.getId());
+        categoryIdNameDTO.setName(category.getName());
+        return categoryIdNameDTO;
     }
 
 }

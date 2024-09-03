@@ -1,8 +1,8 @@
 package com.emezon.stock.app.services;
 
 import com.emezon.stock.app.dtos.article.ArticleDTO;
+import com.emezon.stock.app.dtos.article.ArticleListDTO;
 import com.emezon.stock.app.dtos.article.CreateArticleDTO;
-import com.emezon.stock.app.dtos.common.ReqPageableAndSortableDTO;
 import com.emezon.stock.app.mappers.ArticleDTOMapper;
 import com.emezon.stock.domain.common.PaginatedResponse;
 import com.emezon.stock.domain.constants.PaginatedResponseConstraints;
@@ -33,7 +33,7 @@ public class ArticleService {
         return article.map(ArticleDTOMapper::toDTO);
     }
 
-    public PaginatedResponse<ArticleDTO> getAllArticles(MultiValueMap<String, String> queryParams) {
+    public PaginatedResponse<ArticleListDTO> getAllArticles(MultiValueMap<String, String> queryParams) {
         int page = queryParams.containsKey("page") ?
                 Integer.parseInt(Objects.requireNonNull(queryParams.getFirst("page"))) :
                 PaginatedResponseConstraints.DEFAULT_PAGE_NUMBER;
@@ -43,7 +43,7 @@ public class ArticleService {
         List<String> sort = queryParams.containsKey("sort") ?
                 queryParams.get("sort") : List.of();
         PaginatedResponse<Article> articles = retrieveArticleUseCase.getAllArticles(page, size, sort);
-        List<ArticleDTO> articleDTOS = articles.getItems().stream().map(ArticleDTOMapper::toDTO).toList();
+        List<ArticleListDTO> articleDTOS = articles.getItems().stream().map(ArticleDTOMapper::toListDTO).toList();
         return new PaginatedResponse<>(
                 articleDTOS,
                 articles.getPage(),
