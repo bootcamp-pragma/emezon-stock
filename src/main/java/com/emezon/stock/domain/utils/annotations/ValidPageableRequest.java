@@ -17,5 +17,5 @@ public @interface ValidPageableRequest {
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
     String[] allowedParams() default  {"page", "size", "sort"};
-    String[] allowedSortFormats() default {"^[a-zA-Z]+,(asc|desc)$"};
+    String[] allowedSortFormats() default {"^((?!.*\\.\\..*)[a-zA-Z]+(\\.[a-zA-Z]+)*),(asc|desc)$"};
 }

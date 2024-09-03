@@ -1,6 +1,7 @@
 package com.emezon.stock.app.mappers;
 
 import com.emezon.stock.app.dtos.article.ArticleDTO;
+import com.emezon.stock.app.dtos.article.ArticleListDTO;
 import com.emezon.stock.app.dtos.article.CreateArticleDTO;
 import com.emezon.stock.domain.models.Article;
 import com.emezon.stock.domain.models.Brand;
@@ -54,6 +55,17 @@ public class ArticleDTOMapper {
         articleDTO.setBrand(BrandDTOMapper.toDTO(article.getBrand()));
         articleDTO.setCategories(article.getCategories().stream().map(CategoryDTOMapper::toDTO).toList());
         return articleDTO;
+    }
+
+    public static ArticleListDTO toListDTO(Article article) {
+        ArticleListDTO articleListDTO = new ArticleListDTO();
+        articleListDTO.setName(article.getName());
+        articleListDTO.setDescription(article.getDescription());
+        articleListDTO.setPrice(article.getPrice());
+        articleListDTO.setStock(article.getStock());
+        articleListDTO.setBrand(BrandDTOMapper.toDTO(article.getBrand()));
+        articleListDTO.setCategories(article.getCategories().stream().map(CategoryDTOMapper::toIdNameDTO).toList());
+        return articleListDTO;
     }
 
 }
