@@ -1,7 +1,6 @@
 package com.emezon.stock.app.dtos.category;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
