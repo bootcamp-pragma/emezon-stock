@@ -20,8 +20,7 @@ public class ArticleControllerAdvice {
         ExceptionResponse response = new ExceptionResponse(
                 ex.getMessage(),
                 request.getDescription(false),
-                status.value(),
-                ex.getMessage());
+                status.value());
         return new ResponseEntity<>(response, status);
     }
 
@@ -31,8 +30,7 @@ public class ArticleControllerAdvice {
         ExceptionResponse response = new ExceptionResponse(
                 ex.getMessage(),
                 request.getDescription(false),
-                status.value(),
-                ex.getMessage());
+                status.value());
         return new ResponseEntity<>(response, status);
     }
 
@@ -42,8 +40,7 @@ public class ArticleControllerAdvice {
         ExceptionResponse response = new ExceptionResponse(
                 ex.getMessage(),
                 request.getDescription(false),
-                status.value(),
-                ex.getMessage());
+                status.value());
         return new ResponseEntity<>(response, status);
     }
 
@@ -53,8 +50,7 @@ public class ArticleControllerAdvice {
         ExceptionResponse response = new ExceptionResponse(
                 ex.getMessage(),
                 request.getDescription(false),
-                status.value(),
-                ex.getMessage());
+                status.value());
         return new ResponseEntity<>(response, status);
     }
 
