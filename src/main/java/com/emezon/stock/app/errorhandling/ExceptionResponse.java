@@ -23,6 +23,9 @@ public class ExceptionResponse {
     }
 
     public ExceptionResponse(String message, String requestedURI, Integer code) {
-        new ExceptionResponse(message, requestedURI, code, null);
+        this.message = message;
+        this.requestedURI = requestedURI;
+        this.code = code;
+        this.timestamp = LocalDateTime.now();
     }
 }
