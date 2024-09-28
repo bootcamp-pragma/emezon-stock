@@ -25,8 +25,7 @@ public class ApiControllerAdvice {
         ExceptionResponse response = new ExceptionResponse(
                 messages,
                 request.getDescription(false),
-                status.value(),
-                messages);
+                status.value());
         return new ResponseEntity<>(response, status);
     }
 
@@ -39,17 +38,8 @@ public class ApiControllerAdvice {
         ExceptionResponse response = new ExceptionResponse(
                 message,
                 request.getDescription(false),
-                status.value(),
-                message);
+                status.value());
         return new ResponseEntity<>(response, status);
     }
-
-
-//    @ExceptionHandler(Exception.class)
-//    public ResponseEntity<Object> handleGenericException(Exception ex) {
-//        // Puedes usar ex.getClass().getName() para identificar el tipo exacto de la excepción
-//        return new ResponseEntity<>("Unhandled Exception: " + ex.getClass().getName() + " - " + ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-//    }
-
 
 }
