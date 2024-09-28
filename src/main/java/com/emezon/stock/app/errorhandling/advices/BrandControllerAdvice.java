@@ -18,8 +18,7 @@ public class BrandControllerAdvice {
         ExceptionResponse response = new ExceptionResponse(
                 ex.getMessage(),
                 request.getDescription(false),
-                status.value(),
-                BrandErrorMessages.BRAND_NAME_REQUIRED);
+                status.value());
         return new ResponseEntity<>(response, status);
     }
 
@@ -40,8 +39,7 @@ public class BrandControllerAdvice {
         ExceptionResponse response = new ExceptionResponse(
                 ex.getMessage(),
                 request.getDescription(false),
-                status.value(),
-                ex.getMessage());
+                status.value());
         return new ResponseEntity<>(response, status);
     }
 
@@ -51,8 +49,7 @@ public class BrandControllerAdvice {
         ExceptionResponse response = new ExceptionResponse(
                 ex.getMessage(),
                 request.getDescription(false),
-                status.value(),
-                BrandErrorMessages.BRAND_DESCRIPTION_REQUIRED);
+                status.value());
         return new ResponseEntity<>(response, status);
     }
 
@@ -62,8 +59,7 @@ public class BrandControllerAdvice {
         ExceptionResponse response = new ExceptionResponse(
                 ex.getMessage(),
                 request.getDescription(false),
-                status.value(),
-                ex.getMessage());
+                status.value());
         return new ResponseEntity<>(response, status);
     }
 
@@ -73,8 +69,7 @@ public class BrandControllerAdvice {
         ExceptionResponse response = new ExceptionResponse(
                 ex.getMessage(),
                 request.getDescription(false),
-                status.value(),
-                BrandErrorMessages.BRAND_NOT_FOUND_BY_ID);
+                status.value());
         return new ResponseEntity<>(response, status);
     }
 
