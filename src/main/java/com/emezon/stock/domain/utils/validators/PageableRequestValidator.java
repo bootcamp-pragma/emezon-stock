@@ -1,6 +1,5 @@
 package com.emezon.stock.domain.utils.validators;
 
-import com.emezon.stock.domain.common.PaginatedResponseParams;
 import com.emezon.stock.domain.utils.annotations.ValidPageableRequest;
 import com.emezon.stock.domain.constants.PaginatedResponseConstraints;
 import com.emezon.stock.domain.constants.PaginatedResponseErrorMessages;
@@ -43,7 +42,7 @@ public class PageableRequestValidator implements ConstraintValidator<ValidPageab
                     }
                     if (!valid) {
                         error = true;
-                        context.buildConstraintViolationWithTemplate(PaginatedResponseErrorMessages.SORT_PARAMETER_INVALID)
+                        context.buildConstraintViolationWithTemplate(PaginatedResponseErrorMessages.SORT_PARAM_INVALID)
                                 .addConstraintViolation();
                     }
                 }
