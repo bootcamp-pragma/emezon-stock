@@ -4,6 +4,8 @@ import com.emezon.stock.app.dtos.brand.BrandDTO;
 import com.emezon.stock.app.dtos.brand.CreateBrandDTO;
 import com.emezon.stock.app.mappers.BrandDTOMapper;
 import com.emezon.stock.domain.common.PaginatedResponse;
+import com.emezon.stock.domain.common.PaginatedResponseParams;
+import com.emezon.stock.domain.common.PaginatedResponseUtils;
 import com.emezon.stock.domain.constants.PaginatedResponseConstraints;
 import com.emezon.stock.domain.models.Brand;
 import com.emezon.stock.domain.usecases.brand.CreateBrandUseCase;
@@ -38,16 +40,8 @@ public class BrandService {
     }
 
     public PaginatedResponse<BrandDTO> getAllBrands(MultiValueMap<String, String> queryParams) {
-        int page = queryParams.containsKey("page") ?
-                Integer.parseInt(Objects.requireNonNull(queryParams.getFirst("page"))) :
-                PaginatedResponseConstraints.DEFAULT_PAGE_NUMBER;
-        int size = queryParams.containsKey("size") ?
-                Integer.parseInt(Objects.requireNonNull(queryParams.getFirst("size"))) :
-                PaginatedResponseConstraints.DEFAULT_PAGE_SIZE;
-        List<String> sort = queryParams.containsKey("sort") ?
-                queryParams.get("sort") : List.of();
-
-        PaginatedResponse<Brand> brands = retrieveBrandUseCase.getAllBrands(page, size, sort);
+        PaginatedResponseParams params = PaginatedResponseUtils.getFromMultiValueMap(queryParams);
+        PaginatedResponse<Brand> brands = retrieveBrandUseCase.getAllBrands(params);
         List<BrandDTO> brandDTOs = brands.getItems().stream()
                 .map(BrandDTOMapper::toDTO)
                 .toList();

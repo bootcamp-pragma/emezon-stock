@@ -1,5 +1,6 @@
 package com.emezon.stock.domain.utils.validators;
 
+import com.emezon.stock.domain.common.PaginatedResponseParams;
 import com.emezon.stock.domain.utils.annotations.ValidPageableRequest;
 import com.emezon.stock.domain.constants.PaginatedResponseConstraints;
 import com.emezon.stock.domain.constants.PaginatedResponseErrorMessages;
@@ -17,8 +18,8 @@ public class PageableRequestValidator implements ConstraintValidator<ValidPageab
 
     @Override
     public void initialize(ValidPageableRequest constraintAnnotation) {
-        allowedParams = new HashSet<>(List.of(constraintAnnotation.allowedParams()));
-        allowedSortFormats = new HashSet<>(List.of(constraintAnnotation.allowedSortFormats()));
+        allowedParams = new HashSet<>(PaginatedResponseConstraints.ALLOWED_PARAMS);
+        allowedSortFormats = new HashSet<>(List.of(PaginatedResponseConstraints.VALID_SORT_FORMAT));
     }
 
     @Override

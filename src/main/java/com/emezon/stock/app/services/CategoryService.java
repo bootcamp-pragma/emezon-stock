@@ -4,6 +4,8 @@ import com.emezon.stock.app.dtos.category.CategoryDTO;
 import com.emezon.stock.app.dtos.category.CreateCategoryDTO;
 import com.emezon.stock.app.mappers.CategoryDTOMapper;
 import com.emezon.stock.domain.common.PaginatedResponse;
+import com.emezon.stock.domain.common.PaginatedResponseParams;
+import com.emezon.stock.domain.common.PaginatedResponseUtils;
 import com.emezon.stock.domain.constants.PaginatedResponseConstraints;
 import com.emezon.stock.domain.usecases.category.CreateCategoryUseCase;
 import com.emezon.stock.domain.usecases.category.RetrieveCategoryUseCase;
@@ -43,15 +45,8 @@ public class CategoryService {
     }
 
     public PaginatedResponse<CategoryDTO> getAllCategories(MultiValueMap<String, String> queryParams) {
-        int page = queryParams.containsKey("page") ?
-                Integer.parseInt(Objects.requireNonNull(queryParams.getFirst("page"))) :
-                PaginatedResponseConstraints.DEFAULT_PAGE_NUMBER;
-        int size = queryParams.containsKey("size") ?
-                Integer.parseInt(Objects.requireNonNull(queryParams.getFirst("size"))) :
-                PaginatedResponseConstraints.DEFAULT_PAGE_SIZE;
-        List<String> sort = queryParams.containsKey("sort") ?
-                queryParams.get("sort") : List.of();
-        PaginatedResponse<Category> categories = retrieveCategoryUseCase.getAllCategories(page, size, sort);
+        PaginatedResponseParams params = PaginatedResponseUtils.getFromMultiValueMap(queryParams);
+        PaginatedResponse<Category> categories = retrieveCategoryUseCase.getAllCategories(params);
         List<CategoryDTO> categoryDTOS = categories.getItems().stream().map(CategoryDTOMapper::toDTO).toList();
         return new PaginatedResponse<>(
                 categoryDTOS,

@@ -1,5 +1,6 @@
 package com.emezon.stock.domain.constants;
 
+import com.emezon.stock.domain.common.PaginatedResponseParams;
 import com.emezon.stock.domain.exceptions.paginatedresponse.PaginatedResponsePageNumberInvalidException;
 import com.emezon.stock.domain.exceptions.paginatedresponse.PaginatedResponsePageSizeInvalidException;
 import com.emezon.stock.domain.exceptions.paginatedresponse.PaginatedResponseSortDirectionInvalidException;
@@ -11,9 +12,11 @@ public class PaginatedResponseConstraints {
     public static final int PAGE_SIZE_MIN = 1;
     public static final int PAGE_NUMBER_MIN = 0;
     public static final List<String> SORT_DIRECTIONS = List.of("asc", "desc");
+    public static final List<String> ALLOWED_PARAMS = List.of("page", "size", "sort");
     public static final int DEFAULT_PAGE_NUMBER = 0;
     public static final int DEFAULT_PAGE_SIZE = 10;
-    public static final String VALID_SORT_FORMAT = "^((?!.*\\.\\..*)[a-zA-Z]+(\\.[a-zA-Z]{1,20}){0,3}),(asc|desc)$";
+    public static final List<String> DEFAULT_SORT = List.of();
+    public static final String VALID_SORT_FORMAT = "^((?!.*\\.\\..*)[a-zA-Z]+(\\.[a-zA-Z]{1,20}){0,3}),(" + String.join("|", SORT_DIRECTIONS) + ")$";
 
     public static void validateParameters(int page, int size, List<String> sorting) {
         if (page < PAGE_NUMBER_MIN) {
@@ -27,6 +30,10 @@ public class PaginatedResponseConstraints {
                 throw new PaginatedResponseSortDirectionInvalidException();
             }
         }
+    }
+
+    public static void validateParameters(PaginatedResponseParams params) {
+        validateParameters(params.page, params.size, params.sorting);
     }
 
     private PaginatedResponseConstraints() {

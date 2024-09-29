@@ -16,6 +16,6 @@ public @interface ValidPageableRequest {
     String message() default "Some of the values of the sort parameter do not comply with the format.";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
-    String[] allowedParams() default  {"page", "size", "sort"};
-    String[] allowedSortFormats() default {"^((?!.*\\.\\..*)[a-zA-Z]+(\\.[a-zA-Z]+)*),(asc|desc)$"};
+    String[] allowedParams() default  {};
+    String[] allowedSortFormats() default {};
 }
