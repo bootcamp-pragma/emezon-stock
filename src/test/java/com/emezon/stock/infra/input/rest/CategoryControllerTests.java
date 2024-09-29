@@ -180,11 +180,11 @@ class CategoryControllerTests {
         mockMvc.perform(get("/category?page=1&size=3&sort=name,asc"))
                 .andExpect(status().isOk())
                 .andExpect(result -> {
-                    PaginatedResponse<CategoryDTO> returnedCategories = objectMapper.readValue(result.getResponse().getContentAsString(), PaginatedResponse.class);
-                    assert returnedCategories != null;
-                    assert returnedCategories.getItems().size() == categories.getItems().size();
-                    assert returnedCategories.getPage() == categories.getPage();
-                    assert returnedCategories.getSize() == categories.getSize();
+                    PaginatedResponse<CategoryDTO> response = objectMapper.readValue(result.getResponse().getContentAsString(), PaginatedResponse.class);
+                    assert response != null;
+                    assert response.getItems().size() == categories.getItems().size();
+                    assert response.getPage() == categories.getPage();
+                    assert response.getSize() == categories.getSize();
                 });
 
         verify(categoryService, times(1)).getAllCategories(any());
