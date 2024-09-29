@@ -11,16 +11,10 @@ import com.emezon.stock.infra.output.mysql.jpa.repositories.IMySQLJPABrandReposi
 import com.emezon.stock.infra.output.mysql.jpa.utils.PageableUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
-@Component
 @RequiredArgsConstructor
 public class MySQLJPABrandAdapter implements IBrandRepositoryOutPort {
 

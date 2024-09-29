@@ -8,6 +8,8 @@ import com.emezon.stock.domain.usecases.article.CreateArticleUseCase;
 import com.emezon.stock.domain.usecases.article.RetrieveArticleUseCase;
 import com.emezon.stock.domain.usecases.brand.RetrieveBrandUseCase;
 import com.emezon.stock.domain.usecases.category.RetrieveCategoryUseCase;
+import com.emezon.stock.infra.output.mysql.jpa.adapters.MySQLJPAArticleAdapter;
+import com.emezon.stock.infra.output.mysql.jpa.repositories.IMySQLJPAArticleRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -15,9 +17,14 @@ import org.springframework.context.annotation.Configuration;
 public class ArticleConfig {
 
     @Bean
+    public IArticleRepositoryOutPort articleRepositoryOutPort(IMySQLJPAArticleRepository mySQLJPAArticleRepository) {
+        return new MySQLJPAArticleAdapter(mySQLJPAArticleRepository);
+    }
+
+    @Bean
     public ArticleService articleService(IArticleRepositoryOutPort articleRepositoryOutPort,
-                                         ICategoryRepositoryOutPort categoryRepositoryOutPort,
-                                         IBrandRepositoryOutPort brandRepositoryOutPort) {
+                                                          ICategoryRepositoryOutPort categoryRepositoryOutPort,
+                                                          IBrandRepositoryOutPort brandRepositoryOutPort) {
         return new ArticleService(
                 new CreateArticleUseCase(articleRepositoryOutPort,
                         new RetrieveCategoryUseCase(categoryRepositoryOutPort),
