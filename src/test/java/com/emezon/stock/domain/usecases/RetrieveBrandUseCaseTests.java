@@ -1,6 +1,7 @@
 package com.emezon.stock.domain.usecases;
 
 import com.emezon.stock.domain.common.PaginatedResponse;
+import com.emezon.stock.domain.common.PaginatedResponseParams;
 import com.emezon.stock.domain.models.Brand;
 import com.emezon.stock.domain.ports.outbound.IBrandRepositoryOutPort;
 import com.emezon.stock.domain.usecases.brand.RetrieveBrandUseCase;
@@ -94,9 +95,10 @@ class RetrieveBrandUseCaseTests {
         paginatedResponse.setTotalPages(1);
 
         List<String> sorting = List.of("name,desc");
-        when(brandRepositoryOutPort.findAll(page, size, sorting)).thenReturn(paginatedResponse);
+        PaginatedResponseParams params = new PaginatedResponseParams(page, size, sorting);
+        when(brandRepositoryOutPort.findAll(params)).thenReturn(paginatedResponse);
 
-        PaginatedResponse<Brand> result = retrieveBrandUseCase.getAllBrands(page, size, sorting);
+        PaginatedResponse<Brand> result = retrieveBrandUseCase.getAllBrands(params);
         assertNotNull(result);
         assertEquals(page, result.getPage());
         assertEquals(size, result.getSize());
@@ -104,7 +106,7 @@ class RetrieveBrandUseCaseTests {
         assertEquals(1, result.getTotalPages());
         assertEquals(brand.getId(), result.getItems().get(0).getId());
 
-        verify(brandRepositoryOutPort, times(1)).findAll(page, size, sorting);
+        verify(brandRepositoryOutPort, times(1)).findAll(params);
     }
 
 }

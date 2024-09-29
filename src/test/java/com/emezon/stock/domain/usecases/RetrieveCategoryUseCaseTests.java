@@ -1,6 +1,7 @@
 package com.emezon.stock.domain.usecases;
 
 import com.emezon.stock.domain.common.PaginatedResponse;
+import com.emezon.stock.domain.common.PaginatedResponseParams;
 import com.emezon.stock.domain.exceptions.paginatedresponse.PaginatedResponsePageNumberInvalidException;
 import com.emezon.stock.domain.exceptions.paginatedresponse.PaginatedResponsePageSizeInvalidException;
 import com.emezon.stock.domain.exceptions.paginatedresponse.PaginatedResponseSortDirectionInvalidException;
@@ -110,23 +111,26 @@ class RetrieveCategoryUseCaseTests {
 
     @Test
     void getAllCategories_whenPageNumberIsInvalid_thenPaginatedResponsePageNumberInvalidExceptionIsThrown() {
-        assertThrows(PaginatedResponsePageNumberInvalidException.class, () -> retrieveCategoryUseCase.getAllCategories(-1, 10, List.of("name,asc")));
+        PaginatedResponseParams params = new PaginatedResponseParams(-1, 10, List.of("name,asc"));
+        assertThrows(PaginatedResponsePageNumberInvalidException.class, () -> retrieveCategoryUseCase.getAllCategories(params));
 
-        verify(categoryRepositoryOutPort, never()).findAll(anyInt(), anyInt(), anyList());
+        verify(categoryRepositoryOutPort, never()).findAll(any());
     }
 
     @Test
     void getAllCategories_whenPageSizeIsInvalid_thenPaginatedResponsePageSizeInvalidExceptionIsThrown() {
-        assertThrows(PaginatedResponsePageSizeInvalidException.class, () -> retrieveCategoryUseCase.getAllCategories(1, 0, List.of("name,asc")));
+        PaginatedResponseParams params = new PaginatedResponseParams(1, 0, List.of("name,asc"));
+        assertThrows(PaginatedResponsePageSizeInvalidException.class, () -> retrieveCategoryUseCase.getAllCategories(params));
 
-        verify(categoryRepositoryOutPort, never()).findAll(anyInt(), anyInt(), anyList());
+        verify(categoryRepositoryOutPort, never()).findAll(any());
     }
 
     @Test
     void getAllCategories_whenSortDirectionIsInvalid_thenPaginatedResponseSortDirectionInvalidExceptionIsThrown() {
-        assertThrows(PaginatedResponseSortDirectionInvalidException.class, () -> retrieveCategoryUseCase.getAllCategories(1, 10, List.of("name,invalid")));
+        PaginatedResponseParams params = new PaginatedResponseParams(1, 10, List.of("name,invalid"));
+        assertThrows(PaginatedResponseSortDirectionInvalidException.class, () -> retrieveCategoryUseCase.getAllCategories(params));
 
-        verify(categoryRepositoryOutPort, never()).findAll(anyInt(), anyInt(), anyList());
+        verify(categoryRepositoryOutPort, never()).findAll(any());
     }
 
     @Test
@@ -141,9 +145,10 @@ class RetrieveCategoryUseCaseTests {
         paginatedResponse.setTotalPages(1);
 
         List<String> sorting = List.of("name,desc");
-        when(categoryRepositoryOutPort.findAll(page, size, sorting)).thenReturn(paginatedResponse);
+        PaginatedResponseParams params = new PaginatedResponseParams(page, size, sorting);
+        when(categoryRepositoryOutPort.findAll(params)).thenReturn(paginatedResponse);
 
-        PaginatedResponse<Category> result = retrieveCategoryUseCase.getAllCategories(page, size, sorting);
+        PaginatedResponse<Category> result = retrieveCategoryUseCase.getAllCategories(params);
 
         assertNotNull(result);
         assertEquals(page, result.getPage());
@@ -152,7 +157,7 @@ class RetrieveCategoryUseCaseTests {
         assertEquals(1, result.getTotalPages());
         assertEquals(category.getId(), result.getItems().get(0).getId());
 
-        verify(categoryRepositoryOutPort, times(1)).findAll(page, size, sorting);
+        verify(categoryRepositoryOutPort, times(1)).findAll(params);
     }
 
 }

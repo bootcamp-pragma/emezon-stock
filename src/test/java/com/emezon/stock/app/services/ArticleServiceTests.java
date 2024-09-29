@@ -5,6 +5,7 @@ import com.emezon.stock.app.dtos.article.ArticleListDTO;
 import com.emezon.stock.app.dtos.article.CreateArticleDTO;
 import com.emezon.stock.app.mappers.ArticleDTOMapper;
 import com.emezon.stock.domain.common.PaginatedResponse;
+import com.emezon.stock.domain.common.PaginatedResponseParams;
 import com.emezon.stock.domain.models.Article;
 import com.emezon.stock.domain.models.Brand;
 import com.emezon.stock.domain.models.Category;
@@ -103,14 +104,15 @@ class ArticleServiceTests {
     }
 
     @Test
-    void getAllArticles_whenArticlesExist_thenArticlesAreReturned() {
+    void getAllArticles_whenArticlesExist_thenArticlesSerAreReturned() {
         Brand brand = new Brand("1123", "Samsung", "Samsung Electronics Co., Ltd.");
         Category category = new Category("1234", "Smartphones category", "Smartphones", "Smartphones category description");
         Article article = new Article("1234", "Samsung Galaxy S21", "Samsung Galaxy S21 description",
                 999.99, 100, brand, List.of(category));
         int page = 0, size = 1;
+        PaginatedResponseParams params = new PaginatedResponseParams(page, size, List.of());
         PaginatedResponse<Article> pr = new PaginatedResponse<>(List.of(article), page, size, 1, 1);
-        when(retrieveArticleUseCase.getAllArticles(page, size, List.of())).thenReturn(pr);
+        when(retrieveArticleUseCase.getAllArticles(any())).thenReturn(pr);
 
         MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<>();
         queryParams.add("page", String.valueOf(page));
@@ -124,7 +126,7 @@ class ArticleServiceTests {
         assertEquals(pr.getTotalItems(), allArticles.getTotalItems());
         assertEquals(pr.getTotalPages(), allArticles.getTotalPages());
 
-        verify(retrieveArticleUseCase, times(1)).getAllArticles(page, size, List.of());
+        verify(retrieveArticleUseCase, times(1)).getAllArticles(any());
     }
 
 }
