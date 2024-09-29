@@ -12,18 +12,6 @@ public class ArticleEntityMapper {
         throw new IllegalStateException("Utility class");
     }
 
-    public static ArticleEntity toEntity(ArticleDTO articleDTO) {
-        ArticleEntity articleEntity = new ArticleEntity();
-        articleEntity.setName(articleDTO.getName());
-        articleEntity.setDescription(articleDTO.getDescription());
-        articleEntity.setPrice(articleDTO.getPrice());
-        articleEntity.setStock(articleDTO.getStock());
-        articleEntity.setBrand(BrandEntityMapper.toEntity(articleDTO.getBrand()));
-        articleEntity.setCategories(new HashSet<>(articleDTO.getCategories().stream()
-                        .map(CategoryEntityMapper::toEntity).toList()));
-        return articleEntity;
-    }
-
     public static ArticleEntity toEntity(Article article) {
         ArticleEntity articleEntity = new ArticleEntity();
         articleEntity.setId(article.getId());
