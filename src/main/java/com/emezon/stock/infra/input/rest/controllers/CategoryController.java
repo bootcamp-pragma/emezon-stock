@@ -11,6 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
+
 @RestController
 @RequestMapping("/category")
 @RequiredArgsConstructor
@@ -21,7 +23,8 @@ public class CategoryController {
     @PostMapping
     public ResponseEntity<CategoryDTO> createCategory(@RequestBody @Valid CreateCategoryDTO createCategoryDTO) {
         CategoryDTO createdCategory = categoryService.createCategory(createCategoryDTO);
-        return ResponseEntity.ok(createdCategory);
+        URI location = URI.create("/category");
+        return ResponseEntity.created(location).body(createdCategory);
     }
 
     @GetMapping

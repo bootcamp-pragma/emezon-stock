@@ -11,6 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
+
 @RestController
 @RequestMapping("/brand")
 @RequiredArgsConstructor
@@ -21,7 +23,8 @@ public class BrandController {
     @PostMapping
     public ResponseEntity<BrandDTO> createBrand(@RequestBody @Valid CreateBrandDTO createBrandDTO) {
         BrandDTO createdBrand = brandService.createBrand(createBrandDTO);
-        return ResponseEntity.ok(createdBrand);
+        URI location = URI.create("/brand");
+        return ResponseEntity.created(location).body(createdBrand);
     }
 
     @GetMapping
