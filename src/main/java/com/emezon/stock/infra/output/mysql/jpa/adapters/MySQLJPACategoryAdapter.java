@@ -1,23 +1,19 @@
 package com.emezon.stock.infra.output.mysql.jpa.adapters;
 
 import com.emezon.stock.domain.common.PaginatedResponse;
+import com.emezon.stock.domain.common.PaginatedResponseParams;
 import com.emezon.stock.domain.models.Category;
 import com.emezon.stock.domain.ports.outbound.ICategoryRepositoryOutPort;
 import com.emezon.stock.infra.output.mysql.jpa.entities.CategoryEntity;
 import com.emezon.stock.infra.output.mysql.jpa.mappers.CategoryEntityMapper;
 import com.emezon.stock.infra.output.mysql.jpa.repositories.IMySQLJPACategoryRepository;
+import com.emezon.stock.infra.output.mysql.jpa.utils.PageableUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
-@Component
 @RequiredArgsConstructor
 public class MySQLJPACategoryAdapter implements ICategoryRepositoryOutPort {
 
@@ -49,16 +45,8 @@ public class MySQLJPACategoryAdapter implements ICategoryRepositoryOutPort {
     }
 
     @Override
-    public PaginatedResponse<Category> findAll(int page, int size, List<String> sorting) {
-        List<Sort.Order> orders = new ArrayList<>();
-        for (String sort : sorting) {
-            String[] sortArr = sort.split(",");
-            if (sortArr.length == 2) {
-                Sort.Order order = new Sort.Order(Sort.Direction.fromString(sortArr[1]), sortArr[0]);
-                orders.add(order);
-            }
-        }
-        Pageable pageable = PageRequest.of(page, size, Sort.by(orders));
+    public PaginatedResponse<Category> findAll(PaginatedResponseParams params) {
+        Pageable pageable = PageableUtils.getFromPaginatedResponseParams(params);
         Page<CategoryEntity> pageRes = repository.findAll(pageable);
         PaginatedResponse<Category> paginatedResponse = new PaginatedResponse<>();
         paginatedResponse.setItems(pageRes.getContent().stream().map(CategoryEntityMapper::toModel).toList());

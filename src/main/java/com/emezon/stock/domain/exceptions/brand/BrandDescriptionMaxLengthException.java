@@ -4,6 +4,6 @@ import com.emezon.stock.domain.constants.BrandErrorMessages;
 
 public class BrandDescriptionMaxLengthException extends RuntimeException {
     public BrandDescriptionMaxLengthException(Integer maxLength) {
-        super(String.format(BrandErrorMessages.BRAND_DESCRIPTION_MAX_LENGTH, maxLength));
+        super(String.format(BrandErrorMessages.BRAND_DESCRIPTION_TOO_LONG, maxLength));
     }
 }

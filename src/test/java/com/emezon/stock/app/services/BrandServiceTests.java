@@ -3,6 +3,7 @@ package com.emezon.stock.app.services;
 import com.emezon.stock.app.dtos.brand.BrandDTO;
 import com.emezon.stock.app.dtos.brand.CreateBrandDTO;
 import com.emezon.stock.domain.common.PaginatedResponse;
+import com.emezon.stock.domain.common.PaginatedResponseParams;
 import com.emezon.stock.domain.models.Brand;
 import com.emezon.stock.domain.usecases.brand.CreateBrandUseCase;
 import com.emezon.stock.domain.usecases.brand.RetrieveBrandUseCase;
@@ -107,8 +108,7 @@ class BrandServiceTests {
     void getAllBrands_whenBrandsExist_thenBrandsAreReturned() {
         int page = 0, size = 1;
         PaginatedResponse<Brand> brands = new PaginatedResponse<>(List.of(brand), page, size, 1, 1);
-        List<String> sorting = List.of("name,asc");
-        when(retrieveBrandUseCase.getAllBrands(page, size, sorting)).thenReturn(brands);
+        when(retrieveBrandUseCase.getAllBrands(any())).thenReturn(brands);
         MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<>();
         queryParams.add("page", String.valueOf(page));
         queryParams.add("size", String.valueOf(size));
@@ -122,7 +122,7 @@ class BrandServiceTests {
         assertEquals(page, allBrands.getPage());
         assertEquals(size, allBrands.getSize());
 
-        verify(retrieveBrandUseCase, times(1)).getAllBrands(page, size, sorting);
+        verify(retrieveBrandUseCase, times(1)).getAllBrands(any());
     }
 
 }

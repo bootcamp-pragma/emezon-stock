@@ -1,6 +1,5 @@
 package com.emezon.stock.infra.output.mysql.jpa.mappers;
 
-import com.emezon.stock.app.dtos.article.ArticleDTO;
 import com.emezon.stock.domain.models.Article;
 import com.emezon.stock.infra.output.mysql.jpa.entities.ArticleEntity;
 
@@ -10,18 +9,6 @@ public class ArticleEntityMapper {
 
     private ArticleEntityMapper() {
         throw new IllegalStateException("Utility class");
-    }
-
-    public static ArticleEntity toEntity(ArticleDTO articleDTO) {
-        ArticleEntity articleEntity = new ArticleEntity();
-        articleEntity.setName(articleDTO.getName());
-        articleEntity.setDescription(articleDTO.getDescription());
-        articleEntity.setPrice(articleDTO.getPrice());
-        articleEntity.setStock(articleDTO.getStock());
-        articleEntity.setBrand(BrandEntityMapper.toEntity(articleDTO.getBrand()));
-        articleEntity.setCategories(new HashSet<>(articleDTO.getCategories().stream()
-                        .map(CategoryEntityMapper::toEntity).toList()));
-        return articleEntity;
     }
 
     public static ArticleEntity toEntity(Article article) {

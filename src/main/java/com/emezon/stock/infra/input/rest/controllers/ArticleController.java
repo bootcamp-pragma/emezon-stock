@@ -12,6 +12,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
+
 @RestController
 @RequestMapping("/article")
 @RequiredArgsConstructor
@@ -22,7 +24,8 @@ public class ArticleController {
     @PostMapping
     public ResponseEntity<ArticleDTO> createArticle(@RequestBody @Valid CreateArticleDTO createArticleDTO) {
         ArticleDTO createdArticle = articleService.createArticle(createArticleDTO);
-        return ResponseEntity.ok(createdArticle);
+        URI location = URI.create("/article");
+        return ResponseEntity.created(location).body(createdArticle);
     }
 
     @GetMapping

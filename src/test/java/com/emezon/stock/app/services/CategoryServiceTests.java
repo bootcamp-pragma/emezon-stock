@@ -3,6 +3,7 @@ package com.emezon.stock.app.services;
 import com.emezon.stock.app.dtos.category.CategoryDTO;
 import com.emezon.stock.app.dtos.category.CreateCategoryDTO;
 import com.emezon.stock.domain.common.PaginatedResponse;
+import com.emezon.stock.domain.common.PaginatedResponseParams;
 import com.emezon.stock.domain.models.Category;
 import com.emezon.stock.domain.usecases.category.CreateCategoryUseCase;
 import com.emezon.stock.domain.usecases.category.RetrieveCategoryUseCase;
@@ -130,8 +131,7 @@ class CategoryServiceTests {
     void getAllCategories_whenCategoriesExist_thenPaginatedResponseIsReturned() {
         int page = 1, size = 1;
         PaginatedResponse<Category> categories = new PaginatedResponse<>(List.of(category), page, size, 1, 1);
-        List<String> sort = List.of("name,asc");
-        when(retrieveCategoryUseCase.getAllCategories(page, size, sort)).thenReturn(categories);
+        when(retrieveCategoryUseCase.getAllCategories(any())).thenReturn(categories);
 
         MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<>();
         queryParams.add("page", String.valueOf(page));
@@ -147,7 +147,7 @@ class CategoryServiceTests {
         assertEquals(1, allCategories.getTotalItems());
         assertEquals(1, allCategories.getTotalPages());
 
-        verify(retrieveCategoryUseCase, times(1)).getAllCategories(page, size, sort);
+        verify(retrieveCategoryUseCase, times(1)).getAllCategories(any());
     }
 
 }

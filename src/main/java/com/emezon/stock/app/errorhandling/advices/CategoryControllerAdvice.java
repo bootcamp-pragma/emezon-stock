@@ -40,8 +40,7 @@ public class CategoryControllerAdvice {
         ExceptionResponse response = new ExceptionResponse(
                 ex.getMessage(),
                 request.getDescription(false),
-                status.value(),
-                CategoryErrorMessages.CATEGORY_NAME_REQUIRED);
+                status.value());
         return new ResponseEntity<>(response, status);
     }
 
@@ -51,8 +50,7 @@ public class CategoryControllerAdvice {
         ExceptionResponse response = new ExceptionResponse(
                 ex.getMessage(),
                 request.getDescription(false),
-                status.value(),
-                CategoryErrorMessages.CATEGORY_CODE_REQUIRED);
+                status.value());
         return new ResponseEntity<>(response, status);
     }
 
@@ -62,8 +60,7 @@ public class CategoryControllerAdvice {
         ExceptionResponse response = new ExceptionResponse(
                 ex.getMessage(),
                 request.getDescription(false),
-                status.value(),
-                CategoryErrorMessages.CATEGORY_DESCRIPTION_REQUIRED);
+                status.value());
         return new ResponseEntity<>(response, status);
     }
 
@@ -73,8 +70,7 @@ public class CategoryControllerAdvice {
         ExceptionResponse response = new ExceptionResponse(
                 ex.getMessage(),
                 request.getDescription(false),
-                status.value(),
-                ex.getMessage());
+                status.value());
         return new ResponseEntity<>(response, status);
     }
 
@@ -84,8 +80,7 @@ public class CategoryControllerAdvice {
         ExceptionResponse response = new ExceptionResponse(
                 ex.getMessage(),
                 request.getDescription(false),
-                status.value(),
-                ex.getMessage());
+                status.value());
         return new ResponseEntity<>(response, status);
     }
 
@@ -95,8 +90,7 @@ public class CategoryControllerAdvice {
         ExceptionResponse response = new ExceptionResponse(
                 ex.getMessage(),
                 request.getDescription(false),
-                status.value(),
-                ex.getMessage());
+                status.value());
         return new ResponseEntity<>(response, status);
     }
 

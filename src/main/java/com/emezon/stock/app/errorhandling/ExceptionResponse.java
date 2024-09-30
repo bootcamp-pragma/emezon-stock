@@ -8,17 +8,24 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 public class ExceptionResponse {
-    private String errorMessage;
+    private String message;
     private String requestedURI;
-    private Integer errorCode;
+    private Integer code;
     private String details;
     private LocalDateTime timestamp;
 
-    public ExceptionResponse(String errorMessage, String requestedURI, Integer errorCode, String details) {
-        this.errorMessage = errorMessage;
+    public ExceptionResponse(String message, String requestedURI, Integer code, String details) {
+        this.message = message;
         this.requestedURI = requestedURI;
-        this.errorCode = errorCode;
+        this.code = code;
         this.details = details;
+        this.timestamp = LocalDateTime.now();
+    }
+
+    public ExceptionResponse(String message, String requestedURI, Integer code) {
+        this.message = message;
+        this.requestedURI = requestedURI;
+        this.code = code;
         this.timestamp = LocalDateTime.now();
     }
 }
