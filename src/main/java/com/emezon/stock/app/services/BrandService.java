@@ -6,7 +6,6 @@ import com.emezon.stock.app.mappers.BrandDTOMapper;
 import com.emezon.stock.domain.common.PaginatedResponse;
 import com.emezon.stock.domain.common.PaginatedResponseParams;
 import com.emezon.stock.domain.common.PaginatedResponseUtils;
-import com.emezon.stock.domain.constants.PaginatedResponseConstraints;
 import com.emezon.stock.domain.models.Brand;
 import com.emezon.stock.domain.usecases.brand.CreateBrandUseCase;
 import com.emezon.stock.domain.usecases.brand.RetrieveBrandUseCase;
@@ -14,7 +13,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.util.MultiValueMap;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 @RequiredArgsConstructor

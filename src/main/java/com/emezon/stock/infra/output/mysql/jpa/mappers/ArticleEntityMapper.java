@@ -1,6 +1,5 @@
 package com.emezon.stock.infra.output.mysql.jpa.mappers;
 
-import com.emezon.stock.app.dtos.article.ArticleDTO;
 import com.emezon.stock.domain.models.Article;
 import com.emezon.stock.infra.output.mysql.jpa.entities.ArticleEntity;
 

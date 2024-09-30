@@ -110,7 +110,6 @@ class ArticleServiceTests {
         Article article = new Article("1234", "Samsung Galaxy S21", "Samsung Galaxy S21 description",
                 999.99, 100, brand, List.of(category));
         int page = 0, size = 1;
-        PaginatedResponseParams params = new PaginatedResponseParams(page, size, List.of());
         PaginatedResponse<Article> pr = new PaginatedResponse<>(List.of(article), page, size, 1, 1);
         when(retrieveArticleUseCase.getAllArticles(any())).thenReturn(pr);
 

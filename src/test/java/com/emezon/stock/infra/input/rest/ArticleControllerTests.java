@@ -38,7 +38,6 @@ class ArticleControllerTests {
     private CreateArticleDTO createArticleDTO;
     private ArticleDTO articleDTO;
     private BrandDTO brandDTO;
-    private CategoryDTO categoryDTO;
     private ObjectMapper objectMapper;
 
     @BeforeEach

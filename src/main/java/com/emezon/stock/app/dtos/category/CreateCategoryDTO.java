@@ -1,8 +1,8 @@
 package com.emezon.stock.app.dtos.category;
+
 import com.emezon.stock.domain.constants.CategoryConstraints;
 import com.emezon.stock.domain.constants.CategoryErrorMessages;
 import jakarta.annotation.PostConstruct;
-import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;

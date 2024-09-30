@@ -4,7 +4,6 @@ import com.emezon.stock.domain.common.PaginatedResponse;
 import com.emezon.stock.domain.common.PaginatedResponseParams;
 import com.emezon.stock.domain.models.Category;
 
-import java.util.List;
 import java.util.Optional;
 
 public interface IRetrieveCategoryInPort {

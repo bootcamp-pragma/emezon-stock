@@ -131,8 +131,6 @@ class CategoryServiceTests {
     void getAllCategories_whenCategoriesExist_thenPaginatedResponseIsReturned() {
         int page = 1, size = 1;
         PaginatedResponse<Category> categories = new PaginatedResponse<>(List.of(category), page, size, 1, 1);
-        List<String> sort = List.of("name,asc");
-        PaginatedResponseParams params = new PaginatedResponseParams(page, size, sort);
         when(retrieveCategoryUseCase.getAllCategories(any())).thenReturn(categories);
 
         MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<>();

@@ -41,4 +41,8 @@ public class PaginatedResponseUtils {
         return p;
     }
 
+    private PaginatedResponseUtils() {
+        throw new IllegalStateException("Utility class");
+    }
+
 }

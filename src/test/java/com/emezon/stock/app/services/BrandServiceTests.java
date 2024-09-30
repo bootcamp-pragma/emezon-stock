@@ -108,8 +108,6 @@ class BrandServiceTests {
     void getAllBrands_whenBrandsExist_thenBrandsAreReturned() {
         int page = 0, size = 1;
         PaginatedResponse<Brand> brands = new PaginatedResponse<>(List.of(brand), page, size, 1, 1);
-        List<String> sorting = List.of("name,asc");
-        PaginatedResponseParams params = new PaginatedResponseParams(page, size, sorting);
         when(retrieveBrandUseCase.getAllBrands(any())).thenReturn(brands);
         MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<>();
         queryParams.add("page", String.valueOf(page));
