@@ -1,11 +1,11 @@
 package com.emezon.stock.domain.usecases;
 
-import com.emezon.stock.domain.common.PaginatedResponse;
-import com.emezon.stock.domain.common.PaginatedResponseParams;
+import com.emezon.stock.domain.utils.PaginatedResponse;
+import com.emezon.stock.domain.utils.PaginatedResponseParams;
 import com.emezon.stock.domain.models.Article;
 import com.emezon.stock.domain.models.Brand;
 import com.emezon.stock.domain.models.Category;
-import com.emezon.stock.domain.ports.outbound.IArticleRepositoryOutPort;
+import com.emezon.stock.domain.spi.IArticleRepositoryOutPort;
 import com.emezon.stock.domain.usecases.article.RetrieveArticleUseCase;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

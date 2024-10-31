@@ -10,8 +10,8 @@ import com.emezon.stock.domain.exceptions.category.CategoryNotFoundByIdException
 import com.emezon.stock.domain.models.Article;
 import com.emezon.stock.domain.models.Brand;
 import com.emezon.stock.domain.models.Category;
-import com.emezon.stock.domain.ports.inbound.article.ICreateArticleInPort;
-import com.emezon.stock.domain.ports.outbound.IArticleRepositoryOutPort;
+import com.emezon.stock.domain.api.article.ICreateArticleInPort;
+import com.emezon.stock.domain.spi.IArticleRepositoryOutPort;
 import com.emezon.stock.domain.usecases.brand.RetrieveBrandUseCase;
 import com.emezon.stock.domain.usecases.category.RetrieveCategoryUseCase;
 

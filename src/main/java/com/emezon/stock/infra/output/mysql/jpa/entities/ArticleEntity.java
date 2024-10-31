@@ -1,9 +1,12 @@
 package com.emezon.stock.infra.output.mysql.jpa.entities;
 
 import com.emezon.stock.domain.constants.ArticleConstraints;
+import com.emezon.stock.infra.output.mysql.jpa.constants.ArticleEntityConstants;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -14,9 +17,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-@Entity(name = "articles")
+@Entity(name = ArticleEntityConstants.ENTITY_NAME)
+@Table(name = ArticleEntityConstants.TABLE_NAME)
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class ArticleEntity {
 
     @Id

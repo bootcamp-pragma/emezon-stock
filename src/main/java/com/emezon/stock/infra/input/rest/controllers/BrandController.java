@@ -3,8 +3,9 @@ package com.emezon.stock.infra.input.rest.controllers;
 import com.emezon.stock.app.dtos.brand.BrandDTO;
 import com.emezon.stock.app.dtos.brand.CreateBrandDTO;
 import com.emezon.stock.app.services.BrandService;
-import com.emezon.stock.domain.utils.annotations.ValidPageableRequest;
-import com.emezon.stock.domain.common.PaginatedResponse;
+import com.emezon.stock.domain.utils.ValidPageableRequest;
+import com.emezon.stock.domain.utils.PaginatedResponse;
+import com.emezon.stock.infra.constants.RestApiConstants;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 
 @RestController
-@RequestMapping("/brand")
+@RequestMapping(RestApiConstants.API_BRAND)
 @RequiredArgsConstructor
 public class BrandController {
 
@@ -23,7 +24,7 @@ public class BrandController {
     @PostMapping
     public ResponseEntity<BrandDTO> createBrand(@RequestBody @Valid CreateBrandDTO createBrandDTO) {
         BrandDTO createdBrand = brandService.createBrand(createBrandDTO);
-        URI location = URI.create("/brand");
+        URI location = URI.create(RestApiConstants.API_BRAND);
         return ResponseEntity.created(location).body(createdBrand);
     }
 

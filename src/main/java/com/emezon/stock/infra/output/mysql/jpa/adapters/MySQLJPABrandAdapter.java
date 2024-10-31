@@ -1,10 +1,10 @@
 package com.emezon.stock.infra.output.mysql.jpa.adapters;
 
 
-import com.emezon.stock.domain.common.PaginatedResponse;
-import com.emezon.stock.domain.common.PaginatedResponseParams;
+import com.emezon.stock.domain.utils.PaginatedResponse;
+import com.emezon.stock.domain.utils.PaginatedResponseParams;
 import com.emezon.stock.domain.models.Brand;
-import com.emezon.stock.domain.ports.outbound.IBrandRepositoryOutPort;
+import com.emezon.stock.domain.spi.IBrandRepositoryOutPort;
 import com.emezon.stock.infra.output.mysql.jpa.entities.BrandEntity;
 import com.emezon.stock.infra.output.mysql.jpa.mappers.BrandEntityMapper;
 import com.emezon.stock.infra.output.mysql.jpa.repositories.IMySQLJPABrandRepository;

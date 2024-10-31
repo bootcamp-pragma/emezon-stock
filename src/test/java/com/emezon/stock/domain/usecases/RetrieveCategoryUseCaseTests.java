@@ -1,12 +1,12 @@
 package com.emezon.stock.domain.usecases;
 
-import com.emezon.stock.domain.common.PaginatedResponse;
-import com.emezon.stock.domain.common.PaginatedResponseParams;
+import com.emezon.stock.domain.utils.PaginatedResponse;
+import com.emezon.stock.domain.utils.PaginatedResponseParams;
 import com.emezon.stock.domain.exceptions.paginatedresponse.PaginatedResponsePageNumberInvalidException;
 import com.emezon.stock.domain.exceptions.paginatedresponse.PaginatedResponsePageSizeInvalidException;
 import com.emezon.stock.domain.exceptions.paginatedresponse.PaginatedResponseSortDirectionInvalidException;
 import com.emezon.stock.domain.models.Category;
-import com.emezon.stock.domain.ports.outbound.ICategoryRepositoryOutPort;
+import com.emezon.stock.domain.spi.ICategoryRepositoryOutPort;
 import com.emezon.stock.domain.usecases.category.RetrieveCategoryUseCase;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

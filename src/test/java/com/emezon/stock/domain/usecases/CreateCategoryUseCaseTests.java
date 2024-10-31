@@ -2,7 +2,7 @@ package com.emezon.stock.domain.usecases;
 
 import com.emezon.stock.domain.exceptions.category.*;
 import com.emezon.stock.domain.models.Category;
-import com.emezon.stock.domain.ports.outbound.ICategoryRepositoryOutPort;
+import com.emezon.stock.domain.spi.ICategoryRepositoryOutPort;
 import com.emezon.stock.domain.usecases.category.CreateCategoryUseCase;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

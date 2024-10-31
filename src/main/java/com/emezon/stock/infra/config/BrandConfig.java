@@ -1,7 +1,7 @@
 package com.emezon.stock.infra.config;
 
 import com.emezon.stock.app.services.BrandService;
-import com.emezon.stock.domain.ports.outbound.IBrandRepositoryOutPort;
+import com.emezon.stock.domain.spi.IBrandRepositoryOutPort;
 import com.emezon.stock.domain.usecases.brand.CreateBrandUseCase;
 import com.emezon.stock.domain.usecases.brand.RetrieveBrandUseCase;
 import com.emezon.stock.infra.output.mysql.jpa.adapters.MySQLJPABrandAdapter;

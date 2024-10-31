@@ -1,6 +1,6 @@
 package com.emezon.stock.domain.constants;
 
-import com.emezon.stock.domain.common.PaginatedResponseParams;
+import com.emezon.stock.domain.utils.PaginatedResponseParams;
 import com.emezon.stock.domain.exceptions.paginatedresponse.PaginatedResponsePageNumberInvalidException;
 import com.emezon.stock.domain.exceptions.paginatedresponse.PaginatedResponsePageSizeInvalidException;
 import com.emezon.stock.domain.exceptions.paginatedresponse.PaginatedResponseSortDirectionInvalidException;

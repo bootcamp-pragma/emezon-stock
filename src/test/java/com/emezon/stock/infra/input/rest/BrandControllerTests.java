@@ -3,9 +3,10 @@ package com.emezon.stock.infra.input.rest;
 import com.emezon.stock.app.dtos.brand.BrandDTO;
 import com.emezon.stock.app.dtos.brand.CreateBrandDTO;
 import com.emezon.stock.app.services.BrandService;
-import com.emezon.stock.domain.common.PaginatedResponse;
+import com.emezon.stock.domain.utils.PaginatedResponse;
 import com.emezon.stock.domain.constants.BrandErrorMessages;
 import com.emezon.stock.domain.constants.PaginatedResponseErrorMessages;
+import com.emezon.stock.infra.constants.RestApiConstants;
 import com.emezon.stock.infra.input.rest.controllers.BrandController;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
@@ -50,7 +51,7 @@ class BrandControllerTests {
                 brandDTO.getName(),
                 brandDTO.getDescription());
 
-        mockMvc.perform(post("/brand")
+        mockMvc.perform(post(RestApiConstants.API_BRAND)
                 .contentType("application/json")
                 .content(objectMapper.writeValueAsString(createBrandDTO)))
                 .andExpect(status().isCreated());
@@ -64,7 +65,7 @@ class BrandControllerTests {
                 "",
                 "Just do it");
 
-        mockMvc.perform(post("/brand")
+        mockMvc.perform(post(RestApiConstants.API_BRAND)
                 .contentType("application/json")
                 .content(objectMapper.writeValueAsString(createBrandDTO)))
                 .andExpect(status().isBadRequest())
@@ -82,7 +83,7 @@ class BrandControllerTests {
                 "Nike",
                 "");
 
-        mockMvc.perform(post("/brand")
+        mockMvc.perform(post(RestApiConstants.API_BRAND)
                 .contentType("application/json")
                 .content(objectMapper.writeValueAsString(createBrandDTO)))
                 .andExpect(status().isBadRequest())
@@ -100,7 +101,7 @@ class BrandControllerTests {
                 "alksdjnasdf sadfaskldfjnaskdfas dfasdkfas dfas dfasdf asdfasdfasfdasd faas",
                 "Just do it");
 
-        mockMvc.perform(post("/brand")
+        mockMvc.perform(post(RestApiConstants.API_BRAND)
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(createBrandDTO)))
                 .andExpect(status().isBadRequest())
@@ -119,7 +120,7 @@ class BrandControllerTests {
                 "alksdjnasdf sadfaskldfjnaskdfas dfasdkfas dfas dfasdf asdfasdfasfdasd akdsjsadhfa sdfkashdfkjasdhkf" +
                         "kjasdkjhaksjdhfkasjdhf dasfskdfmaskdfjhskdjf asdkfjasdkjfhs faas");
 
-        mockMvc.perform(post("/brand")
+        mockMvc.perform(post(RestApiConstants.API_BRAND)
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(createBrandDTO)))
                 .andExpect(status().isBadRequest())
@@ -144,7 +145,7 @@ class BrandControllerTests {
         brands.setSize(3);
         brands.setTotalItems(brands.getItems().size());
 
-        mockMvc.perform(get("/brand?page=1&size=3&sort=name,asc")
+        mockMvc.perform(get(RestApiConstants.API_BRAND + "?page=1&size=3&sort=name,asc")
                         .contentType("application/json"))
                 .andExpect(status().isOk())
                 .andExpect(result -> {
@@ -160,7 +161,7 @@ class BrandControllerTests {
 
     @Test
     void getAllBrands_whenPageParamIsInvalid_thenBadRequestIsReturned() throws Exception {
-        mockMvc.perform(get("/brand?page=-1&size=3&sort=name,asc")
+        mockMvc.perform(get(RestApiConstants.API_BRAND + "?page=-1&size=3&sort=name,asc")
                         .contentType("application/json"))
                 .andExpect(status().isBadRequest())
                 .andExpect(result -> {
@@ -172,7 +173,7 @@ class BrandControllerTests {
 
     @Test
     void getAllBrands_whenSizeParamIsInvalid_thenBadRequestIsReturned() throws Exception {
-        mockMvc.perform(get("/brand?page=1&size=0&sort=name,asc")
+        mockMvc.perform(get(RestApiConstants.API_BRAND + "?page=1&size=0&sort=name,asc")
                         .contentType("application/json"))
                 .andExpect(status().isBadRequest())
                 .andExpect(result -> {
@@ -184,7 +185,7 @@ class BrandControllerTests {
 
     @Test
     void getAllBrands_whenSortParamIsInvalid_thenBadRequestIsReturned() throws Exception {
-        mockMvc.perform(get("/brand?page=1&size=3&sort=invalid,")
+        mockMvc.perform(get(RestApiConstants.API_BRAND + "?page=1&size=3&sort=invalid,")
                         .contentType("application/json"))
                 .andExpect(status().isBadRequest())
                 .andExpect(result -> {

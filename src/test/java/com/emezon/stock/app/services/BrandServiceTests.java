@@ -2,8 +2,7 @@ package com.emezon.stock.app.services;
 
 import com.emezon.stock.app.dtos.brand.BrandDTO;
 import com.emezon.stock.app.dtos.brand.CreateBrandDTO;
-import com.emezon.stock.domain.common.PaginatedResponse;
-import com.emezon.stock.domain.common.PaginatedResponseParams;
+import com.emezon.stock.domain.utils.PaginatedResponse;
 import com.emezon.stock.domain.models.Brand;
 import com.emezon.stock.domain.usecases.brand.CreateBrandUseCase;
 import com.emezon.stock.domain.usecases.brand.RetrieveBrandUseCase;

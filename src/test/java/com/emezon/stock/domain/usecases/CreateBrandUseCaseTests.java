@@ -2,7 +2,7 @@ package com.emezon.stock.domain.usecases;
 
 import com.emezon.stock.domain.exceptions.brand.*;
 import com.emezon.stock.domain.models.Brand;
-import com.emezon.stock.domain.ports.outbound.IBrandRepositoryOutPort;
+import com.emezon.stock.domain.spi.IBrandRepositoryOutPort;
 import com.emezon.stock.domain.usecases.brand.CreateBrandUseCase;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

@@ -3,8 +3,8 @@ package com.emezon.stock.domain.usecases.category;
 import com.emezon.stock.domain.constants.CategoryConstraints;
 import com.emezon.stock.domain.exceptions.category.*;
 import com.emezon.stock.domain.models.Category;
-import com.emezon.stock.domain.ports.inbound.category.ICreateCategoryInPort;
-import com.emezon.stock.domain.ports.outbound.ICategoryRepositoryOutPort;
+import com.emezon.stock.domain.api.category.ICreateCategoryInPort;
+import com.emezon.stock.domain.spi.ICategoryRepositoryOutPort;
 
 import java.util.Optional;
 

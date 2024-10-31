@@ -1,6 +1,6 @@
 package com.emezon.stock.infra.output.mysql.jpa.utils;
 
-import com.emezon.stock.domain.common.PaginatedResponseParams;
+import com.emezon.stock.domain.utils.PaginatedResponseParams;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;

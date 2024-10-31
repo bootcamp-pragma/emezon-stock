@@ -1,9 +1,9 @@
 package com.emezon.stock.infra.config;
 
 import com.emezon.stock.app.services.ArticleService;
-import com.emezon.stock.domain.ports.outbound.IArticleRepositoryOutPort;
-import com.emezon.stock.domain.ports.outbound.IBrandRepositoryOutPort;
-import com.emezon.stock.domain.ports.outbound.ICategoryRepositoryOutPort;
+import com.emezon.stock.domain.spi.IArticleRepositoryOutPort;
+import com.emezon.stock.domain.spi.IBrandRepositoryOutPort;
+import com.emezon.stock.domain.spi.ICategoryRepositoryOutPort;
 import com.emezon.stock.domain.usecases.article.CreateArticleUseCase;
 import com.emezon.stock.domain.usecases.article.RetrieveArticleUseCase;
 import com.emezon.stock.domain.usecases.brand.RetrieveBrandUseCase;

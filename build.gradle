@@ -56,16 +56,7 @@ jacocoTestReport {
 	}
 	afterEvaluate {
 		classDirectories.setFrom(files(classDirectories.files.collect {
-			fileTree(dir: it, exclude: [
-					'**/app/errorhandling/advices/**',
-					'**/app/errorhandling/**',
-					'**/app/dtos/**',
-					'**/app/mappers/**',
-					'**/infra/output/mysql/**',
-					'**/infra/docs/**',
-					'**/infra/config/**',
-					'**/domain/utils/**',
-			])
+			fileTree(dir: it, includes: ['**/stock/domain/**'])
 		}))
 	}
 }

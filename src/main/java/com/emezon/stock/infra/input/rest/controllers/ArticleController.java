@@ -4,8 +4,9 @@ import com.emezon.stock.app.dtos.article.ArticleDTO;
 import com.emezon.stock.app.dtos.article.ArticleListDTO;
 import com.emezon.stock.app.dtos.article.CreateArticleDTO;
 import com.emezon.stock.app.services.ArticleService;
-import com.emezon.stock.domain.common.PaginatedResponse;
-import com.emezon.stock.domain.utils.annotations.ValidPageableRequest;
+import com.emezon.stock.domain.utils.PaginatedResponse;
+import com.emezon.stock.domain.utils.ValidPageableRequest;
+import com.emezon.stock.infra.constants.RestApiConstants;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 
 @RestController
-@RequestMapping("/article")
+@RequestMapping(RestApiConstants.API_ARTICLE)
 @RequiredArgsConstructor
 public class ArticleController {
 
@@ -24,7 +25,7 @@ public class ArticleController {
     @PostMapping
     public ResponseEntity<ArticleDTO> createArticle(@RequestBody @Valid CreateArticleDTO createArticleDTO) {
         ArticleDTO createdArticle = articleService.createArticle(createArticleDTO);
-        URI location = URI.create("/article");
+        URI location = URI.create(RestApiConstants.API_ARTICLE);
         return ResponseEntity.created(location).body(createdArticle);
     }
 
