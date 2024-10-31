@@ -4,10 +4,6 @@ import com.emezon.stock.app.dtos.category.CategoryDTO;
 import com.emezon.stock.domain.models.Category;
 import com.emezon.stock.infra.output.mysql.jpa.entities.CategoryEntity;
 
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class CategoryEntityMapper {
 
@@ -20,7 +16,6 @@ public class CategoryEntityMapper {
         categoryEntity.setId(category.getId());
         categoryEntity.setName(category.getName());
         categoryEntity.setDescription(category.getDescription());
-        categoryEntity.setCode(category.getCode());
         return categoryEntity;
     }
 
@@ -28,7 +23,6 @@ public class CategoryEntityMapper {
         CategoryEntity categoryEntity = new CategoryEntity();
         categoryEntity.setName(categoryDTO.getName());
         categoryEntity.setDescription(categoryDTO.getDescription());
-        categoryEntity.setCode(categoryDTO.getCode());
         return categoryEntity;
     }
 
@@ -37,7 +31,6 @@ public class CategoryEntityMapper {
         category.setId(categoryEntity.getId());
         category.setName(categoryEntity.getName());
         category.setDescription(categoryEntity.getDescription());
-        category.setCode(categoryEntity.getCode());
         return category;
     }
 

@@ -48,13 +48,11 @@ class CategoryControllerTests {
         categoryDTO = new CategoryDTO();
         categoryDTO.setId("1234");
         categoryDTO.setName("Smartphones category");
-        categoryDTO.setCode("Smartphones");
         categoryDTO.setDescription("Smartphones category description");
         when(categoryService.createCategory(any())).thenReturn(categoryDTO);
 
         createCategoryDTO = new CreateCategoryDTO(
                 categoryDTO.getName(),
-                categoryDTO.getCode(),
                 categoryDTO.getDescription()
         );
         mockMvc.perform(post(RestApiConstants.API_CATEGORY)
@@ -66,7 +64,6 @@ class CategoryControllerTests {
                             assert createdCategory != null;
                             assert createdCategory.getId().equals(categoryDTO.getId());
                             assert createdCategory.getName().equals(categoryDTO.getName());
-                            assert createdCategory.getCode().equals(categoryDTO.getCode());
                             assert createdCategory.getDescription().equals(categoryDTO.getDescription());
                         });
 
@@ -78,7 +75,6 @@ class CategoryControllerTests {
     void createCategory_whenCategoryNameIsBlank_thenBadRequest() throws Exception {
         createCategoryDTO = new CreateCategoryDTO(
                 "",
-                "Smartphones",
                 "Smartphones category description"
         );
         mockMvc.perform(post(RestApiConstants.API_CATEGORY)
@@ -93,28 +89,9 @@ class CategoryControllerTests {
     }
 
     @Test
-    void createCategory_whenCategoryCodeIsBlank_thenBadRequest() throws Exception {
-        createCategoryDTO = new CreateCategoryDTO(
-                "Smartphones category",
-                "",
-                "Smartphones category description"
-        );
-        mockMvc.perform(post(RestApiConstants.API_CATEGORY)
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(createCategoryDTO)))
-                .andExpect(status().isBadRequest())
-                .andExpect(result -> {
-                    assert result.getResponse().getContentAsString().contains(CategoryErrorMessages.CATEGORY_CODE_REQUIRED);
-                });
-
-        verify(categoryService, never()).createCategory(any());
-    }
-
-    @Test
     void createCategory_whenCategoryDescriptionIsBlank_thenBadRequest() throws Exception {
         createCategoryDTO = new CreateCategoryDTO(
                 "Smartphones category",
-                "Smartphones",
                 ""
         );
         mockMvc.perform(post(RestApiConstants.API_CATEGORY)
@@ -132,7 +109,6 @@ class CategoryControllerTests {
     void createCategory_whenCategoryNameIsTooLong_thenBadRequest() throws Exception {
         createCategoryDTO = new CreateCategoryDTO(
                 "asdnbasndfbsamdnfbsadfbasm,dnfbsm,dfbmsa,dfbsakdfbajskdjflsd fasdfas dfjksadf",
-                "Smartphones",
                 "Smartphones category description"
         );
         mockMvc.perform(post(RestApiConstants.API_CATEGORY)
@@ -150,7 +126,6 @@ class CategoryControllerTests {
     void createCategory_whenCategoryDescriptionIsTooLong_thenBadRequest() throws Exception {
         createCategoryDTO = new CreateCategoryDTO(
                 "Smartphones category",
-                "Smartphones",
                 "asdnbasndfbsamdnfbsadfbasm,dnfbsm,dfbmsa,dfbsakdfbajskdjflsd fasdfas dfjksadf sadnf asdkfbaskdfasdfasd ajsdbhhjfbfsajdfbsamndfbsandfa sd fasdfasdf"
         );
         mockMvc.perform(post(RestApiConstants.API_CATEGORY)
@@ -169,9 +144,9 @@ class CategoryControllerTests {
     void getAllCategories_whenRequestParamsAreValid_thenCategoriesAreReturned() throws Exception {
         PaginatedResponse<CategoryDTO> categories = new PaginatedResponse<>();
         categories.setItems(List.of(
-                new CategoryDTO("5678", "Laptops", "Laptops category", "Laptops"),
-                new CategoryDTO("1234", "Smartphones", "Smartphones category", "Smartphones"),
-                new CategoryDTO("91011", "Tablets", "Tablets category", "Tablets")
+                new CategoryDTO("5678", "Laptops", "Laptops category"),
+                new CategoryDTO("1234", "Smartphones", "Smartphones category"),
+                new CategoryDTO("91011", "Tablets", "Tablets category")
         ));
         categories.setPage(1);
         categories.setSize(3);

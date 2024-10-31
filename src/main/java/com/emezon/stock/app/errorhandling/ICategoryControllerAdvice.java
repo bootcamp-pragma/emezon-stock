@@ -6,11 +6,7 @@ public interface ICategoryControllerAdvice<T> {
 
     Object handleCategoryNameAlreadyExistsException(CategoryNameAlreadyExistsException ex, T request);
 
-    Object handleCategoryCodeAlreadyExistsException(CategoryCodeAlreadyExistsException ex, T request);
-
     Object handleCategoryNameRequiredException(CategoryNameRequiredException ex, T request);
-
-    Object handleCategoryCodeRequiredException(CategoryCodeRequiredException ex, T request);
 
     Object handleCategoryDescriptionRequiredException(CategoryDescriptionRequiredException ex, T request);
 

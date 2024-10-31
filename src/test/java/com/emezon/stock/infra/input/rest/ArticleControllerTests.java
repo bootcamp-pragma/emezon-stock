@@ -54,8 +54,8 @@ class ArticleControllerTests {
     void createArticle_whenArticlePropertiesAreValid_shouldReturnCreated() throws Exception {
         brandDTO = new BrandDTO(genRanUUID(), "Nike", "Just do it");
         List<CategoryDTO> categories = List.of(
-                new CategoryDTO(genRanUUID(), "Electronics", "Electronic devices", "C123"),
-                new CategoryDTO(genRanUUID(), "Smartphones", "Smartphones", "C456")
+                new CategoryDTO(genRanUUID(), "Electronics", "Electronic devices"),
+                new CategoryDTO(genRanUUID(), "Smartphones", "Smartphones")
         );
         articleDTO = new ArticleDTO();
         articleDTO.setName("Smartphone");

@@ -90,26 +90,4 @@ public class MySQLJPACategoryAdapterTests {
         verify(repository, times(1)).findByName(category.getName());
     }
 
-    @Test
-    void findByCode_whenCategoryExists_thenShouldReturnCategory() {
-        CategoryEntity categoryEntity = CategoryEntityMapper.toEntity(category);
-        when(repository.findByCode(category.getCode())).thenReturn(Optional.of(categoryEntity));
-
-        Optional<Category> foundCategory = adapter.findByCode(category.getCode());
-        assertTrue(foundCategory.isPresent());
-        assertEquals(category.getCode(), foundCategory.get().getCode());
-
-        verify(repository, times(1)).findByCode(category.getCode());
-    }
-
-    @Test
-    void findByCode_whenCategoryDoesNotExist_thenShouldReturnEmpty() {
-        when(repository.findByCode(category.getCode())).thenReturn(Optional.empty());
-
-        Optional<Category> foundCategory = adapter.findByCode(category.getCode());
-        assertTrue(foundCategory.isEmpty());
-
-        verify(repository, times(1)).findByCode(category.getCode());
-    }
-
 }

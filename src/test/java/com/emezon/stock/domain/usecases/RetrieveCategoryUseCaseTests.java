@@ -34,7 +34,7 @@ class RetrieveCategoryUseCaseTests {
 
     @BeforeEach
     public void setUp() {
-        category = new Category("123", "Electronics", "ELECT", "Devices and gadgets");
+        category = new Category("123", "Electronics", "Devices and gadgets");
     }
 
     @Test
@@ -83,30 +83,6 @@ class RetrieveCategoryUseCaseTests {
         assertTrue(result.isEmpty());
 
         verify(categoryRepositoryOutPort, times(1)).findByName(category.getName());
-    }
-
-    @Test
-    void getCategoryByCode_whenCategoryCodeExists_thenCategoryIsReturned() {
-        when(categoryRepositoryOutPort.findByCode(category.getCode())).thenReturn(Optional.of(category));
-
-        Optional<Category> result = retrieveCategoryUseCase.getCategoryByCode(category.getCode());
-
-        assertTrue(result.isPresent());
-        Category categoryResult = result.get();
-        assertEquals(category.getCode(), categoryResult.getCode());
-
-        verify(categoryRepositoryOutPort, times(1)).findByCode(category.getCode());
-    }
-
-    @Test
-    void getCategoryByCode_whenCategoryCodeDoesNotExist_thenCategoryIsNotReturned() {
-        when(categoryRepositoryOutPort.findByCode(category.getCode())).thenReturn(Optional.empty());
-
-        Optional<Category> result = retrieveCategoryUseCase.getCategoryByCode(category.getCode());
-
-        assertTrue(result.isEmpty());
-
-        verify(categoryRepositoryOutPort, times(1)).findByCode(category.getCode());
     }
 
     @Test

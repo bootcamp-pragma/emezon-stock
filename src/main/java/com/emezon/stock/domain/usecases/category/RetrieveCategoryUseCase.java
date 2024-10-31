@@ -28,11 +28,6 @@ public class RetrieveCategoryUseCase implements IRetrieveCategoryInPort {
     }
 
     @Override
-    public Optional<Category> getCategoryByCode(String code) {
-        return categoryRepositoryOutPort.findByCode(code);
-    }
-
-    @Override
     public PaginatedResponse<Category> getAllCategories(PaginatedResponseParams params) {
         PaginatedResponseConstraints.validateParameters(params);
         return categoryRepositoryOutPort.findAll(params);

@@ -23,10 +23,6 @@ public class CreateCategoryUseCase implements ICreateCategoryInPort {
         if (categoryByName.isPresent()) {
             throw new CategoryNameAlreadyExistsException(processedCategory.getName());
         }
-        Optional<Category> categoryByCode = categoryRepositoryOutPort.findByCode(processedCategory.getCode());
-        if (categoryByCode.isPresent()) {
-            throw new CategoryCodeAlreadyExistsException(processedCategory.getCode());
-        }
         return categoryRepositoryOutPort.save(processedCategory);
     }
 
@@ -36,8 +32,6 @@ public class CreateCategoryUseCase implements ICreateCategoryInPort {
         if (category.getName().length() > CategoryConstraints.NAME_MAX_LENGTH) {
             throw new CategoryNameMaxLengthException(CategoryConstraints.NAME_MAX_LENGTH);
         }
-        if (category.getCode() == null) { throw new CategoryCodeRequiredException(); }
-        category.setCode(category.getCode().trim());
         if (category.getDescription() == null) { throw new CategoryDescriptionRequiredException(); }
         category.setDescription(category.getDescription().trim());
         if (category.getDescription().length() > CategoryConstraints.DESCRIPTION_MAX_LENGTH) {

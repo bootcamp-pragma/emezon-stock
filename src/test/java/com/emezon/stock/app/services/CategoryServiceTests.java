@@ -45,13 +45,12 @@ class CategoryServiceTests {
     void createCategory_whenCategoryPropertiesAreValid_thenCategoryIsCreated() {
         when(createCategoryUseCase.createCategory(any())).thenReturn(category);
 
-        CreateCategoryDTO categoryDTO = new CreateCategoryDTO("  Electronics", "ELECT", "Devices and gadgets ");
+        CreateCategoryDTO categoryDTO = new CreateCategoryDTO("  Electronics", "Devices and gadgets ");
         categoryDTO.init();
         CategoryDTO createdCategory = categoryService.createCategory(categoryDTO);
 
         assertNotNull(createdCategory);
         assertEquals(category.getName(), createdCategory.getName());
-        assertEquals(category.getCode(), createdCategory.getCode());
         assertEquals(category.getDescription(), createdCategory.getDescription());
 
         verify(createCategoryUseCase, times(1)).createCategory(any());
@@ -101,29 +100,6 @@ class CategoryServiceTests {
         assertTrue(categoryByName.isEmpty());
 
         verify(retrieveCategoryUseCase, times(1)).getCategoryByName(any());
-    }
-
-    @Test
-    void findCategoryByCode_whenCategoryExists_thenCategoryIsReturned() {
-        when(retrieveCategoryUseCase.getCategoryByCode(any())).thenReturn(Optional.of(category));
-
-        Optional<CategoryDTO> categoryByCode = categoryService.getCategoryByCode("ELECT");
-
-        assertTrue(categoryByCode.isPresent());
-        assertEquals(category.getName(), categoryByCode.get().getName());
-
-        verify(retrieveCategoryUseCase, times(1)).getCategoryByCode(any());
-    }
-
-    @Test
-    void findCategoryByCode_whenCategoryDoesNotExist_thenEmptyOptionalIsReturned() {
-        when(retrieveCategoryUseCase.getCategoryByCode(any())).thenReturn(Optional.empty());
-
-        Optional<CategoryDTO> categoryByCode = categoryService.getCategoryByCode("ELECT");
-
-        assertTrue(categoryByCode.isEmpty());
-
-        verify(retrieveCategoryUseCase, times(1)).getCategoryByCode(any());
     }
 
     @Test

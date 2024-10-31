@@ -37,11 +37,6 @@ public class CategoryService {
         return category.map(CategoryDTOMapper::toDTO);
     }
 
-    public Optional<CategoryDTO> getCategoryByCode(String code) {
-        Optional<Category> category = retrieveCategoryUseCase.getCategoryByCode(code);
-        return category.map(CategoryDTOMapper::toDTO);
-    }
-
     public PaginatedResponse<CategoryDTO> getAllCategories(MultiValueMap<String, String> queryParams) {
         PaginatedResponseParams params = PaginatedResponseUtils.getFromMultiValueMap(queryParams);
         PaginatedResponse<Category> categories = retrieveCategoryUseCase.getAllCategories(params);

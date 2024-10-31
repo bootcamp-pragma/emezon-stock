@@ -32,9 +32,6 @@ public class CategoryEntity {
     @Column(nullable = false, length = CategoryConstraints.DESCRIPTION_MAX_LENGTH)
     private String description;
 
-    @Column(unique = true, nullable = false)
-    private String code;
-
     @ManyToMany(mappedBy = "categories")
     private List<ArticleEntity> articles;
 
@@ -50,7 +47,6 @@ public class CategoryEntity {
                 "id='" + id + "'\n" +
                 "name='" + name + "'\n" +
                 "description='" + description + "'\n" +
-                "code='" + code + "'\n" +
                 "}";
     }
 

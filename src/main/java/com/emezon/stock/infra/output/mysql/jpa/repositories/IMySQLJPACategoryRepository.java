@@ -12,7 +12,4 @@ public interface IMySQLJPACategoryRepository extends JpaRepository<CategoryEntit
     @Query("SELECT c FROM " + CategoryEntityConstants.ENTITY_NAME + " c WHERE LOWER(c.name)  = LOWER(:name)")
     Optional<CategoryEntity> findByName(String name);
 
-    @Query("SELECT c FROM " + CategoryEntityConstants.ENTITY_NAME + " c WHERE LOWER(c.code)  = LOWER(:code)")
-    Optional<CategoryEntity> findByCode(String code);
-
 }

@@ -39,12 +39,6 @@ public class MySQLJPACategoryAdapter implements ICategoryRepositoryOutPort {
     }
 
     @Override
-    public Optional<Category> findByCode(String code) {
-        Optional<CategoryEntity> categoryEntity = repository.findByCode(code);
-        return categoryEntity.map(CategoryEntityMapper::toModel);
-    }
-
-    @Override
     public PaginatedResponse<Category> findAll(PaginatedResponseParams params) {
         Pageable pageable = PageableUtils.getFromPaginatedResponseParams(params);
         Page<CategoryEntity> pageRes = repository.findAll(pageable);

@@ -40,7 +40,7 @@ class ArticleServiceTests {
     @Test
     void createArticle_whenArticlePropertiesAreValid_thenArticleIsCreated() {
         Brand brand = new Brand("1123", "Samsung", "Samsung Electronics Co., Ltd.");
-        Category category = new Category("1234", "Smartphones category", "Smartphones", "Smartphones category description");
+        Category category = new Category("1234", "Smartphones category", "Smartphones category description");
         CreateArticleDTO articleDTO = new CreateArticleDTO();
         articleDTO.setName("Samsung Galaxy S21");
         articleDTO.setDescription("Samsung Galaxy S21 description");
@@ -71,7 +71,7 @@ class ArticleServiceTests {
     @Test
     void getArticleById_whenArticleExists_thenArticleIsReturned() {
         Brand brand = new Brand("1123", "Samsung", "Samsung Electronics Co., Ltd.");
-        Category category = new Category("1234", "Smartphones category", "Smartphones", "Smartphones category description");
+        Category category = new Category("1234", "Smartphones category", "Smartphones category description");
         Article article = new Article("1234", "Samsung Galaxy S21", "Samsung Galaxy S21 description",
                 999.99, 100, brand, List.of(category));
         when(retrieveArticleUseCase.getArticleById(article.getId())).thenReturn(Optional.of(article));
@@ -105,7 +105,7 @@ class ArticleServiceTests {
     @Test
     void getAllArticles_whenArticlesExist_thenArticlesSerAreReturned() {
         Brand brand = new Brand("1123", "Samsung", "Samsung Electronics Co., Ltd.");
-        Category category = new Category("1234", "Smartphones category", "Smartphones", "Smartphones category description");
+        Category category = new Category("1234", "Smartphones category", "Smartphones category description");
         Article article = new Article("1234", "Samsung Galaxy S21", "Samsung Galaxy S21 description",
                 999.99, 100, brand, List.of(category));
         int page = 0, size = 1;

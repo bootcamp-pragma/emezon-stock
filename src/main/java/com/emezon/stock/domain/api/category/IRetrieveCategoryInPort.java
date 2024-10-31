@@ -12,8 +12,6 @@ public interface IRetrieveCategoryInPort {
 
     Optional<Category> getCategoryByName(String name);
 
-    Optional<Category> getCategoryByCode(String code);
-
     PaginatedResponse<Category> getAllCategories(PaginatedResponseParams params);
 
 }

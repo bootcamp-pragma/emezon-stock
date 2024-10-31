@@ -26,31 +26,8 @@ public class CategoryControllerAdvice implements ICategoryControllerAdvice<WebRe
     }
 
     @Override
-    @ExceptionHandler(CategoryCodeAlreadyExistsException.class)
-    public ResponseEntity<ExceptionResponse> handleCategoryCodeAlreadyExistsException(CategoryCodeAlreadyExistsException ex, WebRequest request) {
-        HttpStatus status = HttpStatus.CONFLICT;
-        ExceptionResponse response = new ExceptionResponse(
-                ex.getMessage(),
-                request.getDescription(false),
-                status.value(),
-                CategoryErrorMessages.CATEGORY_CODE_ALREADY_EXISTS_DETAILS);
-        return new ResponseEntity<>(response, status);
-    }
-
-    @Override
     @ExceptionHandler(CategoryNameRequiredException.class)
     public ResponseEntity<ExceptionResponse> handleCategoryNameRequiredException(CategoryNameRequiredException ex, WebRequest request) {
-        HttpStatus status = HttpStatus.BAD_REQUEST;
-        ExceptionResponse response = new ExceptionResponse(
-                ex.getMessage(),
-                request.getDescription(false),
-                status.value());
-        return new ResponseEntity<>(response, status);
-    }
-
-    @Override
-    @ExceptionHandler(CategoryCodeRequiredException.class)
-    public ResponseEntity<ExceptionResponse> handleCategoryCodeRequiredException(CategoryCodeRequiredException ex, WebRequest request) {
         HttpStatus status = HttpStatus.BAD_REQUEST;
         ExceptionResponse response = new ExceptionResponse(
                 ex.getMessage(),

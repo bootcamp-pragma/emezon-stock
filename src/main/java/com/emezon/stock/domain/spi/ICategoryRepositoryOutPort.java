@@ -14,8 +14,6 @@ public interface ICategoryRepositoryOutPort {
 
     Optional<Category> findByName(String name);
 
-    Optional<Category> findByCode(String code);
-
     PaginatedResponse<Category> findAll(PaginatedResponseParams params);
 
 }
