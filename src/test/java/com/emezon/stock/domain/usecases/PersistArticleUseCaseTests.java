@@ -10,7 +10,7 @@ import com.emezon.stock.domain.models.Article;
 import com.emezon.stock.domain.models.Brand;
 import com.emezon.stock.domain.models.Category;
 import com.emezon.stock.domain.spi.IArticleRepositoryOutPort;
-import com.emezon.stock.domain.usecases.article.CreateArticleUseCase;
+import com.emezon.stock.domain.usecases.article.PersistArticleUseCase;
 import com.emezon.stock.domain.usecases.brand.RetrieveBrandUseCase;
 import com.emezon.stock.domain.usecases.category.RetrieveCategoryUseCase;
 import org.junit.jupiter.api.BeforeEach;
@@ -28,7 +28,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-class CreateArticleUseCaseTests {
+class PersistArticleUseCaseTests {
 
     @Mock
     private IArticleRepositoryOutPort articleRepositoryOutPort;
@@ -40,7 +40,7 @@ class CreateArticleUseCaseTests {
     private RetrieveCategoryUseCase retrieveCategoryUseCase;
 
     @InjectMocks
-    private CreateArticleUseCase createArticleUseCase;
+    private PersistArticleUseCase persistArticleUseCase;
 
     private Category category;
     private Brand brand;
@@ -57,7 +57,7 @@ class CreateArticleUseCaseTests {
     void createArticle_whenArticlePriceIsLessThanMinValue_thenArticlePriceMinValueExceptionIsThrown() {
         article.setPrice(-1.0);
 
-        assertThrows(ArticlePriceMinValueException.class, () -> createArticleUseCase.createArticle(article));
+        assertThrows(ArticlePriceMinValueException.class, () -> persistArticleUseCase.createArticle(article));
 
         verify(articleRepositoryOutPort, never()).save(any());
     }
@@ -66,7 +66,7 @@ class CreateArticleUseCaseTests {
     void createArticle_whenArticleStockIsLessThanMinValue_thenArticleStockMinValueExceptionIsThrown() {
         article.setStock(-1);
 
-        assertThrows(ArticleStockMinValueException.class, () -> createArticleUseCase.createArticle(article));
+        assertThrows(ArticleStockMinValueException.class, () -> persistArticleUseCase.createArticle(article));
 
         verify(articleRepositoryOutPort, never()).save(any());
     }
@@ -80,7 +80,7 @@ class CreateArticleUseCaseTests {
 
         article.setCategories(List.of(category1, category2, category3, category4));
 
-        assertThrows(ArticleCategoriesNumberInvalidException.class, () -> createArticleUseCase.createArticle(article));
+        assertThrows(ArticleCategoriesNumberInvalidException.class, () -> persistArticleUseCase.createArticle(article));
 
         verify(articleRepositoryOutPort, never()).save(any());
     }
@@ -89,7 +89,7 @@ class CreateArticleUseCaseTests {
     void createArticle_whenNumberOfCategoriesIsLessThanMinValue_thenArticleCategoriesNumberInvalidExceptionIsThrown() {
         article.setCategories(List.of());
 
-        assertThrows(ArticleCategoriesNumberInvalidException.class, () -> createArticleUseCase.createArticle(article));
+        assertThrows(ArticleCategoriesNumberInvalidException.class, () -> persistArticleUseCase.createArticle(article));
 
         verify(articleRepositoryOutPort, never()).save(any());
     }
@@ -98,7 +98,7 @@ class CreateArticleUseCaseTests {
     void createArticle_whenThereAreDuplicateCategories_thenArticleDuplicateCategoriesExceptionIsThrown() {
         article.setCategories(List.of(category, category));
 
-        assertThrows(ArticleDuplicateCategoriesException.class, () -> createArticleUseCase.createArticle(article));
+        assertThrows(ArticleDuplicateCategoriesException.class, () -> persistArticleUseCase.createArticle(article));
 
         verify(articleRepositoryOutPort, never()).save(any());
     }
@@ -107,7 +107,7 @@ class CreateArticleUseCaseTests {
     void createArticle_whenBrandDoesNotExist_thenBrandNotFoundByIdExceptionIsThrown() {
         when(retrieveBrandUseCase.getBrandById(brand.getId())).thenReturn(Optional.empty());
 
-        assertThrows(BrandNotFoundByIdException.class, () -> createArticleUseCase.createArticle(article));
+        assertThrows(BrandNotFoundByIdException.class, () -> persistArticleUseCase.createArticle(article));
 
         verify(articleRepositoryOutPort, never()).save(any());
     }
@@ -117,7 +117,7 @@ class CreateArticleUseCaseTests {
         when(retrieveBrandUseCase.getBrandById(brand.getId())).thenReturn(Optional.of(brand));
         when(retrieveCategoryUseCase.getCategoryById(category.getId())).thenReturn(Optional.empty());
 
-        assertThrows(CategoryNotFoundByIdException.class, () -> createArticleUseCase.createArticle(article));
+        assertThrows(CategoryNotFoundByIdException.class, () -> persistArticleUseCase.createArticle(article));
 
         verify(articleRepositoryOutPort, never()).save(any());
     }
@@ -128,7 +128,7 @@ class CreateArticleUseCaseTests {
         when(retrieveCategoryUseCase.getCategoryById(category.getId())).thenReturn(Optional.of(category));
         when(articleRepositoryOutPort.save(article)).thenReturn(article);
 
-        Article createdArticle = createArticleUseCase.createArticle(article);
+        Article createdArticle = persistArticleUseCase.createArticle(article);
         assertNotNull(createdArticle);
         assertEquals(article.getName(), createdArticle.getName());
         assertEquals(article.getBrand().getName(), createdArticle.getBrand().getName());

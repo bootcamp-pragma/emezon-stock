@@ -2,12 +2,13 @@ package com.emezon.stock.app.services;
 
 import com.emezon.stock.app.dtos.category.CategoryDTO;
 import com.emezon.stock.app.dtos.category.CreateCategoryDTO;
+import com.emezon.stock.app.handlers.ICategoryHandler;
 import com.emezon.stock.app.mappers.CategoryDTOMapper;
+import com.emezon.stock.domain.api.category.IPersistCategoryInPort;
+import com.emezon.stock.domain.api.category.IRetrieveCategoryInPort;
 import com.emezon.stock.domain.utils.PaginatedResponse;
 import com.emezon.stock.domain.utils.PaginatedResponseParams;
 import com.emezon.stock.domain.utils.PaginatedResponseUtils;
-import com.emezon.stock.domain.usecases.category.CreateCategoryUseCase;
-import com.emezon.stock.domain.usecases.category.RetrieveCategoryUseCase;
 import com.emezon.stock.domain.models.Category;
 import lombok.RequiredArgsConstructor;
 import org.springframework.util.MultiValueMap;
@@ -16,30 +17,34 @@ import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
-public class CategoryService {
+public class CategoryService implements ICategoryHandler {
 
-    private final CreateCategoryUseCase createCategoryUseCase;
-    private final RetrieveCategoryUseCase retrieveCategoryUseCase;
+    private final IPersistCategoryInPort persistCategoryInPort;
+    private final IRetrieveCategoryInPort retrieveCategoryInPort;
 
+    @Override
     public CategoryDTO createCategory(CreateCategoryDTO category) {
         Category categoryModel = CategoryDTOMapper.toModel(category);
-        Category createdCategory = createCategoryUseCase.createCategory(categoryModel);
+        Category createdCategory = persistCategoryInPort.createCategory(categoryModel);
         return CategoryDTOMapper.toDTO(createdCategory);
     }
 
+    @Override
     public Optional<CategoryDTO> getCategoryById(String id) {
-        Optional<Category> category = retrieveCategoryUseCase.getCategoryById(id);
+        Optional<Category> category = retrieveCategoryInPort.getCategoryById(id);
         return category.map(CategoryDTOMapper::toDTO);
     }
 
+    @Override
     public Optional<CategoryDTO> getCategoryByName(String name) {
-        Optional<Category> category = retrieveCategoryUseCase.getCategoryByName(name);
+        Optional<Category> category = retrieveCategoryInPort.getCategoryByName(name);
         return category.map(CategoryDTOMapper::toDTO);
     }
 
+    @Override
     public PaginatedResponse<CategoryDTO> getAllCategories(MultiValueMap<String, String> queryParams) {
         PaginatedResponseParams params = PaginatedResponseUtils.getFromMultiValueMap(queryParams);
-        PaginatedResponse<Category> categories = retrieveCategoryUseCase.getAllCategories(params);
+        PaginatedResponse<Category> categories = retrieveCategoryInPort.getAllCategories(params);
         List<CategoryDTO> categoryDTOS = categories.getItems().stream().map(CategoryDTOMapper::toDTO).toList();
         return new PaginatedResponse<>(
                 categoryDTOS,

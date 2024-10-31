@@ -3,7 +3,7 @@ package com.emezon.stock.domain.usecases;
 import com.emezon.stock.domain.exceptions.category.*;
 import com.emezon.stock.domain.models.Category;
 import com.emezon.stock.domain.spi.ICategoryRepositoryOutPort;
-import com.emezon.stock.domain.usecases.category.CreateCategoryUseCase;
+import com.emezon.stock.domain.usecases.category.PersistCategoryUseCase;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -17,13 +17,13 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-class CreateCategoryUseCaseTests {
+class PersistCategoryUseCaseTests {
 
     @Mock
     private ICategoryRepositoryOutPort categoryRepositoryOutPort;
 
     @InjectMocks
-    private CreateCategoryUseCase createCategoryUseCase;
+    private PersistCategoryUseCase persistCategoryUseCase;
 
     private Category category;
 
@@ -36,7 +36,7 @@ class CreateCategoryUseCaseTests {
     void createCategory_whenCategoryNameIsNull_thenCategoryNameRequiredExceptionIsThrown() {
         category.setName(null);
 
-        assertThrows(CategoryNameRequiredException.class, () -> createCategoryUseCase.createCategory(category));
+        assertThrows(CategoryNameRequiredException.class, () -> persistCategoryUseCase.createCategory(category));
 
         verify(categoryRepositoryOutPort, never()).save(any());
     }
@@ -45,7 +45,7 @@ class CreateCategoryUseCaseTests {
     void createCategory_whenCategoryDescriptionIsNull_thenCategoryDescriptionRequiredExceptionIsThrown() {
         category.setDescription(null);
 
-        assertThrows(CategoryDescriptionRequiredException.class, () -> createCategoryUseCase.createCategory(category));
+        assertThrows(CategoryDescriptionRequiredException.class, () -> persistCategoryUseCase.createCategory(category));
 
         verify(categoryRepositoryOutPort, never()).save(any());
     }
@@ -54,7 +54,7 @@ class CreateCategoryUseCaseTests {
     void createCategory_whenCategoryNameIsTooLong_thenCategoryNameMaxLengthExceptionIsThrown() {
         category.setName("This is a very long category name that exceeds the maximum length allowed");
 
-        assertThrows(CategoryNameMaxLengthException.class, () -> createCategoryUseCase.createCategory(category));
+        assertThrows(CategoryNameMaxLengthException.class, () -> persistCategoryUseCase.createCategory(category));
 
         verify(categoryRepositoryOutPort, never()).save(any());
     }
@@ -64,7 +64,7 @@ class CreateCategoryUseCaseTests {
         category.setDescription("This is a very long category description that exceeds the maximum length allowed" +
                 "This is a very long category description that exceeds the maximum length allowed");
 
-        assertThrows(CategoryDescriptionMaxLengthException.class, () -> createCategoryUseCase.createCategory(category));
+        assertThrows(CategoryDescriptionMaxLengthException.class, () -> persistCategoryUseCase.createCategory(category));
 
         verify(categoryRepositoryOutPort, never()).save(any());
     }
@@ -74,7 +74,7 @@ class CreateCategoryUseCaseTests {
     void createCategory_whenCategoryNameAlreadyExists_thenCategoryNameAlreadyExistsExceptionIsThrown() {
         when(categoryRepositoryOutPort.findByName(category.getName())).thenReturn(Optional.of(category));
 
-        assertThrows(CategoryNameAlreadyExistsException.class, () -> createCategoryUseCase.createCategory(category));
+        assertThrows(CategoryNameAlreadyExistsException.class, () -> persistCategoryUseCase.createCategory(category));
 
         verify(categoryRepositoryOutPort, times(1)).findByName(anyString());
         verify(categoryRepositoryOutPort, never()).save(any());
@@ -85,7 +85,7 @@ class CreateCategoryUseCaseTests {
         when(categoryRepositoryOutPort.findByName(category.getName())).thenReturn(Optional.empty());
         when(categoryRepositoryOutPort.save(category)).thenReturn(category);
 
-        Category createdCategory = createCategoryUseCase.createCategory(category);
+        Category createdCategory = persistCategoryUseCase.createCategory(category);
 
         assertNotNull(createdCategory);
         assertEquals(category.getName(), createdCategory.getName());

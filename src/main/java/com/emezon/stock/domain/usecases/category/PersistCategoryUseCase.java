@@ -3,16 +3,16 @@ package com.emezon.stock.domain.usecases.category;
 import com.emezon.stock.domain.constants.CategoryConstraints;
 import com.emezon.stock.domain.exceptions.category.*;
 import com.emezon.stock.domain.models.Category;
-import com.emezon.stock.domain.api.category.ICreateCategoryInPort;
+import com.emezon.stock.domain.api.category.IPersistCategoryInPort;
 import com.emezon.stock.domain.spi.ICategoryRepositoryOutPort;
 
 import java.util.Optional;
 
-public class CreateCategoryUseCase implements ICreateCategoryInPort {
+public class PersistCategoryUseCase implements IPersistCategoryInPort {
 
     private final ICategoryRepositoryOutPort categoryRepositoryOutPort;
 
-    public CreateCategoryUseCase(ICategoryRepositoryOutPort categoryRepositoryOutPort) {
+    public PersistCategoryUseCase(ICategoryRepositoryOutPort categoryRepositoryOutPort) {
         this.categoryRepositoryOutPort = categoryRepositoryOutPort;
     }
 

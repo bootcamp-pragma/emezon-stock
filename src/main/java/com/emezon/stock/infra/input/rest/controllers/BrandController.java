@@ -2,7 +2,7 @@ package com.emezon.stock.infra.input.rest.controllers;
 
 import com.emezon.stock.app.dtos.brand.BrandDTO;
 import com.emezon.stock.app.dtos.brand.CreateBrandDTO;
-import com.emezon.stock.app.services.BrandService;
+import com.emezon.stock.app.handlers.IBrandHandler;
 import com.emezon.stock.domain.utils.ValidPageableRequest;
 import com.emezon.stock.domain.utils.PaginatedResponse;
 import com.emezon.stock.infra.constants.RestApiConstants;
@@ -19,11 +19,11 @@ import java.net.URI;
 @RequiredArgsConstructor
 public class BrandController {
 
-    private final BrandService brandService;
+    private final IBrandHandler brandHandler;
 
     @PostMapping
     public ResponseEntity<BrandDTO> createBrand(@RequestBody @Valid CreateBrandDTO createBrandDTO) {
-        BrandDTO createdBrand = brandService.createBrand(createBrandDTO);
+        BrandDTO createdBrand = brandHandler.createBrand(createBrandDTO);
         URI location = URI.create(RestApiConstants.API_BRAND);
         return ResponseEntity.created(location).body(createdBrand);
     }
@@ -33,7 +33,7 @@ public class BrandController {
             @RequestParam @ValidPageableRequest @Valid
             MultiValueMap<String, String> queryParams
     ) {
-        PaginatedResponse<BrandDTO> brands = brandService.getAllBrands(queryParams);
+        PaginatedResponse<BrandDTO> brands = brandHandler.getAllBrands(queryParams);
         return ResponseEntity.ok(brands);
     }
 

@@ -1,5 +1,7 @@
 package com.emezon.stock.domain.usecases.article;
 
+import com.emezon.stock.domain.api.brand.IRetrieveBrandInPort;
+import com.emezon.stock.domain.api.category.IRetrieveCategoryInPort;
 import com.emezon.stock.domain.constants.ArticleConstraints;
 import com.emezon.stock.domain.exceptions.article.ArticleCategoriesNumberInvalidException;
 import com.emezon.stock.domain.exceptions.article.ArticleDuplicateCategoriesException;
@@ -10,31 +12,29 @@ import com.emezon.stock.domain.exceptions.category.CategoryNotFoundByIdException
 import com.emezon.stock.domain.models.Article;
 import com.emezon.stock.domain.models.Brand;
 import com.emezon.stock.domain.models.Category;
-import com.emezon.stock.domain.api.article.ICreateArticleInPort;
+import com.emezon.stock.domain.api.article.IPersistArticleInPort;
 import com.emezon.stock.domain.spi.IArticleRepositoryOutPort;
-import com.emezon.stock.domain.usecases.brand.RetrieveBrandUseCase;
-import com.emezon.stock.domain.usecases.category.RetrieveCategoryUseCase;
 
 import java.util.*;
 
-public class CreateArticleUseCase implements ICreateArticleInPort {
+public class PersistArticleUseCase implements IPersistArticleInPort {
 
     private final IArticleRepositoryOutPort articleRepositoryOutPort;
-    private final RetrieveCategoryUseCase retrieveCategoryUseCase;
-    private final RetrieveBrandUseCase retrieveBrandUseCase;
+    private final IRetrieveCategoryInPort retrieveCategoryInPort;
+    private final IRetrieveBrandInPort retrieveBrandInPort;
 
-    public CreateArticleUseCase(IArticleRepositoryOutPort articleRepositoryOutPort,
-                                RetrieveCategoryUseCase retrieveCategoryUseCase,
-                                RetrieveBrandUseCase retrieveBrandUseCase) {
+    public PersistArticleUseCase(IArticleRepositoryOutPort articleRepositoryOutPort,
+                                 IRetrieveCategoryInPort retrieveCategoryInPort,
+                                 IRetrieveBrandInPort retrieveBrandInPort) {
         this.articleRepositoryOutPort = articleRepositoryOutPort;
-        this.retrieveCategoryUseCase = retrieveCategoryUseCase;
-        this.retrieveBrandUseCase = retrieveBrandUseCase;
+        this.retrieveCategoryInPort = retrieveCategoryInPort;
+        this.retrieveBrandInPort = retrieveBrandInPort;
     }
 
     @Override
     public Article createArticle(Article article) {
         Article processedArticle = processAndValidateArticle(article);
-        Optional<Brand> brandById = retrieveBrandUseCase.getBrandById(processedArticle.getBrand().getId());
+        Optional<Brand> brandById = retrieveBrandInPort.getBrandById(processedArticle.getBrand().getId());
         if (brandById.isEmpty()) {
             throw new BrandNotFoundByIdException(processedArticle.getBrand().getId());
         }
@@ -42,7 +42,7 @@ public class CreateArticleUseCase implements ICreateArticleInPort {
         List<Category> categories = processedArticle.getCategories();
         processedArticle.setCategories(new ArrayList<>());
         for (Category category : categories) {
-            Optional<Category> categoryById = retrieveCategoryUseCase.getCategoryById(category.getId());
+            Optional<Category> categoryById = retrieveCategoryInPort.getCategoryById(category.getId());
             if (categoryById.isEmpty()) {
                 throw new CategoryNotFoundByIdException(category.getId());
             }

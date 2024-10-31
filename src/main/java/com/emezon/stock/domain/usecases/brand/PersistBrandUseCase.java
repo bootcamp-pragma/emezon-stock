@@ -3,17 +3,17 @@ package com.emezon.stock.domain.usecases.brand;
 import com.emezon.stock.domain.constants.BrandConstraints;
 import com.emezon.stock.domain.exceptions.brand.*;
 import com.emezon.stock.domain.models.Brand;
-import com.emezon.stock.domain.api.brand.ICreateBrandInPort;
+import com.emezon.stock.domain.api.brand.IPersistBrandInPort;
 import com.emezon.stock.domain.spi.IBrandRepositoryOutPort;
 
 import java.util.Optional;
 
 
-public class CreateBrandUseCase implements ICreateBrandInPort {
+public class PersistBrandUseCase implements IPersistBrandInPort {
 
     private final IBrandRepositoryOutPort brandRepositoryOutPort;
 
-    public CreateBrandUseCase(IBrandRepositoryOutPort brandRepositoryOutPort) {
+    public PersistBrandUseCase(IBrandRepositoryOutPort brandRepositoryOutPort) {
         this.brandRepositoryOutPort = brandRepositoryOutPort;
     }
 

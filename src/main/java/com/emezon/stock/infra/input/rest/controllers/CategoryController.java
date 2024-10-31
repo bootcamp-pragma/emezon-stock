@@ -2,7 +2,7 @@ package com.emezon.stock.infra.input.rest.controllers;
 
 import com.emezon.stock.app.dtos.category.CategoryDTO;
 import com.emezon.stock.app.dtos.category.CreateCategoryDTO;
-import com.emezon.stock.app.services.CategoryService;
+import com.emezon.stock.app.handlers.ICategoryHandler;
 import com.emezon.stock.domain.utils.ValidPageableRequest;
 import com.emezon.stock.domain.utils.PaginatedResponse;
 import com.emezon.stock.infra.constants.RestApiConstants;
@@ -19,11 +19,11 @@ import java.net.URI;
 @RequiredArgsConstructor
 public class CategoryController {
 
-    private final CategoryService categoryService;
+    private final ICategoryHandler categoryHandler;
 
     @PostMapping
     public ResponseEntity<CategoryDTO> createCategory(@RequestBody @Valid CreateCategoryDTO createCategoryDTO) {
-        CategoryDTO createdCategory = categoryService.createCategory(createCategoryDTO);
+        CategoryDTO createdCategory = categoryHandler.createCategory(createCategoryDTO);
         URI location = URI.create(RestApiConstants.API_CATEGORY);
         return ResponseEntity.created(location).body(createdCategory);
     }
@@ -33,7 +33,7 @@ public class CategoryController {
             @RequestParam @ValidPageableRequest @Valid
             MultiValueMap<String, String> queryParams
     ) {
-        PaginatedResponse<CategoryDTO> categories = categoryService.getAllCategories(queryParams);
+        PaginatedResponse<CategoryDTO> categories = categoryHandler.getAllCategories(queryParams);
         return ResponseEntity.ok(categories);
     }
 

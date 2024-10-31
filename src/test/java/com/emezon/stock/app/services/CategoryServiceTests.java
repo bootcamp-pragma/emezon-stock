@@ -4,7 +4,7 @@ import com.emezon.stock.app.dtos.category.CategoryDTO;
 import com.emezon.stock.app.dtos.category.CreateCategoryDTO;
 import com.emezon.stock.domain.utils.PaginatedResponse;
 import com.emezon.stock.domain.models.Category;
-import com.emezon.stock.domain.usecases.category.CreateCategoryUseCase;
+import com.emezon.stock.domain.usecases.category.PersistCategoryUseCase;
 import com.emezon.stock.domain.usecases.category.RetrieveCategoryUseCase;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -26,7 +26,7 @@ import static org.mockito.Mockito.*;
 class CategoryServiceTests {
 
     @Mock
-    private CreateCategoryUseCase createCategoryUseCase;
+    private PersistCategoryUseCase persistCategoryUseCase;
 
     @Mock
     private RetrieveCategoryUseCase retrieveCategoryUseCase;
@@ -43,7 +43,7 @@ class CategoryServiceTests {
 
     @Test
     void createCategory_whenCategoryPropertiesAreValid_thenCategoryIsCreated() {
-        when(createCategoryUseCase.createCategory(any())).thenReturn(category);
+        when(persistCategoryUseCase.createCategory(any())).thenReturn(category);
 
         CreateCategoryDTO categoryDTO = new CreateCategoryDTO("  Electronics", "Devices and gadgets ");
         categoryDTO.init();
@@ -53,7 +53,7 @@ class CategoryServiceTests {
         assertEquals(category.getName(), createdCategory.getName());
         assertEquals(category.getDescription(), createdCategory.getDescription());
 
-        verify(createCategoryUseCase, times(1)).createCategory(any());
+        verify(persistCategoryUseCase, times(1)).createCategory(any());
     }
 
     @Test

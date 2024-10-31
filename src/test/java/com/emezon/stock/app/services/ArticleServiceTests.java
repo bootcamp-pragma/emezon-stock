@@ -8,7 +8,7 @@ import com.emezon.stock.domain.utils.PaginatedResponse;
 import com.emezon.stock.domain.models.Article;
 import com.emezon.stock.domain.models.Brand;
 import com.emezon.stock.domain.models.Category;
-import com.emezon.stock.domain.usecases.article.CreateArticleUseCase;
+import com.emezon.stock.domain.usecases.article.PersistArticleUseCase;
 import com.emezon.stock.domain.usecases.article.RetrieveArticleUseCase;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -29,7 +29,7 @@ import static org.mockito.Mockito.*;
 class ArticleServiceTests {
 
     @Mock
-    private CreateArticleUseCase createArticleUseCase;
+    private PersistArticleUseCase persistArticleUseCase;
 
     @Mock
     private RetrieveArticleUseCase retrieveArticleUseCase;
@@ -50,7 +50,7 @@ class ArticleServiceTests {
         articleDTO.setCategoryIds(List.of(category.getId()));
         Article article = new Article("1234", articleDTO.getName(), articleDTO.getDescription(),
                 articleDTO.getPrice(), articleDTO.getStock(), brand, List.of(category));
-        when(createArticleUseCase.createArticle(any())).thenReturn(article);
+        when(persistArticleUseCase.createArticle(any())).thenReturn(article);
 
         ArticleDTO createdArticle = articleService.createArticle(articleDTO);
 
@@ -65,7 +65,7 @@ class ArticleServiceTests {
         assertEquals(expectedArticle.getCategories().size(), createdArticle.getCategories().size());
         assertEquals(expectedArticle.getCategories().get(0).getId(), createdArticle.getCategories().get(0).getId());
 
-        verify(createArticleUseCase, times(1)).createArticle(any());
+        verify(persistArticleUseCase, times(1)).createArticle(any());
     }
 
     @Test

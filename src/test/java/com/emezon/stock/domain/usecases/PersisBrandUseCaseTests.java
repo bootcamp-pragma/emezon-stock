@@ -3,7 +3,7 @@ package com.emezon.stock.domain.usecases;
 import com.emezon.stock.domain.exceptions.brand.*;
 import com.emezon.stock.domain.models.Brand;
 import com.emezon.stock.domain.spi.IBrandRepositoryOutPort;
-import com.emezon.stock.domain.usecases.brand.CreateBrandUseCase;
+import com.emezon.stock.domain.usecases.brand.PersistBrandUseCase;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,13 +18,13 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-class CreateBrandUseCaseTests {
+class PersisBrandUseCaseTests {
 
     @Mock
     private IBrandRepositoryOutPort brandRepositoryOutPort;
 
     @InjectMocks
-    private CreateBrandUseCase createBrandUseCase;
+    private PersistBrandUseCase createBrandUseCase;
 
     private Brand brand;
 

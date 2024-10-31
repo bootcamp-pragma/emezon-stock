@@ -1,36 +1,47 @@
 package com.emezon.stock.infra.config;
 
+import com.emezon.stock.app.handlers.IArticleHandler;
 import com.emezon.stock.app.services.ArticleService;
+import com.emezon.stock.domain.api.article.IPersistArticleInPort;
+import com.emezon.stock.domain.api.article.IRetrieveArticleInPort;
+import com.emezon.stock.domain.api.brand.IRetrieveBrandInPort;
+import com.emezon.stock.domain.api.category.IRetrieveCategoryInPort;
 import com.emezon.stock.domain.spi.IArticleRepositoryOutPort;
-import com.emezon.stock.domain.spi.IBrandRepositoryOutPort;
-import com.emezon.stock.domain.spi.ICategoryRepositoryOutPort;
-import com.emezon.stock.domain.usecases.article.CreateArticleUseCase;
+import com.emezon.stock.domain.usecases.article.PersistArticleUseCase;
 import com.emezon.stock.domain.usecases.article.RetrieveArticleUseCase;
-import com.emezon.stock.domain.usecases.brand.RetrieveBrandUseCase;
-import com.emezon.stock.domain.usecases.category.RetrieveCategoryUseCase;
 import com.emezon.stock.infra.output.mysql.jpa.adapters.MySQLJPAArticleAdapter;
 import com.emezon.stock.infra.output.mysql.jpa.repositories.IMySQLJPAArticleRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
+@AllArgsConstructor
 public class ArticleConfig {
 
+    private final IMySQLJPAArticleRepository mySQLJPAArticleRepository;
+    private final IRetrieveCategoryInPort retrieveCategoryInPort;
+    private final IRetrieveBrandInPort retrieveBrandInPort;
+
     @Bean
-    public IArticleRepositoryOutPort articleRepositoryOutPort(IMySQLJPAArticleRepository mySQLJPAArticleRepository) {
+    public IArticleRepositoryOutPort articleRepositoryOutPort() {
         return new MySQLJPAArticleAdapter(mySQLJPAArticleRepository);
     }
 
     @Bean
-    public ArticleService articleService(IArticleRepositoryOutPort articleRepositoryOutPort,
-                                                          ICategoryRepositoryOutPort categoryRepositoryOutPort,
-                                                          IBrandRepositoryOutPort brandRepositoryOutPort) {
-        return new ArticleService(
-                new CreateArticleUseCase(articleRepositoryOutPort,
-                        new RetrieveCategoryUseCase(categoryRepositoryOutPort),
-                        new RetrieveBrandUseCase(brandRepositoryOutPort)),
-                new RetrieveArticleUseCase(articleRepositoryOutPort)
-        );
+    public IPersistArticleInPort persistArticleInPort() {
+        return new PersistArticleUseCase(articleRepositoryOutPort(), retrieveCategoryInPort, retrieveBrandInPort);
     }
+
+    @Bean
+    public IRetrieveArticleInPort retrieveArticleInPort() {
+        return new RetrieveArticleUseCase(articleRepositoryOutPort());
+    }
+
+    @Bean
+    public IArticleHandler articleHandler() {
+        return new ArticleService(persistArticleInPort(), retrieveArticleInPort());
+    }
+
 
 }
