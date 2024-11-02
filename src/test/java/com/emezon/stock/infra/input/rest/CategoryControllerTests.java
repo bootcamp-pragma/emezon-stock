@@ -6,8 +6,8 @@ import com.emezon.stock.app.services.CategoryService;
 import com.emezon.stock.domain.utils.PaginatedResponse;
 import com.emezon.stock.domain.constants.CategoryErrorMessages;
 import com.emezon.stock.domain.constants.PaginatedResponseErrorMessages;
-import com.emezon.stock.infra.constants.RestApiConstants;
-import com.emezon.stock.infra.input.rest.controllers.CategoryController;
+import com.emezon.stock.infra.inbound.rest.constants.RestApiConstants;
+import com.emezon.stock.infra.inbound.rest.controllers.CategoryController;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -77,7 +77,7 @@ class CategoryControllerTests {
                 "",
                 "Smartphones category description"
         );
-        mockMvc.perform(post(RestApiConstants.API_CATEGORY)
+        mockMvc.perform(post(com.emezon.stock.infra.inbound.rest.constants.RestApiConstants.API_CATEGORY)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(createCategoryDTO)))
                 .andExpect(status().isBadRequest())
@@ -94,7 +94,7 @@ class CategoryControllerTests {
                 "Smartphones category",
                 ""
         );
-        mockMvc.perform(post(RestApiConstants.API_CATEGORY)
+        mockMvc.perform(post(com.emezon.stock.infra.inbound.rest.constants.RestApiConstants.API_CATEGORY)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(createCategoryDTO)))
                 .andExpect(status().isBadRequest())
@@ -111,7 +111,7 @@ class CategoryControllerTests {
                 "asdnbasndfbsamdnfbsadfbasm,dnfbsm,dfbmsa,dfbsakdfbajskdjflsd fasdfas dfjksadf",
                 "Smartphones category description"
         );
-        mockMvc.perform(post(RestApiConstants.API_CATEGORY)
+        mockMvc.perform(post(com.emezon.stock.infra.inbound.rest.constants.RestApiConstants.API_CATEGORY)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(createCategoryDTO)))
                 .andExpect(status().isBadRequest())
@@ -128,7 +128,7 @@ class CategoryControllerTests {
                 "Smartphones category",
                 "asdnbasndfbsamdnfbsadfbasm,dnfbsm,dfbmsa,dfbsakdfbajskdjflsd fasdfas dfjksadf sadnf asdkfbaskdfasdfasd ajsdbhhjfbfsajdfbsamndfbsandfa sd fasdfasdf"
         );
-        mockMvc.perform(post(RestApiConstants.API_CATEGORY)
+        mockMvc.perform(post(com.emezon.stock.infra.inbound.rest.constants.RestApiConstants.API_CATEGORY)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(createCategoryDTO)))
                 .andExpect(status().isBadRequest())
@@ -153,7 +153,7 @@ class CategoryControllerTests {
         categories.setTotalItems(categories.getItems().size());
         when(categoryService.getAllCategories(any())).thenReturn(categories);
 
-        mockMvc.perform(get(RestApiConstants.API_CATEGORY + "?page=1&size=3&sort=name,asc"))
+        mockMvc.perform(get(com.emezon.stock.infra.inbound.rest.constants.RestApiConstants.API_CATEGORY + "?page=1&size=3&sort=name,asc"))
                 .andExpect(status().isOk())
                 .andExpect(result -> {
                     PaginatedResponse<CategoryDTO> response = objectMapper.readValue(result.getResponse().getContentAsString(), PaginatedResponse.class);
@@ -169,7 +169,7 @@ class CategoryControllerTests {
     // Bad request test cases
     @Test
     void getAllCategories_whenPageParamIsInvalid_thenBadRequest() throws Exception {
-        mockMvc.perform(get(RestApiConstants.API_CATEGORY + "?page=-1&size=3&sort=name,asc"))
+        mockMvc.perform(get(com.emezon.stock.infra.inbound.rest.constants.RestApiConstants.API_CATEGORY + "?page=-1&size=3&sort=name,asc"))
                 .andExpect(status().isBadRequest())
                 .andExpect(result -> {
                     assert result.getResponse().getContentAsString()
@@ -181,7 +181,7 @@ class CategoryControllerTests {
 
     @Test
     void getAllCategories_whenSizeParamIsInvalid_thenBadRequest() throws Exception {
-        mockMvc.perform(get(RestApiConstants.API_CATEGORY + "?page=1&size=0&sort=name,asc"))
+        mockMvc.perform(get(com.emezon.stock.infra.inbound.rest.constants.RestApiConstants.API_CATEGORY + "?page=1&size=0&sort=name,asc"))
                 .andExpect(status().isBadRequest())
                 .andExpect(result -> {
                     assert result.getResponse().getContentAsString()
@@ -193,7 +193,7 @@ class CategoryControllerTests {
 
     @Test
     void getAllCategories_whenSortParamIsInvalid_thenBadRequest() throws Exception {
-        mockMvc.perform(get(RestApiConstants.API_CATEGORY + "?page=1&size=3&sort=invalid-asc"))
+        mockMvc.perform(get(com.emezon.stock.infra.inbound.rest.constants.RestApiConstants.API_CATEGORY + "?page=1&size=3&sort=invalid-asc"))
                 .andExpect(status().isBadRequest())
                 .andExpect(result -> {
                     assert result.getResponse().getContentAsString()

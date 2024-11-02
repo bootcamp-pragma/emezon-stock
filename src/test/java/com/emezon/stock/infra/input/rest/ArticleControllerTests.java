@@ -7,8 +7,8 @@ import com.emezon.stock.app.dtos.category.CategoryDTO;
 import com.emezon.stock.app.services.ArticleService;
 import com.emezon.stock.domain.constants.ArticleErrorMessages;
 import com.emezon.stock.domain.constants.PaginatedResponseErrorMessages;
-import com.emezon.stock.infra.constants.RestApiConstants;
-import com.emezon.stock.infra.input.rest.controllers.ArticleController;
+import com.emezon.stock.infra.inbound.rest.constants.RestApiConstants;
+import com.emezon.stock.infra.inbound.rest.controllers.ArticleController;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -102,7 +102,7 @@ class ArticleControllerTests {
         createArticleDTO.setBrandId(genRanUUID());
         createArticleDTO.setCategoryIds(List.of(genRanUUID()));
 
-        mockMvc.perform(post(RestApiConstants.API_ARTICLE)
+        mockMvc.perform(post(com.emezon.stock.infra.inbound.rest.constants.RestApiConstants.API_ARTICLE)
                 .contentType("application/json")
                 .content(objectMapper.writeValueAsString(createArticleDTO)))
                 .andExpect(status().isBadRequest())
@@ -124,7 +124,7 @@ class ArticleControllerTests {
         createArticleDTO.setBrandId(genRanUUID());
         createArticleDTO.setCategoryIds(List.of(genRanUUID()));
 
-        mockMvc.perform(post(RestApiConstants.API_ARTICLE)
+        mockMvc.perform(post(com.emezon.stock.infra.inbound.rest.constants.RestApiConstants.API_ARTICLE)
                 .contentType("application/json")
                 .content(objectMapper.writeValueAsString(createArticleDTO)))
                 .andExpect(status().isBadRequest())
@@ -146,7 +146,7 @@ class ArticleControllerTests {
         createArticleDTO.setBrandId(genRanUUID());
         createArticleDTO.setCategoryIds(List.of(genRanUUID()));
 
-        mockMvc.perform(post(RestApiConstants.API_ARTICLE)
+        mockMvc.perform(post(com.emezon.stock.infra.inbound.rest.constants.RestApiConstants.API_ARTICLE)
                 .contentType("application/json")
                 .content(objectMapper.writeValueAsString(createArticleDTO)))
                 .andExpect(status().isBadRequest())
@@ -168,7 +168,7 @@ class ArticleControllerTests {
         createArticleDTO.setBrandId(genRanUUID());
         createArticleDTO.setCategoryIds(List.of(genRanUUID()));
 
-        mockMvc.perform(post(RestApiConstants.API_ARTICLE)
+        mockMvc.perform(post(com.emezon.stock.infra.inbound.rest.constants.RestApiConstants.API_ARTICLE)
                 .contentType("application/json")
                 .content(objectMapper.writeValueAsString(createArticleDTO)))
                 .andExpect(status().isBadRequest())
@@ -189,7 +189,7 @@ class ArticleControllerTests {
         createArticleDTO.setStock(10);
         createArticleDTO.setCategoryIds(List.of(genRanUUID()));
 
-        mockMvc.perform(post(RestApiConstants.API_ARTICLE)
+        mockMvc.perform(post(com.emezon.stock.infra.inbound.rest.constants.RestApiConstants.API_ARTICLE)
                 .contentType("application/json")
                 .content(objectMapper.writeValueAsString(createArticleDTO)))
                 .andExpect(status().isBadRequest())
@@ -211,7 +211,7 @@ class ArticleControllerTests {
         createArticleDTO.setBrandId("invalid-uuid");
         createArticleDTO.setCategoryIds(List.of(genRanUUID()));
 
-        mockMvc.perform(post(RestApiConstants.API_ARTICLE)
+        mockMvc.perform(post(com.emezon.stock.infra.inbound.rest.constants.RestApiConstants.API_ARTICLE)
                 .contentType("application/json")
                 .content(objectMapper.writeValueAsString(createArticleDTO)))
                 .andExpect(status().isBadRequest())
@@ -234,7 +234,7 @@ class ArticleControllerTests {
         createArticleDTO.setBrandId(genRanUUID());
         createArticleDTO.setCategoryIds(List.of(categoryId, categoryId));
 
-        mockMvc.perform(post(RestApiConstants.API_ARTICLE)
+        mockMvc.perform(post(com.emezon.stock.infra.inbound.rest.constants.RestApiConstants.API_ARTICLE)
                 .contentType("application/json")
                 .content(objectMapper.writeValueAsString(createArticleDTO)))
                 .andExpect(status().isBadRequest())
@@ -256,7 +256,7 @@ class ArticleControllerTests {
         createArticleDTO.setBrandId(genRanUUID());
         createArticleDTO.setCategoryIds(List.of());
 
-        mockMvc.perform(post(RestApiConstants.API_ARTICLE)
+        mockMvc.perform(post(com.emezon.stock.infra.inbound.rest.constants.RestApiConstants.API_ARTICLE)
                 .contentType("application/json")
                 .content(objectMapper.writeValueAsString(createArticleDTO)))
                 .andExpect(status().isBadRequest())
@@ -278,7 +278,7 @@ class ArticleControllerTests {
         createArticleDTO.setBrandId(genRanUUID());
         createArticleDTO.setCategoryIds(List.of(genRanUUID(), genRanUUID(), genRanUUID(), genRanUUID(), genRanUUID(), genRanUUID()));
 
-        mockMvc.perform(post(RestApiConstants.API_ARTICLE)
+        mockMvc.perform(post(com.emezon.stock.infra.inbound.rest.constants.RestApiConstants.API_ARTICLE)
                 .contentType("application/json")
                 .content(objectMapper.writeValueAsString(createArticleDTO)))
                 .andExpect(status().isBadRequest())
@@ -295,7 +295,7 @@ class ArticleControllerTests {
 
     @Test
     void getAllArticles_whenQueryParamsAreValid_shouldReturnOk() throws Exception {
-        mockMvc.perform(get(RestApiConstants.API_ARTICLE)
+        mockMvc.perform(get(com.emezon.stock.infra.inbound.rest.constants.RestApiConstants.API_ARTICLE)
                 .param("page", "1")
                 .param("size", "10")
                 .param("sort", "name,asc"))
@@ -306,7 +306,7 @@ class ArticleControllerTests {
 
     @Test
     void getAllArticles_whenPageParamIsInvalid_shouldReturnBadRequest() throws Exception {
-        mockMvc.perform(get(RestApiConstants.API_ARTICLE)
+        mockMvc.perform(get(com.emezon.stock.infra.inbound.rest.constants.RestApiConstants.API_ARTICLE)
                 .param("page", "-1")
                 .param("size", "10")
                 .param("sort", "name,asc"))
@@ -321,7 +321,7 @@ class ArticleControllerTests {
 
     @Test
     void getAllArticles_whenSizeParamIsInvalid_shouldReturnBadRequest() throws Exception {
-        mockMvc.perform(get(RestApiConstants.API_ARTICLE)
+        mockMvc.perform(get(com.emezon.stock.infra.inbound.rest.constants.RestApiConstants.API_ARTICLE)
                 .param("page", "1")
                 .param("size", "0")
                 .param("sort", "name,asc"))
@@ -336,7 +336,7 @@ class ArticleControllerTests {
 
     @Test
     void getAllArticles_whenSortParamIsInvalid_shouldReturnBadRequest() throws Exception {
-        mockMvc.perform(get(RestApiConstants.API_ARTICLE)
+        mockMvc.perform(get(com.emezon.stock.infra.inbound.rest.constants.RestApiConstants.API_ARTICLE)
                 .param("page", "1")
                 .param("size", "10")
                 .param("sort", "inva,lid"))

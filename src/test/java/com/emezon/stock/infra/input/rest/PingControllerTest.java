@@ -1,6 +1,6 @@
 package com.emezon.stock.infra.input.rest;
 
-import com.emezon.stock.infra.constants.RestApiConstants;
+import com.emezon.stock.infra.inbound.rest.constants.RestApiConstants;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
