@@ -36,11 +36,7 @@ public class SecurityConfig {
 
     @Bean
     public UserDetailsService userDetailsService() {
-//        return userFeignClient::findUserByEmail;
-        return username -> {
-            System.out.println("userFeignClient::findUserByEmail: " + username);
-            return userFeignClient.findUserByEmail(username);
-        };
+        return userFeignClient::findUserByEmail;
     }
 
     @Bean
