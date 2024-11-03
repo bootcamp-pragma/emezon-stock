@@ -2,6 +2,7 @@ package com.emezon.stock.infra.advices;
 
 import com.emezon.stock.app.errorhandling.IApiControllerAdvice;
 import com.emezon.stock.domain.utils.ExceptionResponse;
+import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import org.springframework.context.MessageSourceResolvable;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.method.annotation.HandlerMethodValidationException;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @ControllerAdvice
@@ -22,9 +24,10 @@ public class ApiControllerAdvice implements IApiControllerAdvice<WebRequest> {
 
     @Override
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<ExceptionResponse> handleMethodArgumentNotValidException(MethodArgumentNotValidException ex, WebRequest request) {
+    public ResponseEntity<ExceptionResponse> handleMethodArgumentNotValidException(Exception ex, WebRequest request) {
         HttpStatus status = HttpStatus.BAD_REQUEST;
-        List<String> errorsMessages = ex.getBindingResult().getAllErrors().stream().map(ObjectError::getDefaultMessage).toList();
+        MethodArgumentNotValidException e = (MethodArgumentNotValidException) ex;
+        List<String> errorsMessages = e.getBindingResult().getAllErrors().stream().map(ObjectError::getDefaultMessage).toList();
         String messages = String.join(",\n ", errorsMessages);
         ExceptionResponse response = new ExceptionResponse(
                 messages,
@@ -35,9 +38,10 @@ public class ApiControllerAdvice implements IApiControllerAdvice<WebRequest> {
 
     @Override
     @ExceptionHandler(HandlerMethodValidationException.class)
-    public ResponseEntity<ExceptionResponse> handleConstraintViolationException(HandlerMethodValidationException ex, WebRequest request) {
+    public ResponseEntity<ExceptionResponse> handleConstraintViolationException(Exception ex, WebRequest request) {
         HttpStatus status = HttpStatus.BAD_REQUEST;
-        List<String> errorMessages = ex.getAllValidationResults().stream().map(ParameterValidationResult::getResolvableErrors)
+        HandlerMethodValidationException e = (HandlerMethodValidationException) ex;
+        List<String> errorMessages = e.getAllValidationResults().stream().map(ParameterValidationResult::getResolvableErrors)
                 .flatMap(List::stream).map(MessageSourceResolvable::getDefaultMessage).toList();
         String message = String.join(",\n ", errorMessages);
         ExceptionResponse response = new ExceptionResponse(
@@ -46,5 +50,39 @@ public class ApiControllerAdvice implements IApiControllerAdvice<WebRequest> {
                 status.value());
         return new ResponseEntity<>(response, status);
     }
+
+    @Override
+    @ExceptionHandler(InvalidFormatException.class)
+    public ResponseEntity<ExceptionResponse> handleInvalidFormatException(Exception ex, WebRequest request) {
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+        Throwable cause = ex.getCause();
+        String message = ex.getMessage();
+        if (cause instanceof InvalidFormatException invalidFormatEx) {
+            if (invalidFormatEx.getTargetType() == LocalDate.class &&
+                    invalidFormatEx.getPath() != null &&
+                    !invalidFormatEx.getPath().isEmpty() &&
+                    "birthdate".equals(invalidFormatEx.getPath().get(0).getFieldName())) {
+                message = "Invalid date format. Please use the format yyyy-MM-dd";
+            }
+        }
+
+        ExceptionResponse response = new ExceptionResponse(
+                message,
+                request.getDescription(false),
+                status.value());
+        return new ResponseEntity<>(response, status);
+    }
+
+    @Override
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<ExceptionResponse> handleIllegalArgumentException(Exception ex, WebRequest request) {
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+        ExceptionResponse response = new ExceptionResponse(
+                ex.getMessage(),
+                request.getDescription(false),
+                status.value());
+        return new ResponseEntity<>(response, status);
+    }
+
 
 }
