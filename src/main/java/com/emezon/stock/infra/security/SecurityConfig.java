@@ -51,7 +51,7 @@ public class SecurityConfig {
                 .cors(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(req -> req
                         .requestMatchers(SecurityConstants.WHITE_LIST_URL).permitAll()
-                        .requestMatchers(RestApiConstants.API_CATEGORY + "/**").hasRole(UserRoles.ADMIN.toString())
+//                        .requestMatchers(RestApiConstants.API_CATEGORY + "/**").hasRole(UserRoles.ADMIN.toString())
                         .anyRequest().authenticated()
                 )
                 .formLogin(AbstractHttpConfigurer::disable)

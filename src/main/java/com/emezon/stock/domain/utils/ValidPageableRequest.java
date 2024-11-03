@@ -17,4 +17,5 @@ public @interface ValidPageableRequest {
     Class<? extends Payload>[] payload() default {};
     String[] allowedParams() default  {};
     String[] allowedSortFormats() default {};
+    Class<?> target() default Void.class;
 }

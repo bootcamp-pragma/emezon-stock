@@ -6,6 +6,7 @@ import com.emezon.stock.domain.exceptions.article.ArticleCategoriesNumberInvalid
 import com.emezon.stock.domain.exceptions.article.ArticleDuplicateCategoriesException;
 import com.emezon.stock.domain.exceptions.article.ArticlePriceMinValueException;
 import com.emezon.stock.domain.exceptions.article.ArticleStockMinValueException;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 
 @ControllerAdvice
+@Order(1)
 public class ArticleControllerAdvice implements IArticleControllerAdvice<WebRequest> {
 
     @Override

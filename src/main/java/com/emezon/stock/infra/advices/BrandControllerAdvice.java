@@ -4,6 +4,7 @@ import com.emezon.stock.app.errorhandling.IBrandControllerAdvice;
 import com.emezon.stock.domain.utils.ExceptionResponse;
 import com.emezon.stock.domain.constants.BrandErrorMessages;
 import com.emezon.stock.domain.exceptions.brand.*;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 
 @ControllerAdvice
+@Order(1)
 public class BrandControllerAdvice implements IBrandControllerAdvice<WebRequest> {
 
     @Override

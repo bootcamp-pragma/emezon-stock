@@ -6,6 +6,7 @@ import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 import org.springframework.util.MultiValueMap;
 
+import java.lang.reflect.Field;
 import java.util.*;
 
 
@@ -13,11 +14,27 @@ public class PageableRequestValidator implements ConstraintValidator<ValidPageab
 
     private Set<String> allowedParams;
     private Set<String> allowedSortFormats;
+    private List<String> targetProperties;
 
     @Override
     public void initialize(ValidPageableRequest constraintAnnotation) {
-        allowedParams = new HashSet<>(PaginatedResponseConstraints.ALLOWED_PARAMS);
-        allowedSortFormats = new HashSet<>(List.of(PaginatedResponseConstraints.VALID_SORT_FORMAT));
+        if (constraintAnnotation.allowedParams().length > 0) {
+            this.allowedParams = new HashSet<>(Arrays.asList(constraintAnnotation.allowedParams()));
+        } else {
+            this.allowedParams = new HashSet<>(PaginatedResponseConstraints.ALLOWED_PARAMS);
+        }
+        if (constraintAnnotation.allowedSortFormats().length > 0) {
+            this.allowedSortFormats = new HashSet<>(Arrays.asList(constraintAnnotation.allowedSortFormats()));
+        } else {
+            this.allowedSortFormats = new HashSet<>(List.of(PaginatedResponseConstraints.VALID_SORT_FORMAT));
+        }
+        Class<?> target = constraintAnnotation.target();
+        if (!Void.class.equals(target)) {
+            Field[] fields = target.getDeclaredFields();
+            this.targetProperties = Arrays.stream(fields).map(Field::getName).toList();
+        } else {
+            this.targetProperties = List.of();
+        }
     }
 
     @Override
@@ -42,6 +59,12 @@ public class PageableRequestValidator implements ConstraintValidator<ValidPageab
                     if (!valid) {
                         error = true;
                         context.buildConstraintViolationWithTemplate(PaginatedResponseErrorMessages.SORT_PARAM_INVALID)
+                                .addConstraintViolation();
+                    }
+                    List<String> parts = Arrays.asList(value.split(","));
+                    if (!targetProperties.isEmpty() && !targetProperties.contains(parts.get(0))) {
+                        error = true;
+                        context.buildConstraintViolationWithTemplate(String.format("No property named '%s' found", parts.get(0)))
                                 .addConstraintViolation();
                     }
                 }

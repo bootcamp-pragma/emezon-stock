@@ -3,6 +3,7 @@ package com.emezon.stock.infra.advices;
 import com.emezon.stock.app.errorhandling.IApiControllerAdvice;
 import com.emezon.stock.domain.utils.ExceptionResponse;
 import org.springframework.context.MessageSourceResolvable;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.ObjectError;
@@ -16,6 +17,7 @@ import org.springframework.web.method.annotation.HandlerMethodValidationExceptio
 import java.util.List;
 
 @ControllerAdvice
+@Order(10)
 public class ApiControllerAdvice implements IApiControllerAdvice<WebRequest> {
 
     @Override
@@ -44,4 +46,5 @@ public class ApiControllerAdvice implements IApiControllerAdvice<WebRequest> {
                 status.value());
         return new ResponseEntity<>(response, status);
     }
+
 }
