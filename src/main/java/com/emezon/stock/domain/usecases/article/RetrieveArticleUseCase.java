@@ -23,6 +23,11 @@ public class RetrieveArticleUseCase implements IRetrieveArticleInPort {
     }
 
     @Override
+    public Optional<Article> getArticleByName(String name) {
+        return articleRepositoryOutPort.findByName(name);
+    }
+
+    @Override
     public PaginatedResponse<Article> getAllArticles(PaginatedResponseParams params) {
         PaginatedResponseConstraints.validateParameters(params);
         return articleRepositoryOutPort.findAll(params);

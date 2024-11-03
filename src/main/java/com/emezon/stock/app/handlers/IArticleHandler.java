@@ -14,6 +14,8 @@ public interface IArticleHandler {
 
     public Optional<ArticleDTO> getArticleById(String id);
 
+    public Optional<ArticleDTO> getArticleByName(String name);
+
     public PaginatedResponse<ArticleListDTO> getAllArticles(MultiValueMap<String, String> queryParams);
 
 }

@@ -37,6 +37,12 @@ public class ArticleService implements IArticleHandler {
     }
 
     @Override
+    public Optional<ArticleDTO> getArticleByName(String name) {
+        Optional<Article> article = retrieveArticleInPort.getArticleByName(name);
+        return article.map(ArticleDTOMapper::toDTO);
+    }
+
+    @Override
     public PaginatedResponse<ArticleListDTO> getAllArticles(MultiValueMap<String, String> queryParams) {
         PaginatedResponseParams params = PaginatedResponseUtils.getFromMultiValueMap(queryParams);
         PaginatedResponse<Article> articles = retrieveArticleInPort.getAllArticles(params);

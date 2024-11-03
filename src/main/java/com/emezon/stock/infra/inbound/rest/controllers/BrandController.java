@@ -49,4 +49,10 @@ public class BrandController {
         return ResponseEntity.ok(brands);
     }
 
+    @GetMapping("/name/{name}")
+    public ResponseEntity<BrandDTO> getBrandByName(@PathVariable String name) {
+        BrandDTO brand = brandHandler.getBrandByName(name).orElse(null);
+        return ResponseEntity.ok(brand);
+    }
+
 }

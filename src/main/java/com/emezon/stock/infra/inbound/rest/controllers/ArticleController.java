@@ -50,4 +50,10 @@ public class ArticleController {
         return ResponseEntity.ok(articles);
     }
 
+    @GetMapping("/name/{name}")
+    public ResponseEntity<ArticleDTO> getArticleByName(@PathVariable String name) {
+        ArticleDTO article = articleHandler.getArticleByName(name).orElse(null);
+        return ResponseEntity.ok(article);
+    }
+
 }
