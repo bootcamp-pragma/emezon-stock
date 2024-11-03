@@ -8,14 +8,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 @FeignClient(
-        name = "user-service",
+        name = "ms-user-user",
         url = "http://localhost:8074",
-//        path = RestApiConstants.API_FEIGN_USER,
+        path = RestApiConstants.API_FEIGN_USER,
         configuration = FeignConfig.class
 )
 public interface IUserFeignClient {
 
-    @GetMapping("/api/v1/user/email/{email}")
+    @GetMapping("/email/{email}")
     UserFeign findUserByEmail(@PathVariable("email") String email);
 
 }

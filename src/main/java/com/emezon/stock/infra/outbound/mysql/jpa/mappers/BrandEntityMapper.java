@@ -37,7 +37,7 @@ public class BrandEntityMapper {
     }
 
     public static List<Brand> toModels(List<BrandEntity> brandEntities) {
-        return brandEntities.stream().map(BrandEntityMapper::toModel).collect(Collectors.toList());
+        return brandEntities.stream().map(BrandEntityMapper::toModel).toList();
     }
 
 }

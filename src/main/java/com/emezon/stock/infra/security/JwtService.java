@@ -59,7 +59,6 @@ public class JwtService implements IJwtService {
     public boolean isTokenValid(String token, Map<String, Object> data) {
         final String username = extractUsername(token);
         if (isTokenExpired(token)) {
-            System.out.println("Token has expired");
             throw new ExpiredJwtException(null, null, "Token has expired");
         }
         return username.equals(data.get("username"));
