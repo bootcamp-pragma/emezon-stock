@@ -2,10 +2,9 @@ package com.emezon.stock.app.services;
 
 import com.emezon.stock.app.dtos.category.CategoryDTO;
 import com.emezon.stock.app.dtos.category.CreateCategoryDTO;
-import com.emezon.stock.domain.common.PaginatedResponse;
-import com.emezon.stock.domain.common.PaginatedResponseParams;
+import com.emezon.stock.domain.utils.PaginatedResponse;
 import com.emezon.stock.domain.models.Category;
-import com.emezon.stock.domain.usecases.category.CreateCategoryUseCase;
+import com.emezon.stock.domain.usecases.category.PersistCategoryUseCase;
 import com.emezon.stock.domain.usecases.category.RetrieveCategoryUseCase;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -27,7 +26,7 @@ import static org.mockito.Mockito.*;
 class CategoryServiceTests {
 
     @Mock
-    private CreateCategoryUseCase createCategoryUseCase;
+    private PersistCategoryUseCase persistCategoryUseCase;
 
     @Mock
     private RetrieveCategoryUseCase retrieveCategoryUseCase;
@@ -44,18 +43,17 @@ class CategoryServiceTests {
 
     @Test
     void createCategory_whenCategoryPropertiesAreValid_thenCategoryIsCreated() {
-        when(createCategoryUseCase.createCategory(any())).thenReturn(category);
+        when(persistCategoryUseCase.createCategory(any())).thenReturn(category);
 
-        CreateCategoryDTO categoryDTO = new CreateCategoryDTO("  Electronics", "ELECT", "Devices and gadgets ");
+        CreateCategoryDTO categoryDTO = new CreateCategoryDTO("  Electronics", "Devices and gadgets ");
         categoryDTO.init();
         CategoryDTO createdCategory = categoryService.createCategory(categoryDTO);
 
         assertNotNull(createdCategory);
         assertEquals(category.getName(), createdCategory.getName());
-        assertEquals(category.getCode(), createdCategory.getCode());
         assertEquals(category.getDescription(), createdCategory.getDescription());
 
-        verify(createCategoryUseCase, times(1)).createCategory(any());
+        verify(persistCategoryUseCase, times(1)).createCategory(any());
     }
 
     @Test
@@ -102,29 +100,6 @@ class CategoryServiceTests {
         assertTrue(categoryByName.isEmpty());
 
         verify(retrieveCategoryUseCase, times(1)).getCategoryByName(any());
-    }
-
-    @Test
-    void findCategoryByCode_whenCategoryExists_thenCategoryIsReturned() {
-        when(retrieveCategoryUseCase.getCategoryByCode(any())).thenReturn(Optional.of(category));
-
-        Optional<CategoryDTO> categoryByCode = categoryService.getCategoryByCode("ELECT");
-
-        assertTrue(categoryByCode.isPresent());
-        assertEquals(category.getName(), categoryByCode.get().getName());
-
-        verify(retrieveCategoryUseCase, times(1)).getCategoryByCode(any());
-    }
-
-    @Test
-    void findCategoryByCode_whenCategoryDoesNotExist_thenEmptyOptionalIsReturned() {
-        when(retrieveCategoryUseCase.getCategoryByCode(any())).thenReturn(Optional.empty());
-
-        Optional<CategoryDTO> categoryByCode = categoryService.getCategoryByCode("ELECT");
-
-        assertTrue(categoryByCode.isEmpty());
-
-        verify(retrieveCategoryUseCase, times(1)).getCategoryByCode(any());
     }
 
     @Test

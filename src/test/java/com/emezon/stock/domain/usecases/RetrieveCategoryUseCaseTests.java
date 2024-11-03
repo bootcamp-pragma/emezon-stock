@@ -1,12 +1,12 @@
 package com.emezon.stock.domain.usecases;
 
-import com.emezon.stock.domain.common.PaginatedResponse;
-import com.emezon.stock.domain.common.PaginatedResponseParams;
+import com.emezon.stock.domain.utils.PaginatedResponse;
+import com.emezon.stock.domain.utils.PaginatedResponseParams;
 import com.emezon.stock.domain.exceptions.paginatedresponse.PaginatedResponsePageNumberInvalidException;
 import com.emezon.stock.domain.exceptions.paginatedresponse.PaginatedResponsePageSizeInvalidException;
 import com.emezon.stock.domain.exceptions.paginatedresponse.PaginatedResponseSortDirectionInvalidException;
 import com.emezon.stock.domain.models.Category;
-import com.emezon.stock.domain.ports.outbound.ICategoryRepositoryOutPort;
+import com.emezon.stock.domain.spi.ICategoryRepositoryOutPort;
 import com.emezon.stock.domain.usecases.category.RetrieveCategoryUseCase;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -34,7 +34,7 @@ class RetrieveCategoryUseCaseTests {
 
     @BeforeEach
     public void setUp() {
-        category = new Category("123", "Electronics", "ELECT", "Devices and gadgets");
+        category = new Category("123", "Electronics", "Devices and gadgets");
     }
 
     @Test
@@ -83,30 +83,6 @@ class RetrieveCategoryUseCaseTests {
         assertTrue(result.isEmpty());
 
         verify(categoryRepositoryOutPort, times(1)).findByName(category.getName());
-    }
-
-    @Test
-    void getCategoryByCode_whenCategoryCodeExists_thenCategoryIsReturned() {
-        when(categoryRepositoryOutPort.findByCode(category.getCode())).thenReturn(Optional.of(category));
-
-        Optional<Category> result = retrieveCategoryUseCase.getCategoryByCode(category.getCode());
-
-        assertTrue(result.isPresent());
-        Category categoryResult = result.get();
-        assertEquals(category.getCode(), categoryResult.getCode());
-
-        verify(categoryRepositoryOutPort, times(1)).findByCode(category.getCode());
-    }
-
-    @Test
-    void getCategoryByCode_whenCategoryCodeDoesNotExist_thenCategoryIsNotReturned() {
-        when(categoryRepositoryOutPort.findByCode(category.getCode())).thenReturn(Optional.empty());
-
-        Optional<Category> result = retrieveCategoryUseCase.getCategoryByCode(category.getCode());
-
-        assertTrue(result.isEmpty());
-
-        verify(categoryRepositoryOutPort, times(1)).findByCode(category.getCode());
     }
 
     @Test

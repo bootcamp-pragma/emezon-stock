@@ -1,6 +1,6 @@
 package com.emezon.stock.domain.usecases;
 
-import com.emezon.stock.domain.ports.inbound.IPingInputPort;
+import com.emezon.stock.domain.api.IPingInputPort;
 
 public class PingUseCase implements IPingInputPort {
 

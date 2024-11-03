@@ -1,11 +1,11 @@
 package com.emezon.stock.domain.usecases.category;
 
-import com.emezon.stock.domain.common.PaginatedResponse;
-import com.emezon.stock.domain.common.PaginatedResponseParams;
+import com.emezon.stock.domain.utils.PaginatedResponse;
+import com.emezon.stock.domain.utils.PaginatedResponseParams;
 import com.emezon.stock.domain.constants.PaginatedResponseConstraints;
 import com.emezon.stock.domain.models.Category;
-import com.emezon.stock.domain.ports.inbound.category.IRetrieveCategoryInPort;
-import com.emezon.stock.domain.ports.outbound.ICategoryRepositoryOutPort;
+import com.emezon.stock.domain.api.category.IRetrieveCategoryInPort;
+import com.emezon.stock.domain.spi.ICategoryRepositoryOutPort;
 
 import java.util.Optional;
 
@@ -25,11 +25,6 @@ public class RetrieveCategoryUseCase implements IRetrieveCategoryInPort {
     @Override
     public Optional<Category> getCategoryByName(String name) {
         return categoryRepositoryOutPort.findByName(name);
-    }
-
-    @Override
-    public Optional<Category> getCategoryByCode(String code) {
-        return categoryRepositoryOutPort.findByCode(code);
     }
 
     @Override

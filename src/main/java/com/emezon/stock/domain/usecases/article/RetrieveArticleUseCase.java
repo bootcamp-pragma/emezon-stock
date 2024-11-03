@@ -1,11 +1,11 @@
 package com.emezon.stock.domain.usecases.article;
 
-import com.emezon.stock.domain.common.PaginatedResponse;
-import com.emezon.stock.domain.common.PaginatedResponseParams;
+import com.emezon.stock.domain.utils.PaginatedResponse;
+import com.emezon.stock.domain.utils.PaginatedResponseParams;
 import com.emezon.stock.domain.constants.PaginatedResponseConstraints;
 import com.emezon.stock.domain.models.Article;
-import com.emezon.stock.domain.ports.inbound.article.IRetrieveArticleInPort;
-import com.emezon.stock.domain.ports.outbound.IArticleRepositoryOutPort;
+import com.emezon.stock.domain.api.article.IRetrieveArticleInPort;
+import com.emezon.stock.domain.spi.IArticleRepositoryOutPort;
 
 import java.util.Optional;
 

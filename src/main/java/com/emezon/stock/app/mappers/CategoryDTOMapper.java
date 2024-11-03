@@ -17,7 +17,6 @@ public class CategoryDTOMapper {
         Category category = new Category();
         category.setName(createCategoryDTO.getName());
         category.setDescription(createCategoryDTO.getDescription());
-        category.setCode(createCategoryDTO.getCode());
         return category;
     }
 
@@ -26,7 +25,6 @@ public class CategoryDTOMapper {
         category.setId(categoryDTO.getId());
         category.setName(categoryDTO.getName());
         category.setDescription(categoryDTO.getDescription());
-        category.setCode(categoryDTO.getCode());
         return category;
     }
 
@@ -35,7 +33,6 @@ public class CategoryDTOMapper {
         createCategoryDTO.setId(category.getId());
         createCategoryDTO.setName(category.getName());
         createCategoryDTO.setDescription(category.getDescription());
-        createCategoryDTO.setCode(category.getCode());
         return createCategoryDTO;
     }
 

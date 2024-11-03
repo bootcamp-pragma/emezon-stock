@@ -2,13 +2,14 @@ package com.emezon.stock.app.services;
 
 import com.emezon.stock.app.dtos.brand.BrandDTO;
 import com.emezon.stock.app.dtos.brand.CreateBrandDTO;
+import com.emezon.stock.app.handlers.IBrandHandler;
 import com.emezon.stock.app.mappers.BrandDTOMapper;
-import com.emezon.stock.domain.common.PaginatedResponse;
-import com.emezon.stock.domain.common.PaginatedResponseParams;
-import com.emezon.stock.domain.common.PaginatedResponseUtils;
+import com.emezon.stock.domain.api.brand.IPersistBrandInPort;
+import com.emezon.stock.domain.api.brand.IRetrieveBrandInPort;
+import com.emezon.stock.domain.utils.PaginatedResponse;
+import com.emezon.stock.domain.utils.PaginatedResponseParams;
+import com.emezon.stock.infra.inbound.rest.utils.PaginatedResponseUtils;
 import com.emezon.stock.domain.models.Brand;
-import com.emezon.stock.domain.usecases.brand.CreateBrandUseCase;
-import com.emezon.stock.domain.usecases.brand.RetrieveBrandUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.util.MultiValueMap;
 
@@ -16,30 +17,34 @@ import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
-public class BrandService {
+public class BrandService implements IBrandHandler {
 
-    private final CreateBrandUseCase createBrandUseCase;
-    private final RetrieveBrandUseCase retrieveBrandUseCase;
+    private final IPersistBrandInPort iPersistBrandInPort;
+    private final IRetrieveBrandInPort iRetrieveBrandInPort;
 
+    @Override
     public BrandDTO createBrand(CreateBrandDTO brand) {
         Brand brandModel = BrandDTOMapper.toModel(brand);
-        Brand createdBrand = createBrandUseCase.createBrand(brandModel);
+        Brand createdBrand = iPersistBrandInPort.createBrand(brandModel);
         return BrandDTOMapper.toDTO(createdBrand);
     }
 
+    @Override
     public Optional<BrandDTO> getBrandById(String id) {
-        Optional<Brand> brand = retrieveBrandUseCase.getBrandById(id);
+        Optional<Brand> brand = iRetrieveBrandInPort.getBrandById(id);
         return brand.map(BrandDTOMapper::toDTO);
     }
 
+    @Override
     public Optional<BrandDTO> getBrandByName(String name) {
-        Optional<Brand> brand = retrieveBrandUseCase.getBrandByName(name);
+        Optional<Brand> brand = iRetrieveBrandInPort.getBrandByName(name);
         return brand.map(BrandDTOMapper::toDTO);
     }
 
+    @Override
     public PaginatedResponse<BrandDTO> getAllBrands(MultiValueMap<String, String> queryParams) {
         PaginatedResponseParams params = PaginatedResponseUtils.getFromMultiValueMap(queryParams);
-        PaginatedResponse<Brand> brands = retrieveBrandUseCase.getAllBrands(params);
+        PaginatedResponse<Brand> brands = iRetrieveBrandInPort.getAllBrands(params);
         List<BrandDTO> brandDTOs = brands.getItems().stream()
                 .map(BrandDTOMapper::toDTO)
                 .toList();

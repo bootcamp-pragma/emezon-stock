@@ -5,18 +5,15 @@ public class Category {
     private String id;
     private String name;
     private String description;
-    private String code;
 
-    public Category(String id, String name, String description, String code) {
+    public Category(String id, String name, String description) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.code = code;
     }
 
-    public Category(String name, String code, String description) {
+    public Category(String name, String description) {
         this.name = name;
-        this.code = code;
         this.description = description;
     }
 
@@ -44,14 +41,6 @@ public class Category {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
     }
 
 }

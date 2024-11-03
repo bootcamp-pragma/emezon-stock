@@ -10,6 +10,7 @@ import org.hibernate.validator.constraints.Length;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class CreateCategoryDTO {
 
     @NotBlank(message = CategoryErrorMessages.CATEGORY_NAME_REQUIRED)
@@ -20,15 +21,6 @@ public class CreateCategoryDTO {
     @Length(max = CategoryConstraints.DESCRIPTION_MAX_LENGTH, message = CategoryErrorMessages.CATEGORY_DESCRIPTION_TOO_LONG)
     private String description;
 
-    @NotBlank(message = CategoryErrorMessages.CATEGORY_CODE_REQUIRED)
-    private String code;
-
-    public CreateCategoryDTO(String name, String code, String description) {
-        this.name = name;
-        this.code = code;
-        this.description = description;
-    }
-
     @PostConstruct
     public void init() {
         if (this.name != null) {
@@ -36,9 +28,6 @@ public class CreateCategoryDTO {
         }
         if (this.description != null) {
             this.description = this.description.trim();
-        }
-        if (this.code != null) {
-            this.code = this.code.trim();
         }
     }
 
