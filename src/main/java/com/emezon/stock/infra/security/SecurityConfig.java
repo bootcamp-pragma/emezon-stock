@@ -8,6 +8,7 @@ import com.emezon.stock.infra.outbound.feign.IUserFeignClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -51,7 +52,16 @@ public class SecurityConfig {
                 .cors(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(req -> req
                         .requestMatchers(SecurityConstants.WHITE_LIST_URL).permitAll()
-//                        .requestMatchers(RestApiConstants.API_CATEGORY + "/**").hasRole(UserRoles.ADMIN.toString())
+                        .requestMatchers(
+                                HttpMethod.POST,
+                                RestApiConstants.API_CATEGORY + "/**",
+                                RestApiConstants.API_BRAND + "/**",
+                                RestApiConstants.API_ARTICLE + "/**").hasRole(UserRoles.ADMIN.toString())
+                        .requestMatchers(
+                                HttpMethod.GET,
+                                RestApiConstants.API_CATEGORY + "/**",
+                                RestApiConstants.API_BRAND + "/**",
+                                RestApiConstants.API_ARTICLE + "/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(AbstractHttpConfigurer::disable)

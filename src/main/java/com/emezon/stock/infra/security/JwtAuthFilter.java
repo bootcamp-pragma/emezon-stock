@@ -54,7 +54,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             filterChain.doFilter(request, response);
             return;
         }
-        System.out.println("JwtAuthFilter.doFilterInternal: jwt: " + jwt);
+
         jwtHolder.setToken(jwt);
 
         final String email = jwtService.extractUsername(jwt);
