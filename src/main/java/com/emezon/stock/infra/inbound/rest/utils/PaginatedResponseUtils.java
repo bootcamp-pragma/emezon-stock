@@ -1,6 +1,7 @@
-package com.emezon.stock.domain.utils;
+package com.emezon.stock.infra.inbound.rest.utils;
 
 import com.emezon.stock.domain.constants.PaginatedResponseConstraints;
+import com.emezon.stock.domain.utils.PaginatedResponseParams;
 import org.springframework.util.MultiValueMap;
 
 import java.util.List;

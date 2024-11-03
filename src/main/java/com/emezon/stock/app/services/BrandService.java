@@ -8,7 +8,7 @@ import com.emezon.stock.domain.api.brand.IPersistBrandInPort;
 import com.emezon.stock.domain.api.brand.IRetrieveBrandInPort;
 import com.emezon.stock.domain.utils.PaginatedResponse;
 import com.emezon.stock.domain.utils.PaginatedResponseParams;
-import com.emezon.stock.domain.utils.PaginatedResponseUtils;
+import com.emezon.stock.infra.inbound.rest.utils.PaginatedResponseUtils;
 import com.emezon.stock.domain.models.Brand;
 import lombok.RequiredArgsConstructor;
 import org.springframework.util.MultiValueMap;

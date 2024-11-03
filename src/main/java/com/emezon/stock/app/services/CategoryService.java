@@ -8,7 +8,7 @@ import com.emezon.stock.domain.api.category.IPersistCategoryInPort;
 import com.emezon.stock.domain.api.category.IRetrieveCategoryInPort;
 import com.emezon.stock.domain.utils.PaginatedResponse;
 import com.emezon.stock.domain.utils.PaginatedResponseParams;
-import com.emezon.stock.domain.utils.PaginatedResponseUtils;
+import com.emezon.stock.infra.inbound.rest.utils.PaginatedResponseUtils;
 import com.emezon.stock.domain.models.Category;
 import lombok.RequiredArgsConstructor;
 import org.springframework.util.MultiValueMap;

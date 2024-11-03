@@ -1,5 +1,6 @@
 package com.emezon.stock.domain.utils;
 
+import com.emezon.stock.infra.inbound.rest.utils.PageableRequestValidator;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 
