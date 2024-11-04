@@ -17,8 +17,8 @@ public class ArticleDTO {
     private String description;
     private double price;
     private int stock;
+    private LocalDateTime restockDate;
     private BrandDTO brand;
     private List<CategoryDTO> categories;
-    private LocalDateTime restockDate;
 
 }

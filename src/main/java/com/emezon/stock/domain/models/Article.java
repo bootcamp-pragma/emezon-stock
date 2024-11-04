@@ -10,9 +10,9 @@ public class Article {
     private String description;
     private double price;
     private int stock;
+    private LocalDateTime restockDate;
     private Brand brand;
     private List<Category> categories;
-    private LocalDateTime restockDate;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 

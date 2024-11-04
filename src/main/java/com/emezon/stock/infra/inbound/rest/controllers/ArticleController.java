@@ -3,7 +3,7 @@ package com.emezon.stock.infra.inbound.rest.controllers;
 import com.emezon.stock.app.dtos.article.*;
 import com.emezon.stock.app.handlers.IArticleHandler;
 import com.emezon.stock.domain.utils.PaginatedResponse;
-import com.emezon.stock.domain.utils.ValidPageableRequest;
+import com.emezon.stock.infra.inbound.rest.utils.ValidPageableRequest;
 import com.emezon.stock.infra.inbound.rest.constants.PaginatedConstants;
 import com.emezon.stock.infra.inbound.rest.constants.RestApiConstants;
 import com.emezon.stock.infra.outbound.mysql.jpa.entities.ArticleEntity;

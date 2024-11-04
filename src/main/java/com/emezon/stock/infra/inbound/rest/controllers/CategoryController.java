@@ -3,7 +3,7 @@ package com.emezon.stock.infra.inbound.rest.controllers;
 import com.emezon.stock.app.dtos.category.CategoryDTO;
 import com.emezon.stock.app.dtos.category.CreateCategoryDTO;
 import com.emezon.stock.app.handlers.ICategoryHandler;
-import com.emezon.stock.domain.utils.ValidPageableRequest;
+import com.emezon.stock.infra.inbound.rest.utils.ValidPageableRequest;
 import com.emezon.stock.domain.utils.PaginatedResponse;
 import com.emezon.stock.infra.inbound.rest.constants.PaginatedConstants;
 import com.emezon.stock.infra.inbound.rest.constants.RestApiConstants;
