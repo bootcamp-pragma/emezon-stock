@@ -17,6 +17,8 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.method.annotation.HandlerMethodValidationException;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 
 @ControllerAdvice
@@ -65,8 +67,13 @@ public class ApiControllerAdvice implements IApiControllerAdvice<WebRequest> {
                     "birthdate".equals(invalidFormatEx.getPath().get(0).getFieldName())) {
                 message = "Invalid date format. Please use the format yyyy-MM-dd";
             }
+            if (invalidFormatEx.getTargetType() == LocalDateTime.class &&
+                    invalidFormatEx.getPath() != null &&
+                    !invalidFormatEx.getPath().isEmpty() &&
+                    "restockDate".equals(invalidFormatEx.getPath().get(0).getFieldName())) {
+                message = "Invalid date format. Please use the format yyyy-MM-dd'T'HH:mm:ss";
+            }
         }
-
         ExceptionResponse response = new ExceptionResponse(
                 message,
                 request.getDescription(false),
@@ -91,6 +98,17 @@ public class ApiControllerAdvice implements IApiControllerAdvice<WebRequest> {
         HttpStatus status = HttpStatus.FORBIDDEN;
         ExceptionResponse response = new ExceptionResponse(
                 ex.getMessage(),
+                request.getDescription(false),
+                status.value());
+        return new ResponseEntity<>(response, status);
+    }
+
+    @Override
+    @ExceptionHandler(DateTimeParseException.class)
+    public Object handleDateTimeParseException(Exception ex, WebRequest request) {
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+        ExceptionResponse response = new ExceptionResponse(
+                "Invalid date format",
                 request.getDescription(false),
                 status.value());
         return new ResponseEntity<>(response, status);
