@@ -1,10 +1,14 @@
 package com.emezon.stock.domain.models;
 
+import java.time.LocalDateTime;
+
 public class Brand {
 
     private String id;
     private String name;
     private String description;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
     public Brand(String id, String name, String description) {
         this.id = id;
@@ -43,4 +47,19 @@ public class Brand {
         this.description = description;
     }
 
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
 }

@@ -18,6 +18,8 @@ public class BrandEntityMapper {
         brandEntity.setId(brand.getId());
         brandEntity.setName(brand.getName());
         brandEntity.setDescription(brand.getDescription());
+        brandEntity.setCreatedAt(brand.getCreatedAt());
+        brandEntity.setUpdatedAt(brand.getUpdatedAt());
         return brandEntity;
     }
 
@@ -33,6 +35,8 @@ public class BrandEntityMapper {
         brand.setId(brandEntity.getId());
         brand.setName(brandEntity.getName());
         brand.setDescription(brandEntity.getDescription());
+        brand.setCreatedAt(brandEntity.getCreatedAt());
+        brand.setUpdatedAt(brandEntity.getUpdatedAt());
         return brand;
     }
 
