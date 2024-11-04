@@ -1,8 +1,6 @@
 package com.emezon.stock.app.dtos.article;
 
-//import com.emezon.stock.domain.constants.ArticleConstraints;
 import com.emezon.stock.domain.constants.ArticleErrorMessages;
-//import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
