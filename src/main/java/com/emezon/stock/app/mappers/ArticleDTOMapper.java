@@ -24,6 +24,7 @@ public class ArticleDTOMapper {
         article.setStock(articleDTO.getStock());
         article.setBrand(BrandDTOMapper.toModel(articleDTO.getBrand()));
         article.setCategories(articleDTO.getCategories().stream().map(CategoryDTOMapper::toModel).toList());
+        article.setRestockDate(articleDTO.getRestockDate());
         return article;
     }
 
@@ -54,6 +55,7 @@ public class ArticleDTOMapper {
         articleDTO.setStock(article.getStock());
         articleDTO.setBrand(BrandDTOMapper.toDTO(article.getBrand()));
         articleDTO.setCategories(article.getCategories().stream().map(CategoryDTOMapper::toDTO).toList());
+        articleDTO.setRestockDate(article.getRestockDate());
         return articleDTO;
     }
 
@@ -66,6 +68,7 @@ public class ArticleDTOMapper {
         articleListDTO.setStock(article.getStock());
         articleListDTO.setBrand(BrandDTOMapper.toDTO(article.getBrand()));
         articleListDTO.setCategories(article.getCategories().stream().map(CategoryDTOMapper::toIdNameDTO).toList());
+        articleListDTO.setRestockDate(article.getRestockDate());
         return articleListDTO;
     }
 

@@ -55,6 +55,8 @@ public class ArticleEntity {
     )
     private Set<CategoryEntity> categories;
 
+    private LocalDateTime restockDate;
+
     @CreationTimestamp
     private LocalDateTime createdAt;
 
