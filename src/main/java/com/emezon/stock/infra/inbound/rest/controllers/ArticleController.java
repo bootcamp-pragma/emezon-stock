@@ -5,7 +5,6 @@ import com.emezon.stock.app.dtos.article.ArticleDTO;
 import com.emezon.stock.app.dtos.article.ArticleListDTO;
 import com.emezon.stock.app.dtos.article.CreateArticleDTO;
 import com.emezon.stock.app.handlers.IArticleHandler;
-import com.emezon.stock.domain.models.external.UserRoles;
 import com.emezon.stock.domain.utils.PaginatedResponse;
 import com.emezon.stock.domain.utils.ValidPageableRequest;
 import com.emezon.stock.infra.inbound.rest.constants.PaginatedConstants;
