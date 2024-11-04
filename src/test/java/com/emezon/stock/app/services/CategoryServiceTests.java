@@ -60,10 +60,10 @@ class CategoryServiceTests {
     void findCategoryById_whenCategoryExists_thenCategoryIsReturned() {
         when(retrieveCategoryUseCase.getCategoryById(any())).thenReturn(Optional.of(category));
 
-        Optional<CategoryDTO> categoryById = categoryService.getCategoryById("1");
+        CategoryDTO categoryById = categoryService.getCategoryById("1");
 
-        assertTrue(categoryById.isPresent());
-        assertEquals(category.getName(), categoryById.get().getName());
+        assertNotNull(categoryById);
+        assertEquals(category.getName(), categoryById.getName());
 
         verify(retrieveCategoryUseCase, times(1)).getCategoryById(any());
     }
@@ -72,9 +72,9 @@ class CategoryServiceTests {
     void findCategoryById_whenCategoryDoesNotExist_thenEmptyOptionalIsReturned() {
         when(retrieveCategoryUseCase.getCategoryById(any())).thenReturn(Optional.empty());
 
-        Optional<CategoryDTO> categoryById = categoryService.getCategoryById("1");
+        CategoryDTO categoryById = categoryService.getCategoryById("1");
 
-        assertTrue(categoryById.isEmpty());
+        assertNull(categoryById);
 
         verify(retrieveCategoryUseCase, times(1)).getCategoryById(any());
     }
@@ -83,10 +83,10 @@ class CategoryServiceTests {
     void findCategoryByName_whenCategoryExists_thenCategoryIsReturned() {
         when(retrieveCategoryUseCase.getCategoryByName(any())).thenReturn(Optional.of(category));
 
-        Optional<CategoryDTO> categoryByName = categoryService.getCategoryByName("Electronics");
+        CategoryDTO categoryByName = categoryService.getCategoryByName("Electronics");
 
-        assertTrue(categoryByName.isPresent());
-        assertEquals(category.getName(), categoryByName.get().getName());
+        assertNotNull(categoryByName);
+        assertEquals(category.getName(), categoryByName.getName());
 
         verify(retrieveCategoryUseCase, times(1)).getCategoryByName(any());
     }
@@ -95,9 +95,9 @@ class CategoryServiceTests {
     void findCategoryByName_whenCategoryDoesNotExist_thenEmptyOptionalIsReturned() {
         when(retrieveCategoryUseCase.getCategoryByName(any())).thenReturn(Optional.empty());
 
-        Optional<CategoryDTO> categoryByName = categoryService.getCategoryByName("Electronics");
+        CategoryDTO categoryByName = categoryService.getCategoryByName("Electronics");
 
-        assertTrue(categoryByName.isEmpty());
+        assertNull(categoryByName);
 
         verify(retrieveCategoryUseCase, times(1)).getCategoryByName(any());
     }

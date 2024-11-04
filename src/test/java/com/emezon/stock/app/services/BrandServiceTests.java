@@ -61,7 +61,7 @@ class BrandServiceTests {
         brand.setId("1");
         when(retrieveBrandUseCase.getBrandById(brand.getId())).thenReturn(Optional.of(brand));
 
-        BrandDTO foundBrand = brandService.getBrandById(brand.getId()).orElse(null);
+        BrandDTO foundBrand = brandService.getBrandById(brand.getId());
 
         assertNotNull(foundBrand);
         assertEquals(brand.getName(), foundBrand.getName());
@@ -74,8 +74,8 @@ class BrandServiceTests {
     void findBrandById_whenBrandDoesNotExist_thenBrandIsNotReturned() {
         when(retrieveBrandUseCase.getBrandById("123")).thenReturn(Optional.empty());
 
-        Optional<BrandDTO> foundBrand = brandService.getBrandById("123");
-        assertTrue(foundBrand.isEmpty());
+        BrandDTO foundBrand = brandService.getBrandById("123");
+        assertNull(foundBrand);
 
         verify(retrieveBrandUseCase, times(1)).getBrandById("123");
     }
@@ -84,7 +84,7 @@ class BrandServiceTests {
     void findBrandByName_whenBrandExists_thenBrandIsReturned() {
         when(retrieveBrandUseCase.getBrandByName(any())).thenReturn(Optional.of(brand));
 
-        BrandDTO foundBrand = brandService.getBrandByName("Samsung").orElse(null);
+        BrandDTO foundBrand = brandService.getBrandByName("Samsung");
 
         assertNotNull(foundBrand);
         assertEquals(brand.getName(), foundBrand.getName());
@@ -97,8 +97,8 @@ class BrandServiceTests {
     void findBrandByName_whenBrandDoesNotExist_thenBrandIsNotReturned() {
         when(retrieveBrandUseCase.getBrandByName("Samsung")).thenReturn(Optional.empty());
 
-        Optional<BrandDTO> foundBrand = brandService.getBrandByName("Samsung");
-        assertTrue(foundBrand.isEmpty());
+        BrandDTO foundBrand = brandService.getBrandByName("Samsung");
+        assertNull(foundBrand);
 
         verify(retrieveBrandUseCase, times(1)).getBrandByName("Samsung");
     }

@@ -49,9 +49,15 @@ public class BrandController {
         return ResponseEntity.ok(brands);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<BrandDTO> getBrandById(@PathVariable String id) {
+        BrandDTO brand = brandHandler.getBrandById(id);
+        return ResponseEntity.ok(brand);
+    }
+
     @GetMapping("/name/{name}")
     public ResponseEntity<BrandDTO> getBrandByName(@PathVariable String name) {
-        BrandDTO brand = brandHandler.getBrandByName(name).orElse(null);
+        BrandDTO brand = brandHandler.getBrandByName(name);
         return ResponseEntity.ok(brand);
     }
 

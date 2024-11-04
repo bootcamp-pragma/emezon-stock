@@ -7,6 +7,8 @@ public class ArticleConstraints {
     public static final int MIN_NUMBER_OF_CATEGORIES = 1;
     public static final int MAX_NUMBER_OF_CATEGORIES = 3;
 
+    public static final String RESTOCK_DATE_PATTERN = "yyyy-MM-dd'T'HH:mm:ss";
+
     private ArticleConstraints() {
         throw new IllegalStateException("Utility class");
     }

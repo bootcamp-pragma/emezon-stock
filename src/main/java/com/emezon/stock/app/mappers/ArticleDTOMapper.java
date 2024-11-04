@@ -18,6 +18,7 @@ public class ArticleDTOMapper {
 
     public static Article toModel(ArticleDTO articleDTO) {
         Article article = new Article();
+        article.setId(articleDTO.getId());
         article.setName(articleDTO.getName());
         article.setDescription(articleDTO.getDescription());
         article.setPrice(articleDTO.getPrice());
@@ -49,6 +50,7 @@ public class ArticleDTOMapper {
 
     public static ArticleDTO toDTO(Article article) {
         ArticleDTO articleDTO = new ArticleDTO();
+        articleDTO.setId(article.getId());
         articleDTO.setName(article.getName());
         articleDTO.setDescription(article.getDescription());
         articleDTO.setPrice(article.getPrice());

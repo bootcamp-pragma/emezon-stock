@@ -14,25 +14,26 @@ import com.emezon.stock.domain.models.Article;
 import lombok.RequiredArgsConstructor;
 import org.springframework.util.MultiValueMap;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
 public class ArticleService implements IArticleHandler {
 
-    private final IPersistArticleInPort createArticleInPort;
+    private final IPersistArticleInPort persistArticleInPort;
     private final IRetrieveArticleInPort retrieveArticleInPort;
 
     @Override
     public ArticleDTO createArticle(CreateArticleDTO article) {
         Article articleModel = ArticleDTOMapper.toModel(article);
-        Article createdArticle = createArticleInPort.createArticle(articleModel);
+        Article createdArticle = persistArticleInPort.createArticle(articleModel);
         return ArticleDTOMapper.toDTO(createdArticle);
     }
 
     @Override
     public ArticleDTO addSupply(String id, int quantity) {
-        Article updatedArticle = createArticleInPort.addSupply(id, quantity);
+        Article updatedArticle = persistArticleInPort.addSupply(id, quantity);
         return ArticleDTOMapper.toDTO(updatedArticle);
     }
 
@@ -60,6 +61,15 @@ public class ArticleService implements IArticleHandler {
                 articles.getTotalItems(),
                 articles.getTotalPages()
         );
+    }
+
+    @Override
+    public ArticleDTO updateRestockDate(String id, LocalDateTime restockDate) {
+        restockDate = restockDate.withNano(0);
+        restockDate = restockDate.withSecond(0);
+        restockDate = restockDate.withMinute(0);
+        Article updatedArticle = persistArticleInPort.updateRestockDate(id, restockDate);
+        return ArticleDTOMapper.toDTO(updatedArticle);
     }
 
 }

@@ -19,6 +19,9 @@ public class SecurityConstants {
 
     public static final String ROLE_PREFIX = "ROLE_";
 
-    public static final String[] ADD_SUPPLY_ROLES = { UserRoles.ADMIN.toString(), UserRoles.AUX_BODEGA.toString() };
+    public static final String ADMIN = UserRoles.ADMIN.toString();
+    public static final String AUX_BODEGA = UserRoles.AUX_BODEGA.toString();
+
+    public static final String[] ADD_SUPPLY_ROLES = { ADMIN, AUX_BODEGA };
 
 }

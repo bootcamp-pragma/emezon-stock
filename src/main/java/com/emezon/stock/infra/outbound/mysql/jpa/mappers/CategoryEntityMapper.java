@@ -1,6 +1,5 @@
 package com.emezon.stock.infra.outbound.mysql.jpa.mappers;
 
-import com.emezon.stock.app.dtos.category.CategoryDTO;
 import com.emezon.stock.domain.models.Category;
 import com.emezon.stock.infra.outbound.mysql.jpa.entities.CategoryEntity;
 
@@ -18,13 +17,6 @@ public class CategoryEntityMapper {
         categoryEntity.setDescription(category.getDescription());
         categoryEntity.setCreatedAt(category.getCreatedAt());
         categoryEntity.setUpdatedAt(category.getUpdatedAt());
-        return categoryEntity;
-    }
-
-    public static CategoryEntity toEntity(CategoryDTO categoryDTO) {
-        CategoryEntity categoryEntity = new CategoryEntity();
-        categoryEntity.setName(categoryDTO.getName());
-        categoryEntity.setDescription(categoryDTO.getDescription());
         return categoryEntity;
     }
 

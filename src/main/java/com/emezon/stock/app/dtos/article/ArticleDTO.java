@@ -12,6 +12,7 @@ import java.util.List;
 @Setter
 public class ArticleDTO {
 
+    private String id;
     private String name;
     private String description;
     private double price;

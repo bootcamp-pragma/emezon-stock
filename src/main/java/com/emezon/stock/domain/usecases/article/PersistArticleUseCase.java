@@ -12,6 +12,7 @@ import com.emezon.stock.domain.models.Category;
 import com.emezon.stock.domain.api.article.IPersistArticleInPort;
 import com.emezon.stock.domain.spi.IArticleRepositoryOutPort;
 
+import java.time.LocalDateTime;
 import java.util.*;
 
 public class PersistArticleUseCase implements IPersistArticleInPort {
@@ -56,6 +57,17 @@ public class PersistArticleUseCase implements IPersistArticleInPort {
         }
         Article article = articleById.get();
         article.setStock(article.getStock() + quantity);
+        return articleRepositoryOutPort.save(article);
+    }
+
+    @Override
+    public Article updateRestockDate(String id, LocalDateTime restockDate) {
+        Optional<Article> articleById = articleRepositoryOutPort.findById(id);
+        if (articleById.isEmpty()) {
+            throw new ArticleNotFoundByIdException(id);
+        }
+        Article article = articleById.get();
+        article.setRestockDate(restockDate);
         return articleRepositoryOutPort.save(article);
     }
 

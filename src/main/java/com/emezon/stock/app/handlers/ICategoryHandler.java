@@ -9,12 +9,12 @@ import java.util.Optional;
 
 public interface ICategoryHandler {
 
-    public CategoryDTO createCategory(CreateCategoryDTO category);
+    CategoryDTO createCategory(CreateCategoryDTO category);
 
-    public Optional<CategoryDTO> getCategoryById(String id);
+    CategoryDTO getCategoryById(String id);
 
-    public Optional<CategoryDTO> getCategoryByName(String name);
+    CategoryDTO getCategoryByName(String name);
 
-    public PaginatedResponse<CategoryDTO> getAllCategories(MultiValueMap<String, String> queryParams);
+    PaginatedResponse<CategoryDTO> getAllCategories(MultiValueMap<String, String> queryParams);
 
 }

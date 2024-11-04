@@ -1,9 +1,6 @@
 package com.emezon.stock.infra.inbound.rest.controllers;
 
-import com.emezon.stock.app.dtos.article.AddSupplyDTO;
-import com.emezon.stock.app.dtos.article.ArticleDTO;
-import com.emezon.stock.app.dtos.article.ArticleListDTO;
-import com.emezon.stock.app.dtos.article.CreateArticleDTO;
+import com.emezon.stock.app.dtos.article.*;
 import com.emezon.stock.app.handlers.IArticleHandler;
 import com.emezon.stock.domain.utils.PaginatedResponse;
 import com.emezon.stock.domain.utils.ValidPageableRequest;
@@ -52,6 +49,12 @@ public class ArticleController {
         return ResponseEntity.ok(articles);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<ArticleDTO> getArticleById(@PathVariable String id) {
+        ArticleDTO article = articleHandler.getArticleById(id);
+        return ResponseEntity.ok(article);
+    }
+
     @GetMapping("/name/{name}")
     public ResponseEntity<ArticleDTO> getArticleByName(@PathVariable String name) {
         ArticleDTO article = articleHandler.getArticleByName(name);
@@ -60,8 +63,17 @@ public class ArticleController {
 
     @PreAuthorize("hasAnyRole(@securityConstants.ADD_SUPPLY_ROLES)")
     @PatchMapping("/{id}/add-supply")
-    public ResponseEntity<ArticleDTO> addSupply(@PathVariable String id, @RequestBody @Valid AddSupplyDTO addSupplyDTO) {
+    public ResponseEntity<ArticleDTO> addSupply(@PathVariable String id,
+                                                @RequestBody @Valid AddSupplyDTO addSupplyDTO) {
         ArticleDTO updatedArticle = articleHandler.addSupply(id, addSupplyDTO.getQuantity());
+        return ResponseEntity.ok(updatedArticle);
+    }
+
+    @PreAuthorize("hasAnyRole(@securityConstants.ADMIN)")
+    @PatchMapping("/{id}/update-restock-date")
+    public ResponseEntity<ArticleDTO> updateRestockDate(@PathVariable String id,
+                                                        @RequestBody @Valid UpdateRestockDate updateRestockDate) {
+        ArticleDTO updatedArticle = articleHandler.updateRestockDate(id, updateRestockDate.getRestockDate());
         return ResponseEntity.ok(updatedArticle);
     }
 
