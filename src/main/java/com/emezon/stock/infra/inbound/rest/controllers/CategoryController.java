@@ -49,4 +49,10 @@ public class CategoryController {
         return ResponseEntity.ok(categories);
     }
 
+    @GetMapping("/name/{name}")
+    public ResponseEntity<CategoryDTO> getCategoryByName(@PathVariable String name) {
+        CategoryDTO category = categoryHandler.getCategoryByName(name).orElse(null);
+        return ResponseEntity.ok(category);
+    }
+
 }

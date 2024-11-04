@@ -16,4 +16,6 @@ public enum UserRoles {
         return name;
     }
 
+    public static final String[] ADD_SUPPLY_ROLES = { UserRoles.ADMIN.toString(), UserRoles.AUX_BODEGA.toString() };
+
 }

@@ -1,11 +1,8 @@
 package com.emezon.stock.infra.advices;
 
 import com.emezon.stock.app.errorhandling.IArticleControllerAdvice;
+import com.emezon.stock.domain.exceptions.article.*;
 import com.emezon.stock.domain.utils.ExceptionResponse;
-import com.emezon.stock.domain.exceptions.article.ArticleCategoriesNumberInvalidException;
-import com.emezon.stock.domain.exceptions.article.ArticleDuplicateCategoriesException;
-import com.emezon.stock.domain.exceptions.article.ArticlePriceMinValueException;
-import com.emezon.stock.domain.exceptions.article.ArticleStockMinValueException;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -54,6 +51,16 @@ public class ArticleControllerAdvice implements IArticleControllerAdvice<WebRequ
     @ExceptionHandler(ArticleStockMinValueException.class)
     public ResponseEntity<ExceptionResponse> handleArticleStockMinValueException(ArticleStockMinValueException ex, WebRequest request) {
         HttpStatus status = HttpStatus.BAD_REQUEST;
+        ExceptionResponse response = new ExceptionResponse(
+                ex.getMessage(),
+                request.getDescription(false),
+                status.value());
+        return new ResponseEntity<>(response, status);
+    }
+
+    @Override
+    public Object handleArticleNotFoundByIdException(ArticleNotFoundByIdException ex, WebRequest request) {
+        HttpStatus status = HttpStatus.NOT_FOUND;
         ExceptionResponse response = new ExceptionResponse(
                 ex.getMessage(),
                 request.getDescription(false),

@@ -1,9 +1,6 @@
 package com.emezon.stock.app.errorhandling;
 
-import com.emezon.stock.domain.exceptions.article.ArticleCategoriesNumberInvalidException;
-import com.emezon.stock.domain.exceptions.article.ArticleDuplicateCategoriesException;
-import com.emezon.stock.domain.exceptions.article.ArticlePriceMinValueException;
-import com.emezon.stock.domain.exceptions.article.ArticleStockMinValueException;
+import com.emezon.stock.domain.exceptions.article.*;
 
 public interface IArticleControllerAdvice<T> {
 
@@ -14,5 +11,7 @@ public interface IArticleControllerAdvice<T> {
     Object handleArticlePriceMinValueException(ArticlePriceMinValueException ex, T request);
 
     Object handleArticleStockMinValueException(ArticleStockMinValueException ex, T request);
+
+    Object handleArticleNotFoundByIdException(ArticleNotFoundByIdException ex, T request);
 
 }

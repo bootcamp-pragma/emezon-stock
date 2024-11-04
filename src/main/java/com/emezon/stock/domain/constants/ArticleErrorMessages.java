@@ -11,6 +11,8 @@ public class ArticleErrorMessages {
     public static final String ARTICLE_NAME_REQUIRED = "The name of the article is required";
     public static final String ARTICLE_DESCRIPTION_REQUIRED = "The description of the article is required";
 
+    public static final String ARTICLE_NOT_FOUND_BY_ID = "Article with id %s not found";
+
     private ArticleErrorMessages() {
         throw new IllegalStateException("Utility class");
     }

@@ -1,5 +1,6 @@
 package com.emezon.stock.infra.security;
 
+import com.emezon.stock.domain.models.external.UserRoles;
 import com.emezon.stock.infra.inbound.rest.constants.RestApiConstants;
 
 public class SecurityConstants {
@@ -18,6 +19,6 @@ public class SecurityConstants {
 
     public static final String ROLE_PREFIX = "ROLE_";
 
-    private SecurityConstants() { }
+    public static final String[] ADD_SUPPLY_ROLES = { UserRoles.ADMIN.toString(), UserRoles.AUX_BODEGA.toString() };
 
 }

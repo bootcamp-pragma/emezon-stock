@@ -76,7 +76,7 @@ class ArticleServiceTests {
                 999.99, 100, brand, List.of(category));
         when(retrieveArticleUseCase.getArticleById(article.getId())).thenReturn(Optional.of(article));
 
-        ArticleDTO foundArticle = articleService.getArticleById(article.getId()).orElse(null);
+        ArticleDTO foundArticle = articleService.getArticleById(article.getId());
 
         ArticleDTO expectedArticle = ArticleDTOMapper.toDTO(article);
 
@@ -96,8 +96,8 @@ class ArticleServiceTests {
     void getArticleById_whenArticleDoesNotExist_thenArticleIsNotReturned() {
         when(retrieveArticleUseCase.getArticleById("123")).thenReturn(Optional.empty());
 
-        Optional<ArticleDTO> foundArticle = articleService.getArticleById("123");
-        assertTrue(foundArticle.isEmpty());
+        ArticleDTO foundArticle = articleService.getArticleById("123");
+        assertNull(foundArticle);
 
         verify(retrieveArticleUseCase, times(1)).getArticleById("123");
     }

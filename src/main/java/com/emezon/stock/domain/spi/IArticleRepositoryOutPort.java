@@ -12,6 +12,8 @@ public interface IArticleRepositoryOutPort {
 
     Optional<Article> findById(String id);
 
+    Optional<Article> findByName(String name);
+
     PaginatedResponse<Article> findAll(PaginatedResponseParams params);
 
 }

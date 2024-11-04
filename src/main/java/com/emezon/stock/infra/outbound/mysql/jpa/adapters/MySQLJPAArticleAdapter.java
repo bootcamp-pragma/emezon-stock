@@ -33,6 +33,12 @@ public class MySQLJPAArticleAdapter implements IArticleRepositoryOutPort {
     }
 
     @Override
+    public Optional<Article> findByName(String name) {
+        Optional<ArticleEntity> articleEntity = repository.findByName(name);
+        return articleEntity.map(ArticleEntityMapper::toModel);
+    }
+
+    @Override
     public PaginatedResponse<Article> findAll(PaginatedResponseParams params) {
         Pageable pageable = PageableUtils.getFromPaginatedResponseParams(params);
         Page<ArticleEntity> pageRes = repository.findAll(pageable);

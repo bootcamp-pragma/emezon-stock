@@ -10,6 +10,8 @@ public interface IRetrieveArticleInPort {
 
     Optional<Article> getArticleById(String id);
 
+    Optional<Article> getArticleByName(String name);
+
     PaginatedResponse<Article> getAllArticles(PaginatedResponseParams params);
 
 }
