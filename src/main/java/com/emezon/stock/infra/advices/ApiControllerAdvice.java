@@ -7,6 +7,7 @@ import org.springframework.context.MessageSourceResolvable;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authorization.AuthorizationDeniedException;
 import org.springframework.validation.ObjectError;
 import org.springframework.validation.method.ParameterValidationResult;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -77,6 +78,17 @@ public class ApiControllerAdvice implements IApiControllerAdvice<WebRequest> {
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<ExceptionResponse> handleIllegalArgumentException(Exception ex, WebRequest request) {
         HttpStatus status = HttpStatus.BAD_REQUEST;
+        ExceptionResponse response = new ExceptionResponse(
+                ex.getMessage(),
+                request.getDescription(false),
+                status.value());
+        return new ResponseEntity<>(response, status);
+    }
+
+    @Override
+    @ExceptionHandler(AuthorizationDeniedException.class)
+    public ResponseEntity<ExceptionResponse> handleAuthorizationDeniedException(Exception ex, WebRequest request) {
+        HttpStatus status = HttpStatus.FORBIDDEN;
         ExceptionResponse response = new ExceptionResponse(
                 ex.getMessage(),
                 request.getDescription(false),

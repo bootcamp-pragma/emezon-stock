@@ -6,15 +6,15 @@ import com.emezon.stock.app.dtos.article.CreateArticleDTO;
 import com.emezon.stock.domain.utils.PaginatedResponse;
 import org.springframework.util.MultiValueMap;
 
-import java.util.Optional;
-
 public interface IArticleHandler {
 
     public ArticleDTO createArticle(CreateArticleDTO article);
 
-    public Optional<ArticleDTO> getArticleById(String id);
+    public ArticleDTO addSupply(String id, int quantity);
 
-    public Optional<ArticleDTO> getArticleByName(String name);
+    public ArticleDTO getArticleById(String id);
+
+    public ArticleDTO getArticleByName(String name);
 
     public PaginatedResponse<ArticleListDTO> getAllArticles(MultiValueMap<String, String> queryParams);
 

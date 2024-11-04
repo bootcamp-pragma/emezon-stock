@@ -6,4 +6,7 @@ public interface IPersistArticleInPort {
 
     Article createArticle(Article article);
 
+    Article addSupply(String id, int quantity);
+
+
 }

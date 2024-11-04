@@ -59,6 +59,7 @@ public class ArticleDTOMapper {
 
     public static ArticleListDTO toListDTO(Article article) {
         ArticleListDTO articleListDTO = new ArticleListDTO();
+        articleListDTO.setId(article.getId());
         articleListDTO.setName(article.getName());
         articleListDTO.setDescription(article.getDescription());
         articleListDTO.setPrice(article.getPrice());

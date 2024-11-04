@@ -91,4 +91,9 @@ public class SecurityConfig {
         return authProvider;
     }
 
+    @Bean
+    public SecurityConstants securityConstants() {
+        return new SecurityConstants();
+    }
+
 }

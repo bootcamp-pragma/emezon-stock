@@ -18,7 +18,8 @@ public class GlobalExceptionAdvice implements IGlobalExceptionHandler<WebRequest
     public ResponseEntity<ExceptionResponse> handleGeneralException(Exception ex, WebRequest request) {
         HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
         String message = ex.getMessage() != null ? ex.getMessage() : "Ha ocurrido un error inesperado.";
-
+        // String exceptionClass = ex.getClass().getSimpleName();
+        // message = message + " (" + exceptionClass + ")";
         ExceptionResponse response = new ExceptionResponse(
                 message,
                 request.getDescription(false),

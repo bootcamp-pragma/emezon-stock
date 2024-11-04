@@ -31,15 +31,21 @@ public class ArticleService implements IArticleHandler {
     }
 
     @Override
-    public Optional<ArticleDTO> getArticleById(String id) {
-        Optional<Article> article = retrieveArticleInPort.getArticleById(id);
-        return article.map(ArticleDTOMapper::toDTO);
+    public ArticleDTO addSupply(String id, int quantity) {
+        Article updatedArticle = createArticleInPort.addSupply(id, quantity);
+        return ArticleDTOMapper.toDTO(updatedArticle);
     }
 
     @Override
-    public Optional<ArticleDTO> getArticleByName(String name) {
+    public ArticleDTO getArticleById(String id) {
+        Optional<Article> article = retrieveArticleInPort.getArticleById(id);
+        return article.map(ArticleDTOMapper::toDTO).orElse(null);
+    }
+
+    @Override
+    public ArticleDTO getArticleByName(String name) {
         Optional<Article> article = retrieveArticleInPort.getArticleByName(name);
-        return article.map(ArticleDTOMapper::toDTO);
+        return article.map(ArticleDTOMapper::toDTO).orElse(null);
     }
 
     @Override

@@ -3,10 +3,7 @@ package com.emezon.stock.domain.usecases.article;
 import com.emezon.stock.domain.api.brand.IRetrieveBrandInPort;
 import com.emezon.stock.domain.api.category.IRetrieveCategoryInPort;
 import com.emezon.stock.domain.constants.ArticleConstraints;
-import com.emezon.stock.domain.exceptions.article.ArticleCategoriesNumberInvalidException;
-import com.emezon.stock.domain.exceptions.article.ArticleDuplicateCategoriesException;
-import com.emezon.stock.domain.exceptions.article.ArticlePriceMinValueException;
-import com.emezon.stock.domain.exceptions.article.ArticleStockMinValueException;
+import com.emezon.stock.domain.exceptions.article.*;
 import com.emezon.stock.domain.exceptions.brand.BrandNotFoundByIdException;
 import com.emezon.stock.domain.exceptions.category.CategoryNotFoundByIdException;
 import com.emezon.stock.domain.models.Article;
@@ -49,6 +46,17 @@ public class PersistArticleUseCase implements IPersistArticleInPort {
             processedArticle.getCategories().add(categoryById.get());
         }
         return articleRepositoryOutPort.save(processedArticle);
+    }
+
+    @Override
+    public Article addSupply(String id, int quantity) {
+        Optional<Article> articleById = articleRepositoryOutPort.findById(id);
+        if (articleById.isEmpty()) {
+            throw new ArticleNotFoundByIdException(id);
+        }
+        Article article = articleById.get();
+        article.setStock(article.getStock() + quantity);
+        return articleRepositoryOutPort.save(article);
     }
 
     private Article processAndValidateArticle(Article article) {
