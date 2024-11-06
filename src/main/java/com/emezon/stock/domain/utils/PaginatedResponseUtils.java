@@ -10,10 +10,10 @@ public class PaginatedResponseUtils {
         try {
             List<String> pageList = queryParams.get("page");
             if (pageList != null && !pageList.isEmpty()) {
-                return Integer.parseInt(pageList.get(0)); // Obtener el primer valor de la lista
+                return Integer.parseInt(pageList.get(0));
             }
         } catch (NumberFormatException | NullPointerException e) {
-            // En caso de error, retornar el valor por defecto
+            // Do nothing
         }
         return PaginatedResponseConstraints.DEFAULT_PAGE_NUMBER;
     }
@@ -22,10 +22,10 @@ public class PaginatedResponseUtils {
         try {
             List<String> sizeList = queryParams.get("size");
             if (sizeList != null && !sizeList.isEmpty()) {
-                return Integer.parseInt(sizeList.get(0)); // Obtener el primer valor de la lista
+                return Integer.parseInt(sizeList.get(0));
             }
         } catch (NumberFormatException | NullPointerException e) {
-            // En caso de error, retornar el valor por defecto
+            // Do nothing
         }
         return PaginatedResponseConstraints.DEFAULT_PAGE_SIZE;
     }
