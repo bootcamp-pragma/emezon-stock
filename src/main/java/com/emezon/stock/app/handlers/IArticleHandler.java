@@ -12,7 +12,7 @@ public interface IArticleHandler {
 
     ArticleDTO createArticle(CreateArticleDTO article);
 
-    ArticleDTO addSupply(String id, int quantity);
+    ArticleDTO addSupply(String id, String payload);
 
     ArticleDTO getArticleById(String id);
 

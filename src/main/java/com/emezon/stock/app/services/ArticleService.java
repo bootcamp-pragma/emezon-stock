@@ -7,6 +7,7 @@ import com.emezon.stock.app.handlers.IArticleHandler;
 import com.emezon.stock.app.mappers.ArticleDTOMapper;
 import com.emezon.stock.domain.api.article.IPersistArticleInPort;
 import com.emezon.stock.domain.api.article.IRetrieveArticleInPort;
+import com.emezon.stock.domain.spi.IJwtService;
 import com.emezon.stock.domain.utils.PaginatedResponse;
 import com.emezon.stock.domain.utils.PaginatedResponseParams;
 import com.emezon.stock.infra.inbound.rest.utils.PaginatedResponseUtils;
@@ -16,6 +17,7 @@ import org.springframework.util.MultiValueMap;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -23,6 +25,7 @@ public class ArticleService implements IArticleHandler {
 
     private final IPersistArticleInPort persistArticleInPort;
     private final IRetrieveArticleInPort retrieveArticleInPort;
+    private final IJwtService jwtService;
 
     @Override
     public ArticleDTO createArticle(CreateArticleDTO article) {
@@ -32,8 +35,9 @@ public class ArticleService implements IArticleHandler {
     }
 
     @Override
-    public ArticleDTO addSupply(String id, int quantity) {
-        Article updatedArticle = persistArticleInPort.addSupply(id, quantity);
+    public ArticleDTO addSupply(String id, String payload) {
+        Map<String, Object> payloadMap = jwtService.extractAllClaims(payload);
+        Article updatedArticle = persistArticleInPort.addSupply(id, payloadMap);
         return ArticleDTOMapper.toDTO(updatedArticle);
     }
 
@@ -65,9 +69,9 @@ public class ArticleService implements IArticleHandler {
 
     @Override
     public ArticleDTO updateRestockDate(String id, LocalDateTime restockDate) {
-        restockDate = restockDate.withNano(0);
-        restockDate = restockDate.withSecond(0);
-        restockDate = restockDate.withMinute(0);
+        if (restockDate != null) {
+            restockDate = restockDate.withNano(0).withSecond(0).withMinute(0);
+        }
         Article updatedArticle = persistArticleInPort.updateRestockDate(id, restockDate);
         return ArticleDTOMapper.toDTO(updatedArticle);
     }

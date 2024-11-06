@@ -50,14 +50,41 @@ public class PersistArticleUseCase implements IPersistArticleInPort {
     }
 
     @Override
-    public Article addSupply(String id, int quantity) {
+    public Article addSupply(String id, int quantity, LocalDateTime restockDate) {
         Optional<Article> articleById = articleRepositoryOutPort.findById(id);
         if (articleById.isEmpty()) {
             throw new ArticleNotFoundByIdException(id);
         }
         Article article = articleById.get();
         article.setStock(article.getStock() + quantity);
+        article.setRestockDate(restockDate);
         return articleRepositoryOutPort.save(article);
+    }
+
+    @Override
+    public Article addSupply(String id, Map<String, Object> payload) {
+        if (!isValidMapStructure(payload)) {
+            throw new IllegalArgumentException("Invalid payload structure");
+        }
+        int exp = (int) payload.get("exp");
+        Date date = new Date(exp * 1000L);
+        if (date.before(new Date())) {
+            throw new IllegalArgumentException("Invalid expiration date");
+        }
+        String restockDate = (String) payload.get("restockDate");
+        LocalDateTime restockDateLocal = null;
+        if (restockDate != null) {
+            try {
+                restockDateLocal = LocalDateTime.parse(restockDate).withNano(0).withSecond(0).withMinute(0);
+            } catch (Exception e) {
+                throw new IllegalArgumentException("Invalid restock date");
+            }
+        }
+        int quantity = (int) payload.get("quantity");
+        if (quantity < 0) {
+            throw new IllegalArgumentException("Invalid quantity");
+        }
+        return addSupply(id, quantity, restockDateLocal);
     }
 
     @Override
@@ -88,6 +115,31 @@ public class PersistArticleUseCase implements IPersistArticleInPort {
                     ArticleConstraints.MAX_NUMBER_OF_CATEGORIES);
         }
         return article;
+    }
+
+    public boolean isValidMapStructure(Map<String, Object> payload) {
+        Map<String, Class<?>> requiredFields =Map.of(
+                "quantity", Integer.class,
+                "exp", Integer.class
+        );
+        for (Map.Entry<String, Class<?>> entry : requiredFields.entrySet()) {
+            Class<?> type = entry.getValue();
+            Object value = payload.get(entry.getKey());
+            if (!payload.containsKey(entry.getKey()) || !type.isInstance(value)) {
+                return false;
+            }
+        }
+        Map<String, Class<?>> optionalFields = Map.of(
+                "restockDate", String.class
+        );
+        for (Map.Entry<String, Class<?>> entry : optionalFields.entrySet()) {
+            Class<?> type = entry.getValue();
+            Object value = payload.get(entry.getKey());
+            if (value != null && !type.isInstance(value)) {
+                return false;
+            }
+        }
+        return true;
     }
 
 }

@@ -34,7 +34,6 @@ public class ArticleDTOMapper {
         article.setName(createArticleDTO.getName());
         article.setDescription(createArticleDTO.getDescription());
         article.setPrice(createArticleDTO.getPrice());
-        article.setStock(createArticleDTO.getStock());
         Brand brand = new Brand();
         brand.setId(createArticleDTO.getBrandId());
         article.setBrand(brand);

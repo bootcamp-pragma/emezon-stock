@@ -64,8 +64,8 @@ public class ArticleController {
     @PreAuthorize("hasAnyRole(@securityConstants.ADD_SUPPLY_ROLES)")
     @PatchMapping("/{id}/add-supply")
     public ResponseEntity<ArticleDTO> addSupply(@PathVariable String id,
-                                                @RequestBody @Valid AddSupplyDTO addSupplyDTO) {
-        ArticleDTO updatedArticle = articleHandler.addSupply(id, addSupplyDTO.getQuantity());
+                                                @RequestBody @Valid AddSupplyFromMSTransaction addSupplyDTO) {
+        ArticleDTO updatedArticle = articleHandler.addSupply(id, addSupplyDTO.getPayload());
         return ResponseEntity.ok(updatedArticle);
     }
 

@@ -7,11 +7,12 @@ public interface IJwtService {
 
     String extractUsername(String token);
 
+    Map<String, Object> extractAllClaims(String token);
+
     <T> T extractClaim(String token, Function<Map<String, Object>, T> claimsResolver);
 
     boolean isTokenValid(String token, Map<String, Object> data);
 
     String getRoleName(String token);
-
 
 }

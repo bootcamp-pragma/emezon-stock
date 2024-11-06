@@ -28,7 +28,8 @@ public class JwtService implements IJwtService {
         return Keys.hmacShaKeyFor(keyBytes);
     }
 
-    private Claims extractAllClaims(String token) {
+    @Override
+    public Claims extractAllClaims(String token) {
         return Jwts.parserBuilder()
                 .setSigningKey(getSignInKey())
                 .build()
@@ -47,7 +48,7 @@ public class JwtService implements IJwtService {
         return extractClaim(token, claim -> {
             Number exp = (Number) claim.get("exp");
             long expLong = exp.longValue();
-            return new Date(expLong * 1000);
+            return new Date(expLong * 1000L);
         });
     }
 
