@@ -17,7 +17,7 @@ public class Article {
     private LocalDateTime updatedAt;
 
 
-    public Article(String id, String name, String description, double price, int stock, Brand brand, List<Category> categories) {
+    public Article(String id, String name, String description, double price, Brand brand, List<Category> categories) {
         this.id = id;
         this.name = name;
         this.description = description;
