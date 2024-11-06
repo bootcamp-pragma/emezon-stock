@@ -3,6 +3,7 @@ package com.emezon.stock.infra.advices;
 import com.emezon.stock.app.errorhandling.IApiControllerAdvice;
 import com.emezon.stock.domain.utils.ExceptionResponse;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
+import io.jsonwebtoken.MalformedJwtException;
 import org.springframework.context.MessageSourceResolvable;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
@@ -114,5 +115,15 @@ public class ApiControllerAdvice implements IApiControllerAdvice<WebRequest> {
         return new ResponseEntity<>(response, status);
     }
 
+    @Override
+    @ExceptionHandler(MalformedJwtException.class)
+    public Object handleMalformedJwtException(Exception ex, WebRequest request) {
+        HttpStatus status = HttpStatus.FORBIDDEN;
+        ExceptionResponse response = new ExceptionResponse(
+                ex.getMessage(),
+                request.getDescription(false),
+                status.value());
+        return new ResponseEntity<>(response, status);
+    }
 
 }

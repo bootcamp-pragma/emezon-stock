@@ -14,4 +14,6 @@ public interface IApiControllerAdvice<T> {
 
     Object handleDateTimeParseException(Exception ex, T request);
 
+    Object handleMalformedJwtException(Exception ex, T request);
+
 }
