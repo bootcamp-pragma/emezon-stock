@@ -22,7 +22,6 @@ public class Article {
         this.name = name;
         this.description = description;
         this.price = price;
-        this.stock = stock;
         this.brand = brand;
         this.categories = categories;
     }
