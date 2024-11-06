@@ -55,27 +55,12 @@ public class ArticleEntity {
     )
     private Set<CategoryEntity> categories;
 
+    private LocalDateTime restockDate;
+
     @CreationTimestamp
     private LocalDateTime createdAt;
 
     @UpdateTimestamp
     private LocalDateTime updatedAt;
-
-    @Override
-    public String toString() {
-        List<String> categoriesStr = new ArrayList<>();
-        for (CategoryEntity category : categories) {
-            categoriesStr.add(category.toString());
-        }
-        return "\n{\n" +
-                "id='" + id + "',\n" +
-                "name='" + name + "',\n" +
-                "description='" + description + "',\n" +
-                "price=" + price + "\n" +
-                "stock=" + stock + "\n" +
-                "brand= " + brand.toString() + "\n" +
-                "categories= [" + String.join(", ", categoriesStr) + " ]\n" +
-                "}";
-    }
 
 }

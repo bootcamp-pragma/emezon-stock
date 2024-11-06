@@ -7,6 +7,7 @@ import com.emezon.stock.domain.api.article.IRetrieveArticleInPort;
 import com.emezon.stock.domain.api.brand.IRetrieveBrandInPort;
 import com.emezon.stock.domain.api.category.IRetrieveCategoryInPort;
 import com.emezon.stock.domain.spi.IArticleRepositoryOutPort;
+import com.emezon.stock.domain.spi.IJwtService;
 import com.emezon.stock.domain.usecases.article.PersistArticleUseCase;
 import com.emezon.stock.domain.usecases.article.RetrieveArticleUseCase;
 import com.emezon.stock.infra.outbound.mysql.jpa.adapters.MySQLJPAArticleAdapter;
@@ -22,6 +23,7 @@ public class ArticleConfig {
     private final IMySQLJPAArticleRepository mySQLJPAArticleRepository;
     private final IRetrieveCategoryInPort retrieveCategoryInPort;
     private final IRetrieveBrandInPort retrieveBrandInPort;
+    private final IJwtService jwtService;
 
     @Bean
     public IArticleRepositoryOutPort articleRepositoryOutPort() {
@@ -40,7 +42,7 @@ public class ArticleConfig {
 
     @Bean
     public IArticleHandler articleHandler() {
-        return new ArticleService(persistArticleInPort(), retrieveArticleInPort());
+        return new ArticleService(persistArticleInPort(), retrieveArticleInPort(), jwtService);
     }
 
 

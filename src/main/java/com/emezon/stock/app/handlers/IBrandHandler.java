@@ -9,12 +9,12 @@ import java.util.Optional;
 
 public interface IBrandHandler {
 
-    public BrandDTO createBrand(CreateBrandDTO brand);
+    BrandDTO createBrand(CreateBrandDTO brand);
 
-    public Optional<BrandDTO> getBrandById(String id);
+    BrandDTO getBrandById(String id);
 
-    public Optional<BrandDTO> getBrandByName(String name);
+    BrandDTO getBrandByName(String name);
 
-    public PaginatedResponse<BrandDTO> getAllBrands(MultiValueMap<String, String> queryParams);
+    PaginatedResponse<BrandDTO> getAllBrands(MultiValueMap<String, String> queryParams);
 
 }

@@ -3,7 +3,7 @@ package com.emezon.stock.infra.inbound.rest.controllers;
 import com.emezon.stock.app.dtos.brand.BrandDTO;
 import com.emezon.stock.app.dtos.brand.CreateBrandDTO;
 import com.emezon.stock.app.handlers.IBrandHandler;
-import com.emezon.stock.domain.utils.ValidPageableRequest;
+import com.emezon.stock.infra.inbound.rest.utils.ValidPageableRequest;
 import com.emezon.stock.domain.utils.PaginatedResponse;
 import com.emezon.stock.infra.inbound.rest.constants.PaginatedConstants;
 import com.emezon.stock.infra.inbound.rest.constants.RestApiConstants;
@@ -49,9 +49,15 @@ public class BrandController {
         return ResponseEntity.ok(brands);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<BrandDTO> getBrandById(@PathVariable String id) {
+        BrandDTO brand = brandHandler.getBrandById(id);
+        return ResponseEntity.ok(brand);
+    }
+
     @GetMapping("/name/{name}")
     public ResponseEntity<BrandDTO> getBrandByName(@PathVariable String name) {
-        BrandDTO brand = brandHandler.getBrandByName(name).orElse(null);
+        BrandDTO brand = brandHandler.getBrandByName(name);
         return ResponseEntity.ok(brand);
     }
 

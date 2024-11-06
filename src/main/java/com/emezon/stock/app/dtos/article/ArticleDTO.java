@@ -5,18 +5,20 @@ import com.emezon.stock.app.dtos.category.CategoryDTO;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
 @Setter
 public class ArticleDTO {
 
+    private String id;
     private String name;
     private String description;
     private double price;
     private int stock;
+    private LocalDateTime restockDate;
     private BrandDTO brand;
     private List<CategoryDTO> categories;
-
 
 }

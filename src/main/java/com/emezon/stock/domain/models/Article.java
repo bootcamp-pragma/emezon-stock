@@ -1,5 +1,6 @@
 package com.emezon.stock.domain.models;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class Article {
@@ -9,15 +10,18 @@ public class Article {
     private String description;
     private double price;
     private int stock;
+    private LocalDateTime restockDate;
     private Brand brand;
     private List<Category> categories;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
-    public Article(String id, String name, String description, double price, int stock, Brand brand, List<Category> categories) {
+
+    public Article(String id, String name, String description, double price, Brand brand, List<Category> categories) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
-        this.stock = stock;
         this.brand = brand;
         this.categories = categories;
     }
@@ -80,4 +84,27 @@ public class Article {
         this.categories = categories;
     }
 
+    public LocalDateTime getRestockDate() {
+        return restockDate;
+    }
+
+    public void setRestockDate(LocalDateTime restockDate) {
+        this.restockDate = restockDate;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
 }

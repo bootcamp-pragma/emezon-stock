@@ -21,6 +21,9 @@ public class ArticleEntityMapper {
         articleEntity.setBrand(BrandEntityMapper.toEntity(article.getBrand()));
         articleEntity.setCategories(new HashSet<>(article.getCategories().stream()
                         .map(CategoryEntityMapper::toEntity).toList()));
+        articleEntity.setRestockDate(article.getRestockDate());
+        articleEntity.setCreatedAt(article.getCreatedAt());
+        articleEntity.setUpdatedAt(article.getUpdatedAt());
         return articleEntity;
     }
 
@@ -34,6 +37,9 @@ public class ArticleEntityMapper {
         article.setBrand(BrandEntityMapper.toModel(articleEntity.getBrand()));
         article.setCategories(articleEntity.getCategories().stream()
                         .map(CategoryEntityMapper::toModel).toList());
+        article.setRestockDate(articleEntity.getRestockDate());
+        article.setCreatedAt(articleEntity.getCreatedAt());
+        article.setUpdatedAt(articleEntity.getUpdatedAt());
         return article;
     }
 

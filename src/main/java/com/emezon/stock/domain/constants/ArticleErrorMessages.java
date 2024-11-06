@@ -13,6 +13,9 @@ public class ArticleErrorMessages {
 
     public static final String ARTICLE_NOT_FOUND_BY_ID = "Article with id %s not found";
 
+    public static final String ARTICLE_RESTOCK_DATE_REQUIRED = "The restock date is required";
+
+
     private ArticleErrorMessages() {
         throw new IllegalStateException("Utility class");
     }

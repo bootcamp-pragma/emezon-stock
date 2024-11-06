@@ -6,16 +6,20 @@ import com.emezon.stock.app.dtos.article.CreateArticleDTO;
 import com.emezon.stock.domain.utils.PaginatedResponse;
 import org.springframework.util.MultiValueMap;
 
+import java.time.LocalDateTime;
+
 public interface IArticleHandler {
 
-    public ArticleDTO createArticle(CreateArticleDTO article);
+    ArticleDTO createArticle(CreateArticleDTO article);
 
-    public ArticleDTO addSupply(String id, int quantity);
+    ArticleDTO addSupply(String id, String payload);
 
-    public ArticleDTO getArticleById(String id);
+    ArticleDTO getArticleById(String id);
 
-    public ArticleDTO getArticleByName(String name);
+    ArticleDTO getArticleByName(String name);
 
-    public PaginatedResponse<ArticleListDTO> getAllArticles(MultiValueMap<String, String> queryParams);
+    PaginatedResponse<ArticleListDTO> getAllArticles(MultiValueMap<String, String> queryParams);
+
+    ArticleDTO updateRestockDate(String id, LocalDateTime restockDate);
 
 }

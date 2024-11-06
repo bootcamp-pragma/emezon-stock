@@ -35,7 +35,7 @@ class RetrieveArticleUseCaseTests {
     public void setUp() {
         Category category = new Category("12345", "Electronics", "Electronic devices");
         Brand brand = new Brand("12354", "SAMSUNG", "Samsung Electronics");
-        article = new Article("12378", "Galaxy S21", "Samsung Galaxy S21", 1000.0, 20, brand, List.of(category));
+        article = new Article("12378", "Galaxy S21", "Samsung Galaxy S21", 1000.0, brand, List.of(category));
     }
 
     @Test

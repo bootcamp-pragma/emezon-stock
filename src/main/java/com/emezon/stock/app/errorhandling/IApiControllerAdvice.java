@@ -12,4 +12,8 @@ public interface IApiControllerAdvice<T> {
 
     Object handleAuthorizationDeniedException(Exception ex, T request);
 
+    Object handleDateTimeParseException(Exception ex, T request);
+
+    Object handleMalformedJwtException(Exception ex, T request);
+
 }

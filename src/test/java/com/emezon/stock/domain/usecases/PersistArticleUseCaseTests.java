@@ -50,7 +50,7 @@ class PersistArticleUseCaseTests {
     public void setUp() {
         category = new Category("76890", "ELECTRONICS", "Electronic devices");
         brand = new Brand("456", "SAMSUNG", "Samsung Electronics");
-        article = new Article("789", "SAMSUNG-123", "Samsung Galaxy S21", 1000.0, 10, brand, List.of(category));
+        article = new Article("789", "SAMSUNG-123", "Samsung Galaxy S21", 1000.0, brand, List.of(category));
     }
 
     @Test

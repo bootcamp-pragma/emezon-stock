@@ -18,12 +18,14 @@ public class ArticleDTOMapper {
 
     public static Article toModel(ArticleDTO articleDTO) {
         Article article = new Article();
+        article.setId(articleDTO.getId());
         article.setName(articleDTO.getName());
         article.setDescription(articleDTO.getDescription());
         article.setPrice(articleDTO.getPrice());
         article.setStock(articleDTO.getStock());
         article.setBrand(BrandDTOMapper.toModel(articleDTO.getBrand()));
         article.setCategories(articleDTO.getCategories().stream().map(CategoryDTOMapper::toModel).toList());
+        article.setRestockDate(articleDTO.getRestockDate());
         return article;
     }
 
@@ -32,7 +34,6 @@ public class ArticleDTOMapper {
         article.setName(createArticleDTO.getName());
         article.setDescription(createArticleDTO.getDescription());
         article.setPrice(createArticleDTO.getPrice());
-        article.setStock(createArticleDTO.getStock());
         Brand brand = new Brand();
         brand.setId(createArticleDTO.getBrandId());
         article.setBrand(brand);
@@ -48,12 +49,14 @@ public class ArticleDTOMapper {
 
     public static ArticleDTO toDTO(Article article) {
         ArticleDTO articleDTO = new ArticleDTO();
+        articleDTO.setId(article.getId());
         articleDTO.setName(article.getName());
         articleDTO.setDescription(article.getDescription());
         articleDTO.setPrice(article.getPrice());
         articleDTO.setStock(article.getStock());
         articleDTO.setBrand(BrandDTOMapper.toDTO(article.getBrand()));
         articleDTO.setCategories(article.getCategories().stream().map(CategoryDTOMapper::toDTO).toList());
+        articleDTO.setRestockDate(article.getRestockDate());
         return articleDTO;
     }
 
@@ -66,6 +69,7 @@ public class ArticleDTOMapper {
         articleListDTO.setStock(article.getStock());
         articleListDTO.setBrand(BrandDTOMapper.toDTO(article.getBrand()));
         articleListDTO.setCategories(article.getCategories().stream().map(CategoryDTOMapper::toIdNameDTO).toList());
+        articleListDTO.setRestockDate(article.getRestockDate());
         return articleListDTO;
     }
 

@@ -30,15 +30,15 @@ public class BrandService implements IBrandHandler {
     }
 
     @Override
-    public Optional<BrandDTO> getBrandById(String id) {
+    public BrandDTO getBrandById(String id) {
         Optional<Brand> brand = iRetrieveBrandInPort.getBrandById(id);
-        return brand.map(BrandDTOMapper::toDTO);
+        return brand.map(BrandDTOMapper::toDTO).orElse(null);
     }
 
     @Override
-    public Optional<BrandDTO> getBrandByName(String name) {
+    public BrandDTO getBrandByName(String name) {
         Optional<Brand> brand = iRetrieveBrandInPort.getBrandByName(name);
-        return brand.map(BrandDTOMapper::toDTO);
+        return brand.map(BrandDTOMapper::toDTO).orElse(null);
     }
 
     @Override

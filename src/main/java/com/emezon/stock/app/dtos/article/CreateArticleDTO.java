@@ -28,9 +28,6 @@ public class CreateArticleDTO {
     @Min(value = ArticleConstraints.PRICE_MIN_VALUE, message = ArticleErrorMessages.ARTICLE_PRICE_MIN_VALUE)
     private double price;
 
-    @Min(value = ArticleConstraints.STOCK_MIN_VALUE, message = ArticleErrorMessages.ARTICLE_STOCK_MIN_VALUE)
-    private int stock;
-
     @NotNull(message = ArticleErrorMessages.ARTICLE_BRAND_ID_REQUIRED)
     @NotBlank(message = ArticleErrorMessages.ARTICLE_BRAND_ID_NOT_VALID)
     @UUID(message = ArticleErrorMessages.ARTICLE_BRAND_ID_NOT_VALID)

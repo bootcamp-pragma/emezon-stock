@@ -45,11 +45,10 @@ class ArticleServiceTests {
         articleDTO.setName("Samsung Galaxy S21");
         articleDTO.setDescription("Samsung Galaxy S21 description");
         articleDTO.setPrice(999.99);
-        articleDTO.setStock(100);
         articleDTO.setBrandId(brand.getId());
         articleDTO.setCategoryIds(List.of(category.getId()));
         Article article = new Article("1234", articleDTO.getName(), articleDTO.getDescription(),
-                articleDTO.getPrice(), articleDTO.getStock(), brand, List.of(category));
+                articleDTO.getPrice(), brand, List.of(category));
         when(persistArticleUseCase.createArticle(any())).thenReturn(article);
 
         ArticleDTO createdArticle = articleService.createArticle(articleDTO);
@@ -73,7 +72,7 @@ class ArticleServiceTests {
         Brand brand = new Brand("1123", "Samsung", "Samsung Electronics Co., Ltd.");
         Category category = new Category("1234", "Smartphones category", "Smartphones category description");
         Article article = new Article("1234", "Samsung Galaxy S21", "Samsung Galaxy S21 description",
-                999.99, 100, brand, List.of(category));
+                999.99, brand, List.of(category));
         when(retrieveArticleUseCase.getArticleById(article.getId())).thenReturn(Optional.of(article));
 
         ArticleDTO foundArticle = articleService.getArticleById(article.getId());
@@ -107,7 +106,7 @@ class ArticleServiceTests {
         Brand brand = new Brand("1123", "Samsung", "Samsung Electronics Co., Ltd.");
         Category category = new Category("1234", "Smartphones category", "Smartphones category description");
         Article article = new Article("1234", "Samsung Galaxy S21", "Samsung Galaxy S21 description",
-                999.99, 100, brand, List.of(category));
+                999.99, brand, List.of(category));
         int page = 0, size = 1;
         PaginatedResponse<Article> pr = new PaginatedResponse<>(List.of(article), page, size, 1, 1);
         when(retrieveArticleUseCase.getAllArticles(any())).thenReturn(pr);

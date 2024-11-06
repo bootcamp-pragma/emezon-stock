@@ -30,15 +30,15 @@ public class CategoryService implements ICategoryHandler {
     }
 
     @Override
-    public Optional<CategoryDTO> getCategoryById(String id) {
+    public CategoryDTO getCategoryById(String id) {
         Optional<Category> category = retrieveCategoryInPort.getCategoryById(id);
-        return category.map(CategoryDTOMapper::toDTO);
+        return category.map(CategoryDTOMapper::toDTO).orElse(null);
     }
 
     @Override
-    public Optional<CategoryDTO> getCategoryByName(String name) {
+    public CategoryDTO getCategoryByName(String name) {
         Optional<Category> category = retrieveCategoryInPort.getCategoryByName(name);
-        return category.map(CategoryDTOMapper::toDTO);
+        return category.map(CategoryDTOMapper::toDTO).orElse(null);
     }
 
     @Override
