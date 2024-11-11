@@ -10,7 +10,7 @@ import com.emezon.stock.domain.api.article.IRetrieveArticleInPort;
 import com.emezon.stock.domain.spi.IJwtService;
 import com.emezon.stock.domain.utils.PaginatedResponse;
 import com.emezon.stock.domain.utils.PaginatedResponseParams;
-import com.emezon.stock.infra.inbound.rest.utils.PaginatedResponseUtils;
+import com.emezon.stock.domain.utils.PaginatedResponseUtils;
 import com.emezon.stock.domain.models.Article;
 import lombok.RequiredArgsConstructor;
 import org.springframework.util.MultiValueMap;
@@ -55,7 +55,7 @@ public class ArticleService implements IArticleHandler {
 
     @Override
     public PaginatedResponse<ArticleListDTO> getAllArticles(MultiValueMap<String, String> queryParams) {
-        PaginatedResponseParams params = PaginatedResponseUtils.getFromMultiValueMap(queryParams);
+        PaginatedResponseParams params = PaginatedResponseUtils.getFromMap(queryParams);
         PaginatedResponse<Article> articles = retrieveArticleInPort.getAllArticles(params);
         List<ArticleListDTO> articleDTOS = articles.getItems().stream().map(ArticleDTOMapper::toListDTO).toList();
         return new PaginatedResponse<>(
